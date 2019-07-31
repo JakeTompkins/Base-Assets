@@ -49,7 +49,7 @@ RaceList["mountain dwarf"] = {
 	trait : "Mountain Dwarf (+2 Strength, +2 Constitution)\n\nStonecunning:\n   Whenever I make an Intelligence (History) check related to the origin of stonework, I am considered proficient in the History skill and add double my proficiency bonus to the check, instead of my normal proficiency bonus."
 };
 RaceList["dark elf"] = {
-	regExpSearch : /^(?!.*half)((?=.*drow)|((?=.*\b(elfs?|elves|elvish|elven)\b)(?=.*\b(dark|underdarks?|deep|depths?)\b))).*$/i,
+	regExpSearch : /^(?!.*half)((?=.*(drow|devkarin))|((?=.*\b(elfs?|elves|elvish|elven)\b)(?=.*\b(dark|underdarks?|deep|depths?)\b))).*$/i,
 	name : "Drow",
 	sortname : "Elf, Dark (Drow)",
 	source : ["P", 24],
@@ -114,7 +114,7 @@ RaceList["dark elf"] = {
 	}
 };
 RaceList["wood elf"] = {
-	regExpSearch : /^(?!.*half)((?=.*(grugach|kagonesti))|((?=.*\b(elfs?|elves|elvish|elven)\b)(?=.*\b(woodlands?|woods?|forests?|wilds?|green)\b))).*$/i,
+	regExpSearch : /^(?!.*half)((?=.*(grugach|kagonesti|silhana))|((?=.*\b(elfs?|elves|elvish|elven)\b)(?=.*\b(woodlands?|woods?|forests?|wilds?|green)\b))).*$/i,
 	name : "Wood elf",
 	sortname : "Elf, Wood",
 	source : ["P", 24],
@@ -459,7 +459,7 @@ AddSubClass("cleric", "nature domain", {
 			source : ["P", 62],
 			minlevel : 1,
 			description : "\n   " + "I learn a druid cantrip and proficiency with a skill: Animal Handling, Nature, Survival",
-			skillstxt : "\n\n" + toUni("Nature Domain") + ": Choose one from Animal Handling, Nature, and Survival.",
+			skillstxt : "\n\n" + toUni("Nature Domain") + ": Choose one from Animal Handling, Nature, or Survival.",
 			spellcastingBonus : {
 				name : "Acolyte of Nature",
 				"class" : "druid",
@@ -779,7 +779,7 @@ AddSubClass("fighter", "battle master", {
 			"feinting attack" : {
 				name : "Feinting Attack",
 				source : ["P", 74],
-				description : "\n   " + "As a bonus action, I can feint to gain adv. on my next attack against a target within 5 ft" + "\n   " + "If the attack hits, I add the superiority die to my attack's damage",
+				description : "\n   " + "As a bonus action, I can feint to gain adv. on my next attack this turn vs. a target in 5 ft" + "\n   " + "If the attack hits, I add the superiority die to my attack's damage",
 				action : ["bonus action", ""]
 			},
 			"goading attack" : {
@@ -961,7 +961,7 @@ AddSubClass("monk", "way of the four elements", {
 			"elemental attunement" : {
 				name : "Elemental Attunement",
 				source : ["P", 81],
-				description : "\n   " + "As an action, I can briefly control elemental forces nearby" + "\n   " + "I can make a harmless sensory effect, light/snuff light, chill/warm 1 lb for 1 hour," + "\n   " + "or I cause earth/fire/water/mist in a 1 ft cube to shape itself into a form for 1 minute",
+				description : "\n   " + "As an action, I can briefly control elemental forces within 30 ft of me" + "\n   " + "I can make a harmless sensory effect, light/snuff light, chill/warm 1 lb for 1 hour," + "\n   " + "or I cause earth/fire/water/mist in a 1 ft cube to shape itself into a form for 1 minute",
 				action : ["action", ""]
 			},
 			"breath of winter (prereq: level 17 monk)" : {
@@ -1317,7 +1317,7 @@ AddSubClass("paladin", "oath of vengeance", {
 			name : "Channel Divinity: Vow of Enmity",
 			source : ["P", 88],
 			minlevel : 3,
-			description : "\n   " + "As a bonus action, I utter a vow against a creature I can see within 10 ft" + "\n   " + "I have advantage on attack rolls against it for 1 minute or until it is at 0 HP/unconscious",
+			description : "\n   " + "As a bonus action, I utter a vow against a creature I can see within 10 ft" + "\n   " + "I get adv. on attacks against it for 1 minute or until it drops to 0 HP or falls unconscious",
 			action : ["bonus action", ""]
 		},
 		"subclassfeature7" : {
@@ -1354,7 +1354,13 @@ AddSubClass("ranger", "beast master", {
 			name : "Ranger's Companion",
 			source : ["P", 93],
 			minlevel : 3,
-			description : "\n   " + "It adds my proficiency bonus to AC, attacks, damage, and save/skill proficiencies" + "\n   " + "Its Hit Point maximum equals four times my ranger level if higher than its normal HP" + "\n   " + "It takes a turn on my initiative; It only takes an action if I command it to" + "\n   " + "As an action, I can have it do an Attack/Dash/Disengage/Dodge/Help action on its turn" + "\n   " + "Can attack while commanding with Extra Attack; Order movement at no action cost",
+			description : desc([
+				"It adds my proficiency bonus to AC, attacks, damage, and save/skill proficiencies",
+				"Its hit point maximum equals four times my ranger level if higher than its normal HP",
+				"It takes a turn on my initiative; It takes the Dodge action unless I command it otherwise",
+				"As an action, I can have it take the Attack, Dash, Disengage, or Help action on its turn",
+				"I can still use Extra Attack while commanding it to Attack; No action to order to move"
+			]),
 			additional : "1/4 CR up to medium sized beast",
 			action : ["action", " (Command)"]
 		},
@@ -1362,7 +1368,10 @@ AddSubClass("ranger", "beast master", {
 			name : "Exceptional Training",
 			source : ["P", 93],
 			minlevel : 7,
-			description : "\n   " + "As a bonus action, I can have my beast Dash/Disengage/Dodge/Help on its turn",
+			description : desc([
+				"My beast's attacks count as magical for overcoming resistances and immunities",
+				"As a bonus action, I can command it to take the Dash/Disengage/Help action on its turn"
+			]),
 			action : ["bonus action", ""]
 		},
 		"subclassfeature11" : {
@@ -2049,7 +2058,7 @@ BackgroundList["charlatan"] = {
 	lifestyle : "comfortable"
 };
 BackgroundList["criminal"] = {
-	regExpSearch : /(criminal|blackmailer|burglar|fence|robber|killer|assassin|pickpocket|smuggler)/i,
+	regExpSearch : /criminal/i,
 	name : "Criminal",
 	source : [["P", 129], ["ALbackground", 0]],
 	skills : ["Deception", "Stealth"],
@@ -3029,10 +3038,10 @@ FeatsList["dual wielder"] = {
 FeatsList["dungeon delver"] = {
 	name : "Dungeon Delver",
 	source : ["P", 166],
-	description : "I have advantage on Wis (Perception) and Int (Investigation) checks made to detect the presence of secret doors. I can search for traps while traveling at a normal pace. I have resistance to damage dealt by traps and advantage on saves to avoid or resist traps.",
+	description : "I have adv. on Wis (Perception) and Int (Investigation) checks made to detect the presence of secret doors. I have resistance to damage dealt by traps and advantage on saves to avoid or resist traps. Travelling at a fast pace doesn't impose -5 on my passive Perception.",
 	dmgres : ["Traps"],
 	savetxt : { adv_vs : ["traps"] },
-	vision : [["Adv. on Perception and Investigation for secret doors", 0]]
+	vision : [["Adv. on Perception and Investigation for secret doors", 0], ["No -5 for travelling at fast pace", 0]]
 };
 FeatsList["durable"] = {
 	name : "Durable",
@@ -3047,14 +3056,6 @@ FeatsList["elemental adept"] = {
 	description : "Choose one of the damage types: acid, cold, fire, lightning, or thunder. Spells I cast ignore resistance to damage from this damage type. For any spell I cast that deals this damage type, I can treat any 1 on a damage die as a 2.",
 	prerequisite : "The ability to cast at least one spell",
 	prereqeval : "CurrentSpells.toSource() !== '({})'"
-};
-FeatsList["grappler"] = {
-	name : "Grappler",
-	source : [["SRD", 75], ["P", 167]],
-	description : "I have advantage on attack rolls against a creature I am grappling. As an action, I can try to pin a creature grappled by me. If I succeed on a grapple check, both the creature and I are restrained until the grapple ends.",
-	prerequisite : "Strength 13 or higher",
-	prereqeval : "What('Str') >= 13",
-	action : ["action", " feat (pin grappled)"]
 };
 FeatsList["great weapon master"] = {
 	name : "Great Weapon Master",
@@ -3289,7 +3290,7 @@ FeatsList["observant"] = {
 FeatsList["polearm master"] = {
 	name : "Polearm Master",
 	source : ["P", 168],
-	description : "As a bonus action, when I take the Attack action with only a glaive/halberd/quarterstaff, I can make an attack with the butt end for 1d4 bludgeoning. While wielding a glaive/ halberd/pike/quarterstaff, I get an opportunity attack when a creature enters my reach.",
+	description : "As a bonus action when I do the Attack action with a glaive/" + (typePF ? " " : "") + "halberd/quarterstaff/spear, I can make a 1d4 bludgeoning attack with its butt end." + (typePF ? "\n" : " ") + "While wielding a glaive/halberd/" + (typePF ? "" : " ") + "pike/quarterstaff/spear, I get an opportunity attack when a creature enters my reach.",
 	eval : "AddAction('bonus action', 'Butt end attack (after attack with polearm)', 'the Polearm Master feat'); AddWeapon('polearm butt end');",
 	removeeval : "RemoveAction('bonus action', 'Butt end attack (after attack with polearm)'); RemoveWeapon('polearm butt end');",
 	weapons : [false, false, ["polearm butt end"]]
@@ -3445,7 +3446,7 @@ FeatsList["spell sniper [bard]"] = {
 	eval : "CurrentSpells['spell sniper bard'] = {name : 'Spell Sniper [Bard]', ability : 6, list : {class : 'bard', attackOnly : 'true'}, known : {cantrips : 1}}; SetStringifieds('spells');",
 	removeeval : "delete CurrentSpells['spell sniper bard']; SetStringifieds('spells');",
 	calcChanges : {
-		atkAdd : ["if (!spellSniper && !isDC && isSpell && (/^(?!.*melee).*\\d+ ?(f.{0,2}t|m).*$/i).test(fields.Range)) {var spellSniper = true; var rangeNmbr = fields.Range.match(/\\d+/); rangeNmbr.forEach(function(dR) {fields.Range = fields.Range.replace(dR, Number(dR) * 2);});}; ", "My spells and cantrips that require a ranged attack roll, have their range doubled."]
+		atkAdd : ["if (!spellSniper && !isDC && isSpell && (/^(?!.*melee).*\\d+(\\.\\d+|,\\d+)? ?(f.{0,2}t|m).*$/i).test(fields.Range)) { var spellSniper = true; var rangeNmbr = fields.Range.match(/\\d+(\\.\\d+|,\\d+)?/g); var notNmbrs = fields.Range.split(RegExp(rangeNmbr.join('|'))); fields.Range = ''; rangeNmbr.forEach(function (dR, idx) { fields.Range += (notNmbrs[idx] ? notNmbrs[idx] : '') + (parseFloat(dR.toString().replace(',', '.') * 2)); }); if (notNmbrs.length > rangeNmbr.length) { fields.Range += notNmbrs[notNmbrs.length - 1]; }; }; ", "My spells and cantrips that require a ranged attack roll, have their range doubled."]
 	}
 };
 FeatsList["spell sniper [cleric]"] = {
@@ -3457,7 +3458,7 @@ FeatsList["spell sniper [cleric]"] = {
 	eval : "CurrentSpells['spell sniper cleric'] = {name : 'Spell Sniper [Cleric]', ability : 5, list : {class : 'cleric', attackOnly : 'true'}, known : {cantrips : 1}}; SetStringifieds('spells');",
 	removeeval : "delete CurrentSpells['spell sniper cleric']; SetStringifieds('spells');",
 	calcChanges : {
-		atkAdd : ["if (!spellSniper && !isDC && isSpell && (/^(?!.*melee).*\\d+ ?(f.{0,2}t|m).*$/i).test(fields.Range)) {var spellSniper = true; var rangeNmbr = fields.Range.match(/\\d+/); rangeNmbr.forEach(function(dR) {fields.Range = fields.Range.replace(dR, Number(dR) * 2);});}; ", "My spells and cantrips that require a ranged attack roll, have their range doubled."]
+		atkAdd : ["if (!spellSniper && !isDC && isSpell && (/^(?!.*melee).*\\d+(\\.\\d+|,\\d+)? ?(f.{0,2}t|m).*$/i).test(fields.Range)) { var spellSniper = true; var rangeNmbr = fields.Range.match(/\\d+(\\.\\d+|,\\d+)?/g); var notNmbrs = fields.Range.split(RegExp(rangeNmbr.join('|'))); fields.Range = ''; rangeNmbr.forEach(function (dR, idx) { fields.Range += (notNmbrs[idx] ? notNmbrs[idx] : '') + (parseFloat(dR.toString().replace(',', '.') * 2)); }); if (notNmbrs.length > rangeNmbr.length) { fields.Range += notNmbrs[notNmbrs.length - 1]; }; }; ", "My spells and cantrips that require a ranged attack roll, have their range doubled."]
 	}
 };
 FeatsList["spell sniper [druid]"] = {
@@ -3469,7 +3470,7 @@ FeatsList["spell sniper [druid]"] = {
 	eval : "CurrentSpells['spell sniper druid'] = {name : 'Spell Sniper [Druid]', ability : 5, list : {class : 'druid', attackOnly : 'true'}, known : {cantrips : 1}}; SetStringifieds('spells');",
 	removeeval : "delete CurrentSpells['spell sniper druid']; SetStringifieds('spells');",
 	calcChanges : {
-		atkAdd : ["if (!spellSniper && !isDC && isSpell && (/^(?!.*melee).*\\d+ ?(f.{0,2}t|m).*$/i).test(fields.Range)) {var spellSniper = true; var rangeNmbr = fields.Range.match(/\\d+/); rangeNmbr.forEach(function(dR) {fields.Range = fields.Range.replace(dR, Number(dR) * 2);});}; ", "My spells and cantrips that require a ranged attack roll, have their range doubled."]
+		atkAdd : ["if (!spellSniper && !isDC && isSpell && (/^(?!.*melee).*\\d+(\\.\\d+|,\\d+)? ?(f.{0,2}t|m).*$/i).test(fields.Range)) { var spellSniper = true; var rangeNmbr = fields.Range.match(/\\d+(\\.\\d+|,\\d+)?/g); var notNmbrs = fields.Range.split(RegExp(rangeNmbr.join('|'))); fields.Range = ''; rangeNmbr.forEach(function (dR, idx) { fields.Range += (notNmbrs[idx] ? notNmbrs[idx] : '') + (parseFloat(dR.toString().replace(',', '.') * 2)); }); if (notNmbrs.length > rangeNmbr.length) { fields.Range += notNmbrs[notNmbrs.length - 1]; }; }; ", "My spells and cantrips that require a ranged attack roll, have their range doubled."]
 	}
 };
 FeatsList["spell sniper [sorcerer]"] = {
@@ -3481,7 +3482,7 @@ FeatsList["spell sniper [sorcerer]"] = {
 	eval : "CurrentSpells['spell sniper sorcerer'] = {name : 'Spell Sniper [Sorcerer]', ability : 6, list : {class : 'sorcerer', attackOnly : 'true'}, known : {cantrips : 1}}; SetStringifieds('spells');",
 	removeeval : "delete CurrentSpells['spell sniper sorcerer']; SetStringifieds('spells');",
 	calcChanges : {
-		atkAdd : ["if (!spellSniper && !isDC && isSpell && (/^(?!.*melee).*\\d+ ?(f.{0,2}t|m).*$/i).test(fields.Range)) {var spellSniper = true; var rangeNmbr = fields.Range.match(/\\d+/); rangeNmbr.forEach(function(dR) {fields.Range = fields.Range.replace(dR, Number(dR) * 2);});}; ", "My spells and cantrips that require a ranged attack roll, have their range doubled."]
+		atkAdd : ["if (!spellSniper && !isDC && isSpell && (/^(?!.*melee).*\\d+(\\.\\d+|,\\d+)? ?(f.{0,2}t|m).*$/i).test(fields.Range)) { var spellSniper = true; var rangeNmbr = fields.Range.match(/\\d+(\\.\\d+|,\\d+)?/g); var notNmbrs = fields.Range.split(RegExp(rangeNmbr.join('|'))); fields.Range = ''; rangeNmbr.forEach(function (dR, idx) { fields.Range += (notNmbrs[idx] ? notNmbrs[idx] : '') + (parseFloat(dR.toString().replace(',', '.') * 2)); }); if (notNmbrs.length > rangeNmbr.length) { fields.Range += notNmbrs[notNmbrs.length - 1]; }; }; ", "My spells and cantrips that require a ranged attack roll, have their range doubled."]
 	}
 };
 FeatsList["spell sniper [warlock]"] = {
@@ -3493,7 +3494,7 @@ FeatsList["spell sniper [warlock]"] = {
 	eval : "CurrentSpells['spell sniper warlock'] = {name : 'Spell Sniper [Warlock]', ability : 6, list : {class : 'warlock', attackOnly : 'true'}, known : {cantrips : 1}}; SetStringifieds('spells');",
 	removeeval : "delete CurrentSpells['spell sniper warlock']; SetStringifieds('spells');",
 	calcChanges : {
-		atkAdd : ["if (!spellSniper && !isDC && isSpell && (/^(?!.*melee).*\\d+ ?(f.{0,2}t|m).*$/i).test(fields.Range)) {var spellSniper = true; var rangeNmbr = fields.Range.match(/\\d+/); rangeNmbr.forEach(function(dR) {fields.Range = fields.Range.replace(dR, Number(dR) * 2);});}; ", "My spells and cantrips that require a ranged attack roll, have their range doubled."]
+		atkAdd : ["if (!spellSniper && !isDC && isSpell && (/^(?!.*melee).*\\d+(\\.\\d+|,\\d+)? ?(f.{0,2}t|m).*$/i).test(fields.Range)) { var spellSniper = true; var rangeNmbr = fields.Range.match(/\\d+(\\.\\d+|,\\d+)?/g); var notNmbrs = fields.Range.split(RegExp(rangeNmbr.join('|'))); fields.Range = ''; rangeNmbr.forEach(function (dR, idx) { fields.Range += (notNmbrs[idx] ? notNmbrs[idx] : '') + (parseFloat(dR.toString().replace(',', '.') * 2)); }); if (notNmbrs.length > rangeNmbr.length) { fields.Range += notNmbrs[notNmbrs.length - 1]; }; }; ", "My spells and cantrips that require a ranged attack roll, have their range doubled."]
 	}
 };
 FeatsList["spell sniper [wizard]"] = {
@@ -3505,7 +3506,7 @@ FeatsList["spell sniper [wizard]"] = {
 	eval : "CurrentSpells['spell sniper wizard'] = {name : 'Spell Sniper [Wizard]', ability : 4, list : {class : 'wizard', attackOnly : 'true'}, known : {cantrips : 1}}; SetStringifieds('spells');",
 	removeeval : "delete CurrentSpells['spell sniper wizard']; SetStringifieds('spells');",
 	calcChanges : {
-		atkAdd : ["if (!spellSniper && !isDC && isSpell && (/^(?!.*melee).*\\d+ ?(f.{0,2}t|m).*$/i).test(fields.Range)) {var spellSniper = true; var rangeNmbr = fields.Range.match(/\\d+/); rangeNmbr.forEach(function(dR) {fields.Range = fields.Range.replace(dR, Number(dR) * 2);});}; ", "My spells and cantrips that require a ranged attack roll, have their range doubled."]
+		atkAdd : ["if (!spellSniper && !isDC && isSpell && (/^(?!.*melee).*\\d+(\\.\\d+|,\\d+)? ?(f.{0,2}t|m).*$/i).test(fields.Range)) { var spellSniper = true; var rangeNmbr = fields.Range.match(/\\d+(\\.\\d+|,\\d+)?/g); var notNmbrs = fields.Range.split(RegExp(rangeNmbr.join('|'))); fields.Range = ''; rangeNmbr.forEach(function (dR, idx) { fields.Range += (notNmbrs[idx] ? notNmbrs[idx] : '') + (parseFloat(dR.toString().replace(',', '.') * 2)); }); if (notNmbrs.length > rangeNmbr.length) { fields.Range += notNmbrs[notNmbrs.length - 1]; }; }; ", "My spells and cantrips that require a ranged attack roll, have their range doubled."]
 	}
 };
 FeatsList["tavern brawler"] = {
@@ -3515,7 +3516,7 @@ FeatsList["tavern brawler"] = {
 	improvements : "Tavern Brawler (feat): +1 Strength or Constitution;",
 	eval : "AddAction('bonus action', 'Grapple (on hit with unarmed/improv.)', 'the Tavern Brawler feat');",
 	removeeval : "RemoveAction('bonus action', 'Grapple (on hit with unarmed/improv.)');",
-	weapons : [false, false, ["improvised weapons"]],
+	weapons : [false, false, ["Improvised weapons"]],
 	calcChanges : {
 		atkAdd : ["if (isMeleeWeapon && ((/unarmed strike/i).test(WeaponName) || (/improvised/i).test(WeaponName) || (/improvised weapon/i).test(theWea.type))) {fields.Description += (fields.Description ? '; ' : '') + 'After hitting, can attempt to grapple as a bonus action'; fields.Proficiency = true; }; if ((/unarmed strike/i).test(WeaponName) && fields.Damage_Die == 1) {fields.Damage_Die = '1d4'; }; ", "My unarmed strikes do 1d4 damage instead of 1;\n - After hitting a creature with an unarmed strike or improvised weapon in melee, I can attempt to start a grapple as a bonus action."]
 	}
@@ -3546,14 +3547,14 @@ FeatsList["weapon master"] = {
 
 // Add equipment that is not in the SRD
 WeaponsList["polearm butt end"] = {
-	regExpSearch : /^(?=.*(polearm|(glaive|guandao|bisento|naginata)|(halberd|\bji\b|kamayari)|(quarterstaff|\bstaff\b|\bbo\b)))(?=.*butt)(?=.*end).*$/i,
+	regExpSearch : /^(?=.*(polearm|(glaive|guandao|bisento|naginata)|(halberd|\bji\b|kamayari)|(quarterstaff|\bstaff\b|\bbo\b)|(spear|qiang|\byaris?\b)))(?=.*butt)(?=.*end).*$/i,
 	name : "Polearm butt end",
 	source : ["P", 168],
 	ability : 1,
 	type : "Other",
 	damage : [1, 4, "bludgeoning"],
 	range : "Melee",
-	description : "As bonus action after taking an attack action with only a glaive, halberd, or quarterstaff",
+	description : "As bonus action after Attack action with only a glaive, halberd, spear, or quarterstaff",
 	abilitytodamage : true
 };
 WeaponsList["thorn whip"] = {
@@ -5796,7 +5797,7 @@ SpellsList["control flames"] = {
 SpellsList["control winds"] = {
 	name : "Control Winds",
 	classes : ["druid", "sorcerer", "wizard"],
-	source : [["X", 152], ["E", 16]],
+	source : [["X", 152], ["E", 16], ["UA:D", 8]],
 	level : 5,
 	school : "Trans",
 	time : "1 a",
@@ -5874,7 +5875,7 @@ SpellsList["elemental bane"] = {
 	components : "V,S",
 	duration : "Conc, 1 min",
 	save : "Con",
-	description : "1+1/SL crea in 30 ft save or first attack each rnd of chosen energy does +2d6 dmg; no resistance",
+	description : "1+1/SL crea, each max 30 ft apart, save or 1 energy: lose resist. to it & +2d6 to first dmg with it/turn",
 	descriptionFull : "Choose one creature you can see within range, and choose one of the following damage types - acid, cold, fire, lightning, or thunder. The target must succeed on a Constitution saving throw or be affected by the spell for its duration. The first time each turn the affected target takes damage of the chosen type, the target takes an extra 2d6 damage of that type. Moreover, the target loses any resistance to that damage type until the spell ends." + AtHigherLevels + "When you cast this spell using a spell slot of 5th level or higher, you can target one additional creature for each slot level above 4th. The creatures must be within 30 feet of each other when you target them."
 };
 SpellsList["erupting earth"] = {
@@ -5922,7 +5923,7 @@ SpellsList["frostbite"] = {
 SpellsList["gust"] = {
 	name : "Gust",
 	classes : ["druid", "sorcerer", "wizard"],
-	source : [["WGtE", 107], ["X", 157], ["E", 19]],
+	source : [["WGtE", 107], ["X", 157], ["E", 19], ["UA:D", 6]],
 	level : 0,
 	school : "Trans",
 	time : "1 a",
@@ -7333,7 +7334,11 @@ AddSubClass("barbarian", "battlerager", {
 			name : "Battlerager Armor",
 			source : ["S", 121],
 			minlevel : 3,
-			description : "\n   " + "I gain proficiency with spiked armor as a weapon" + "\n   " + "As a bonus action while raging, I can attack once with my armor spikes",
+			description : desc([
+				"I gain proficiency with spiked armor both as an armor and as a weapon",
+				"As a bonus action while raging, I can attack once with my armor spikes",
+				"With my spiked armor I do 3 piercing damage when I use my Attack action to grapple"
+			]),
 			action : ["bonus action", " attack (in rage)"],
 			weapons : [false, false, ["armor spikes"]],
 			eval : "AddString('Proficiency Armor Other Description', 'Spiked Armor', ', '); AddWeapon('Armor Spikes');",
@@ -7451,8 +7456,8 @@ AddSubClass("fighter", "purple dragon knight", {
 			name : "Royal Envoy",
 			source : ["S", 128],
 			minlevel : 7,
-			description : "\n   " + "I gain proficiency with the Persuasion skill and I gain expertise with the Persuasion skill" + "\n   " + "If already proficient, I can choose Animal Handling, Insight, Intimidation, or Perform",
-			skillstxt : "\n\n" + toUni("Purple Dragon Knight (Royal Envoy)") + ": Persuasion proficiency and expertise; if already proficient, choose one from Animal Handling, Insight, Intimidation, and Performance.",
+			description : "\n   " + "I gain proficiency with the Persuasion skill and I gain expertise with the Persuasion skill" + "\n   " + "If already proficient, I can choose Animal Handling, Insight, Intimidation, or Performance",
+			skillstxt : "\n\n" + toUni("Purple Dragon Knight (Royal Envoy)") + ": Persuasion proficiency and expertise; if already proficient, choose one from Animal Handling, Insight, Intimidation, or Performance.",
 			eval : "AddSkillProf('Persuasion', true, true);",
 			removeeval : "AddSkillProf('Persuasion', false, true);"
 		},
@@ -7745,10 +7750,10 @@ AddSubClass("sorcerer", "storm sorcery", {
 			source : [["S", 137], ["X", 52]],
 			minlevel : 1,
 			description : desc([
-				"As a bonus action, after casting a 1st-level or higher spell, I can control elemental air",
-				"I can use this control to fly up to 10 feet without provoking opportunity attacks"
+				"As a bonus action, before or after casting a 1st-level or higher spell, I can fly 10 ft",
+				"This movement doesn't provoke opportunity attacks as whirling gust of air surround me"
 			]),
-			action : ["bonus action", " (after casting)"]
+			action : ["bonus action", " (with casting)"]
 		},
 		"subclassfeature6" : {
 			name : "Heart of the Storm",
@@ -8335,7 +8340,7 @@ WeaponsList["armor spikes"] = {
 	type : "Other",
 	damage : [1, 4, "piercing"],
 	range : "Melee",
-	description : "Does 3 piercing damage when using your attack to grapple",
+	description : "Does 3 piercing damage when grappling during my Attack action",
 	abilitytodamage : true
 };
 WeaponsList["radiant sun bolt"] = {
@@ -8506,7 +8511,7 @@ BackgroundList["haunted one"] = {
 	name : "Haunted One",
 	source : [["CoS", 209], ["ALbackground", 0]],
 	skills : "",
-	skillstxt : "Choose two from Arcana, Investigation, Religion, and Survival",
+	skillstxt : "Choose two from Arcana, Investigation, Religion, and Survival", // As only one skill proficiency in Curse of Strahd, but that was corrected in Curse of Strahd: Character Options
 	languageProfs : [1],
 	gold : 0,
 	equipleft : [
@@ -9412,7 +9417,7 @@ RaceList["firbolg"] = {
 RaceList["goblin"] = {
 	regExpSearch : /^(?=.*\bgoblins?\b)(?!.*hobgoblin|bugbear).*$/i,
 	name : "Goblin",
-	source : ["V", 119],
+	source : [["V", 119], ["G", 17]],
 	plural : "Goblins",
 	size : 4,
 	speed : {
@@ -9422,9 +9427,9 @@ RaceList["goblin"] = {
 	vision : [["Darkvision", 60]],
 	age : " rearch adulthood at age 8 and live up to 60 years",
 	height : " are between 3 and a half and 4 feet tall (3'5\" + 2d4\")",
-	weight : " weigh between 40 and 70 lb (35 + 2d4 \xD7 1d4 lb)",
+	weight : " weigh between 40 and 70 lb (35 + 2d4 \xD7 1 lb)",
 	heightMetric : " are between 100 and 120 cm tall (100 + 5d4 cm)",
-	weightMetric : " weigh between 20 and 30 kg (17 + 5d4 \xD7 2d4 / 10 kg)",
+	weightMetric : " weigh between 20 and 30 kg (17 + 5d4 \xD7 2 / 10 kg)",
 	improvements : "Goblin: +2 Dexterity, +1 Constitution;",
 	scores : [0, 2, 1, 0, 0, 0],
 	features : {
@@ -9433,8 +9438,7 @@ RaceList["goblin"] = {
 			minlevel : 1,
 			usages : 1,
 			recovery : "short rest",
-			additional : ["+1 damage", "+2 damage", "+3 damage", "+4 damage", "+5 damage", "+6 damage", "+7 damage", "+8 damage", "+9 damage", "+10 damage", "+11 damage", "+12 damage", "+13 damage", "+14 damage", "+15 damage", "+16 damage", "+17 damage", "+18 damage", "+19 damage", "+20 damage"],
-			tooltip : ""
+			aadditional : levels.map(function (n) { return "+" + n + " damage"; })
 		},
 		"nimble escape" : {
 			name : "Nimble Escape",
@@ -10020,7 +10024,7 @@ CreatureList["stench kow"] = {
 			description : "Any creature other than a stench kow starting its turn within 5 ft of a stench kow must make a DC 12 Constitution saving throw or be poisoned until the start of the creature's next turn. On a successful saving throw, the creature is immune to the stench of all stench kows for 1 hour."
 		}
 	],
-	wildshapeString : "Darkvision 60 ft | Resistant to: cold, fire, poison | Charge: If the stench kow moves at least 20 ft straight toward a target and then hits it with a gore attack on the same turn, it deals extra 2d6 piercing damage | Stench: Any creature starting its turn within 5 ft of a stench kow must take a DC 12 Con save or be poisoned until the start of the its next turn. On a success, it is immune to the stench of all stench kows for 1 hour"
+	wildshapeString : "Darkvision 60 ft | Resistant to: cold, fire, poison | Charge: If the stench kow moves at least 20 ft straight toward a target and then hits it with a gore attack on the same turn, it deals extra 2d6 piercing damage | Stench: Any creature starting its turn within 5 ft of a stench kow must make a DC 12 Con save or be poisoned until the start of the its next turn. On a success, it is immune to the stench of all stench kows for 1 hour"
 };
 CreatureList["dolphin"] = {
 	name : "Dolphin",
@@ -10401,14 +10405,14 @@ CreatureList["gazer"] = {
 		}
 	]
 };
-var iFileName = "pub_20170404_TotYP.js";
+var iFileName = "pub_20170404_TftYP.js";
 RequiredSheetVersion(12.999);
-// This file adds the beasts from the Tales of the Yawning Portal adventure book to MPMB's Character Record Sheet
+// This file adds the beasts from the Tales from the Yawning Portal adventure book to MPMB's Character Record Sheet
 
 // Define the source
-SourceList.TotYP={
-	name : "Tales of the Yawning Portal [beasts]",
-	abbreviation : "TotYP",
+SourceList.TftYP={
+	name : "Tales from the Yawning Portal [beasts]",
+	abbreviation : "TftYP",
 	group : "Adventure Books",
 	url : "https://dnd.wizards.com/products/tabletop-games/rpg-products/tales-yawning-portal",
 	date : "2017/04/04"
@@ -10417,7 +10421,7 @@ SourceList.TotYP={
 // Creatures
 CreatureList["giant crayfish"] = {
 	name : "Giant Crayfish",
-	source : ["TotYP", 235],
+	source : ["TftYP", 235],
 	size : 2, //Large
 	type : "Beast",
 	subtype : "",
@@ -10453,7 +10457,7 @@ CreatureList["giant crayfish"] = {
 };
 CreatureList["giant ice toad"] = {
 	name : "Giant Ice Toad",
-	source : ["TotYP", 235],
+	source : ["TftYP", 235],
 	size : 2, //Large
 	type : "Monstrosity",
 	subtype : "",
@@ -10499,7 +10503,7 @@ CreatureList["giant ice toad"] = {
 };
 CreatureList["giant lightning eel"] = {
 	name : "Giant Lightning Eel",
-	source : ["TotYP", 236],
+	source : ["TftYP", 236],
 	size : 2, //Large
 	type : "Beast",
 	subtype : "",
@@ -10547,7 +10551,7 @@ CreatureList["giant lightning eel"] = {
 };
 CreatureList["giant subterranean lizard"] = {
 	name : "Giant Subterranean Lizard",
-	source : ["TotYP", 236],
+	source : ["TftYP", 236],
 	size : 1, //Huge
 	type : "Beast",
 	subtype : "",
@@ -10723,7 +10727,7 @@ BackgroundList["anthropologist"] = {
 		"I want to learn more about a particular humanoid culture that fascinates me.",
 		"I seek to avenge a clan, tribe, kingdom, or empire that was wiped out.",
 		"I have a trinket that I believe is the key to finding a long-lost society."
-	], 	
+	],
 	flaw : [
 		"Boats make me seasick.",
 		"I talk to myself, and I don't make friends easily.",
@@ -10731,7 +10735,7 @@ BackgroundList["anthropologist"] = {
 		"I've picked up some unpleasant habits living among goblins, lizardfolk, or orcs.",
 		"I complain about everything.",
 		"I wear a tribal mask and never take it off."
-	], 
+	],
 	extra : [
 		"Select an Adopted Culture",
 		"Aarakocra",
@@ -10809,7 +10813,7 @@ BackgroundList["archaeologist"] = {
 		"I have no time for friends or family. I spend every waking moment thinking about and preparing for my next expedition.",
 		"When given the choice of going left or right, I always go left.",
 		"I can't sleep except in total darkness."
-	], 
+	],
 	extra : [
 		"Select a Signature Item",
 		"10-foot pole",
@@ -10836,10 +10840,10 @@ BackgroundFeatureList["historical knowledge"] = {
 };
 
 // Weapon
-WeaponsList["yklwa"] = { 
-	regExpSearch : /yklwa/i, 
-	name : "Yklwa", 
-	source : ["ToA", 32], 
+WeaponsList["yklwa"] = {
+	regExpSearch : /yklwa/i,
+	name : "Yklwa",
+	source : ["ToA", 32],
 	list : "melee",
 	ability : 1,
 	type : "Simple",
@@ -11387,7 +11391,7 @@ AddSubClass("barbarian", "storm herald-xgte", {
 					"Whenever I active my aura, anybody in my aura other than me takes fire damage"
 				]),
 				additional : levels.map(function (n) { return n < 3 ? "" : (n < 5 ? 2 : n < 10 ? 3 : n < 15 ? 4 : n < 20 ? 5 : 6) + " fire damage"; }),
-				eval : "var ToAdd = ['barbarian', 'subclassfeature6', 'desert']; if (classes.known.barbarian.level >= 6 && this.getField('Class Features Remember').value.indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)}; ToAdd[1] = 'subclassfeature10'; if (classes.known.barbarian.level >= 10 && this.getField('Class Features Remember').value.indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)}; ToAdd[1] = 'subclassfeature14'; if (classes.known.barbarian.level >= 14 && this.getField('Class Features Remember').value.indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)};"
+				eval : "var ToAdd = ['barbarian', 'subclassfeature6', 'desert']; if (classes.known.barbarian.level >= 6 && What('Class Features Remember').indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)}; ToAdd[1] = 'subclassfeature10'; if (classes.known.barbarian.level >= 10 && What('Class Features Remember').indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)}; ToAdd[1] = 'subclassfeature14'; if (classes.known.barbarian.level >= 14 && What('Class Features Remember').indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)};"
 			},
 			"sea" : {
 				name : "Storm Aura: Sea",
@@ -11398,7 +11402,7 @@ AddSubClass("barbarian", "storm herald-xgte", {
 					"It takes lightning damage, or half as much on a successful Dexterity saving throw"
 				]),
 				additional : levels.map(function (n) { return n < 3 ? "" : (n < 10 ? 1 : n < 15 ? 2 : n < 20 ? 3 : 4) + "d6 lightning damage"; }),
-				eval : "var ToAdd = ['barbarian', 'subclassfeature6', 'sea']; if (classes.known.barbarian.level >= 6 && this.getField('Class Features Remember').value.indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)}; ToAdd[1] = 'subclassfeature10'; if (classes.known.barbarian.level >= 10 && this.getField('Class Features Remember').value.indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)}; ToAdd[1] = 'subclassfeature14'; if (classes.known.barbarian.level >= 14 && this.getField('Class Features Remember').value.indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)};"
+				eval : "var ToAdd = ['barbarian', 'subclassfeature6', 'sea']; if (classes.known.barbarian.level >= 6 && What('Class Features Remember').indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)}; ToAdd[1] = 'subclassfeature10'; if (classes.known.barbarian.level >= 10 && What('Class Features Remember').indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)}; ToAdd[1] = 'subclassfeature14'; if (classes.known.barbarian.level >= 14 && What('Class Features Remember').indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)};"
 			},
 			"tundra" : {
 				name : "Storm Aura: Tundra",
@@ -11408,7 +11412,7 @@ AddSubClass("barbarian", "storm herald-xgte", {
 					"Whenever I active my aura, all creatures of my choice in my aura gain temporary HP"
 				]),
 				additional : levels.map(function (n) { return n < 3 ? "" : (n < 5 ? 2 : n < 10 ? 3 : n < 15 ? 4 : n < 20 ? 5 : 6) + " temporary hit points"; }),
-				eval : "var ToAdd = ['barbarian', 'subclassfeature6', 'tundra']; if (classes.known.barbarian.level >= 6 && this.getField('Class Features Remember').value.indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)}; ToAdd[1] = 'subclassfeature10'; if (classes.known.barbarian.level >= 10 && this.getField('Class Features Remember').value.indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)}; ToAdd[1] = 'subclassfeature14'; if (classes.known.barbarian.level >= 14 && this.getField('Class Features Remember').value.indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)};"
+				eval : "var ToAdd = ['barbarian', 'subclassfeature6', 'tundra']; if (classes.known.barbarian.level >= 6 && What('Class Features Remember').indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)}; ToAdd[1] = 'subclassfeature10'; if (classes.known.barbarian.level >= 10 && What('Class Features Remember').indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)}; ToAdd[1] = 'subclassfeature14'; if (classes.known.barbarian.level >= 14 && What('Class Features Remember').indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)};"
 			}
 		},
 		"subclassfeature6" : {
@@ -11943,7 +11947,7 @@ AddSubClass("druid", "circle of dreams-xgte", {
 			minlevel : 6,
 			description : desc([
 				"At the start of a rest, I can create a 30-ft radius invisible magical sphere",
-				"The sphere extends from a point in space I touch, but doesn't expend through total cover",
+				"The sphere extends from a point in space I touch, but doesn't extend through total cover",
 				"Within this area, my allies and I gain +5 on Wis (Perception) and Dex (Stealth) checks",
 				"Also, any light from open flames that are in the sphere is invisible from outside the area",
 				"This effect lasts until the end of the rest or when I leave the sphere"
@@ -12448,7 +12452,7 @@ AddSubClass("monk", "way of the kensei-xgte", {
 			calcChanges : {
 				atkAdd : [
 					"var monkDie = function(n) {return n < 5 ? 4 : n < 11 ? 6 : n < 17 ? 8 : 10;}; if (classes.known.monk && classes.known.monk.level > 2 && theWea && !isSpell && !theWea.monkweapon && (!(/heavy|special/i).test(fields.Description) || WeaponName === 'longbow') && WeaponText.toLowerCase().indexOf('kensei') !== -1) {var aMonkDie = aMonkDie ? aMonkDie : monkDie(classes.known.monk.level); try {var curDie = eval(fields.Damage_Die.replace('d', '*'));} catch (e) {var curDie = 'x';}; if (isNaN(curDie) || curDie < aMonkDie) {fields.Damage_Die = '1d' + aMonkDie; }; if (theWea.ability === 1) {fields.Mod = StrDex; }; if (isRangedWeapon) {fields.Description += (fields.Description ? '; ' : '') + 'As bonus action with Attack action, +1d4 damage'; }; fields.Proficiency = true; }; ",
-					"If I inlcude the word 'Kensei' in the name of a weapon that doesn't have the Heavy or Special attribute, or that is a longbow, that weapon gains the same benefits as any other 'Monk Weapon'.\nIn addition, with ranged 'Kensei Weapons', I can take a bonus action to have that hit, and any other hit after that as part of the same action, do +1d4 damage."
+					"If I include the word 'Kensei' in the name of a weapon that doesn't have the Heavy or Special attribute, or that is a longbow, that weapon gains the same benefits as any other 'Monk Weapon'.\nIn addition, with ranged 'Kensei Weapons', I can take a bonus action to have that hit, and any other hit after that as part of the same action, do +1d4 damage."
 				]
 			}
 		},
@@ -13396,10 +13400,10 @@ if (!ClassSubList["sorcerer-storm sorcery"] && (!SourceList.S || SourceList.S.ab
 				source : [["S", 137], ["X", 52]],
 				minlevel : 1,
 				description : desc([
-					"As a bonus action, after casting a 1st-level or higher spell, I can control elemental air",
-					"I can use this control to fly up to 10 feet without provoking opportunity attacks"
+					"As a bonus action, before or after casting a 1st-level or higher spell, I can fly 10 ft",
+					"This movement doesn't provoke opportunity attacks as whirling gust of air surround me"
 				]),
-				action : ["bonus action", " (after casting)"]
+				action : ["bonus action", " (with casting)"]
 			},
 			"subclassfeature6" : {
 				name : "Heart of the Storm",
@@ -13760,7 +13764,7 @@ AddWarlockInvocation("Maddening Hex (prereq: level 5 warlock, Hex spell or warlo
 		"The Hex spell and any of my warlock features that curse are considered a hex for this"
 	]),
 	source : ["X", 57],
-	prereqeval : "classes.known.warlock.level >= 5 && (isSpellUsed('hex', true) || (/hexblade/).test(classes.known.warlock.subclass) || (/sign of ill omen/i).test(toTestE))",
+	prereqeval : "classes.known.warlock.level >= 5 && (isSpellUsed('hex', true) || (/hexblade/).test(classes.known.warlock.subclass))",
 	action : ["bonus action", ""]
 });
 AddWarlockInvocation("Relentless Hex (prereq: level 7 warlock, Hex spell or warlock feature that curses)", {
@@ -13770,7 +13774,7 @@ AddWarlockInvocation("Relentless Hex (prereq: level 7 warlock, Hex spell or warl
 		"I teleport up to 30 ft to an unoccupied space that I can see within 5 ft of the target"
 	]),
 	source : ["X", 57],
-	prereqeval : "classes.known.warlock.level >= 7 && (isSpellUsed('hex', true) || (/hexblade/).test(classes.known.warlock.subclass) || (/sign of ill omen/i).test(toTestE))",
+	prereqeval : "classes.known.warlock.level >= 7 && (isSpellUsed('hex', true) || (/hexblade/).test(classes.known.warlock.subclass))",
 	action : ["bonus action", ""]
 });
 AddWarlockInvocation("Shroud of Shadow (prereq: level 15 warlock)", {
@@ -13887,7 +13891,7 @@ FeatsList["dragon fear-xgte"] = {
 	source : ["X", 74],
 	prerequisite : "Being a Dragonborn",
 	prereqeval : "CurrentRace.known.indexOf('dragonborn') !== -1",
-	calculate : "event.value = 'I can use my Breath Weapon to roar instead. Chosen creatures within 30 ft that can see or hear me must make a DC ' + (8 + Number(What('Proficiency Bonus')) + Number(What('Wis Mod'))) + ' Wis save (8 + prof. bonus + Cha mod) or be frightened of me for 1 min. A target can repeat the save whenever it takes damage. [+1 Str, Con, or Cha]';",
+	calculate : "event.value = 'I can use my Breath Weapon to roar instead. Chosen creatures within 30 ft that can see or hear me must make a DC ' + (8 + Number(What('Proficiency Bonus')) + Number(What('Cha Mod'))) + ' Wis save (8 + prof. bonus + Cha mod) or be frightened of me for 1 min. A target can repeat the save whenever it takes damage. [+1 Str, Con, or Cha]';",
 	improvements : "Dragon Fear (feat): +1 Strength, Constitution, or Charisma;",
 	eval : "AddAction('action', 'Breath Weapon or Dragon Fear', 'Dragon Fear (feat)', 'Breath Weapon');",
 	removeeval : "AddAction('action', 'Breath Weapon', 'Dragonborn (Draconic Ancestry)', 'Breath Weapon or Dragon Fear'); if (CurrentRace.known !== 'dragonborn') { RemoveAction('action', 'Breath Weapon'); }; "
@@ -14180,7 +14184,7 @@ if (!SourceList.E || !(/Elemental.*Evil.*Player.*Companion/i).test(SourceList.E.
 	SpellsList["control winds"] = {
 		name : "Control Winds",
 		classes : ["druid", "sorcerer", "wizard"],
-		source : [["X", 152], ["E", 16]],
+		source : [["X", 152], ["E", 16], ["UA:D", 8]],
 		level : 5,
 		school : "Trans",
 		time : "1 a",
@@ -14258,7 +14262,7 @@ if (!SourceList.E || !(/Elemental.*Evil.*Player.*Companion/i).test(SourceList.E.
 		components : "V,S",
 		duration : "Conc, 1 min",
 		save : "Con",
-		description : "1+1/SL crea in 30 ft save or first attack each rnd of chosen energy does +2d6 dmg; no resistance",
+		description : "1+1/SL crea, each max 30 ft apart, save or 1 energy: lose resist. to it & +2d6 to first dmg with it/turn",
 		descriptionFull : "Choose one creature you can see within range, and choose one of the following damage types - acid, cold, fire, lightning, or thunder. The target must succeed on a Constitution saving throw or be affected by the spell for its duration. The first time each turn the affected target takes damage of the chosen type, the target takes an extra 2d6 damage of that type. Moreover, the target loses any resistance to that damage type until the spell ends." + AtHigherLevels + "When you cast this spell using a spell slot of 5th level or higher, you can target one additional creature for each slot level above 4th. The creatures must be within 30 feet of each other when you target them."
 	};
 	SpellsList["erupting earth"] = {
@@ -14306,7 +14310,7 @@ if (!SourceList.E || !(/Elemental.*Evil.*Player.*Companion/i).test(SourceList.E.
 	SpellsList["gust"] = {
 		name : "Gust",
 		classes : ["druid", "sorcerer", "wizard"],
-		source : [["WGtE", 107], ["X", 157], ["E", 19]],
+		source : [["WGtE", 107], ["X", 157], ["E", 19], ["UA:D", 6]],
 		level : 0,
 		school : "Trans",
 		time : "1 a",
@@ -14720,7 +14724,7 @@ SpellsList["cause fear-xgte"] = {
 	components : "V",
 	duration : "Conc, 1 min",
 	save : "Wis",
-	description : "1+1/SL crea in 15-ft rad save or frightened; extra save at end of each turn; constr./undead immune",
+	description : "1+1/SL crea (not construct/undead), each max 30 ft apart, save or frightened; save end of each turn",
 	descriptionFull : "You awaken the sense of mortality in one creature you can see within range. A construct or an undead is immune to this effect. The target must succeed on a Wisdom saving throw or become frightened of you until the spell ends. The frightened target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success." + AtHigherLevels + "When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st. The creatures must be within 30 feet of each other when you target them."
 };
 SpellsList["ceremony-xgte"] = {
@@ -14741,7 +14745,7 @@ SpellsList["ceremony-xgte"] = {
 SpellsList["chaos bolt-xgte"] = {
 	name : "Chaos Bolt",
 	classes : ["sorcerer"],
-	source : ["X", 151],
+	source : [["X", 151], ["G", 67]],
 	ritual : false,
 	level : 1,
 	school : "Evoc",
@@ -14764,7 +14768,7 @@ SpellsList["charm monster"] = {
 	components : "V,S",
 	duration : "1 h",
 	save : "Wis",
-	description : "1+1/SL crea in 15-ft rad save or charmed; adv. if you or allies fighting it; ends if your or allies harms",
+	description : "1+1/SL creatures, each max 30 ft apart, save or charmed; adv. on save if you/allies are fighting it",
 	descriptionFull : "You attempt to charm a creature you can see within range. It must make a Wisdom saving throw, and it does so with advantage if you or your companions are fighting it. If it fails the saving throw, it is charmed by you until the spell ends or until you or your companions do anything harmful to it. The charmed creature is friendly to you. When the spell ends, the creature knows it was charmed by you." + AtHigherLevels + "When you cast this spell using a spell slot of 5th level or higher, you can target one additional creature for each slot level above 4th. The creatures must be within 30 feet of each other when you target them."
 };
 SpellsList["create homunculus"] = {
@@ -15396,7 +15400,7 @@ SpellsList["tiny servant"] = {
 SpellsList["toll the dead-xgte"] = {
 	name : "Toll the Dead",
 	classes : ["cleric", "warlock", "wizard"],
-	source : ["X", 169],
+	source : [["X", 169], ["UA:SS", 4]],
 	ritual : false,
 	level : 0,
 	school : "Necro",
@@ -15547,10 +15551,10 @@ WeaponsList["thunderclap"] = {
 	abilitytodamage : false,
 	dc : true
 };
-WeaponsList["toll the dead-xgte"] = {
+WeaponsList["toll the dead"] = {
 	regExpSearch : /^(?=.*toll)(?=.*the)(?=.*dead).*$/i,
 	name : "Toll the Dead",
-	source : ["X", 169],
+	source : [["X", 169], ["UA:SS", 4]],
 	list : "spell",
 	ability : 5,
 	type : "Cantrip",
@@ -15658,8 +15662,6 @@ CreatureList["tiny servant"] = { // Stats for the Tiny Servant spell (contains c
 		description : ""
 	}]
 };
-// WORK IN PROGRESS, NOT FINISHED, NOT TESTED!
-
 var iFileName = "pub_20180529_MToF.js";
 RequiredSheetVersion(12.999);
 // This file adds all the player-material from Mordenkainen's Tome of Foes to MPMB's Character Record Sheet
@@ -16519,7 +16521,7 @@ SourceList.WGtE = {
 	abbreviation : "WGtE",
 	group : "Primary Sources",
 	url : "https://www.dmsguild.com/product/247882/",
-	date : "2018/07/23"
+	date : "2018/10/09" // the original is from 2018/07/23, but this script is based on the newer version that includes (most of) the UA:Dragonmark changes 
 };
 
 // The changeling
@@ -16810,7 +16812,7 @@ WeaponsList["warforged iron fists"] = { // Juggernaut warforged weapon
 	abilitytodamage : true,
 	monkweapon : true
 };
-RaceList["Skirmisher warforged"] = {
+RaceList["skirmisher warforged"] = {
 	regExpSearch : /^(?=.*warforged)(?=.*skirmisher).*$/i,
 	name : "Skirmisher warforged",
 	sortname : "Warforged, Skirmisher",
@@ -17138,7 +17140,7 @@ RaceList["dragonmark detection half-elf"] = {
 	regExpSearch : /^((?=.*mark)(?=.*detection)|(?=.*house)(?=.*medani)).*$/i,
 	name : "Half-elf (dragonmark)",
 	sortname : "Dragonmark, Detection (Half-Elf)",
-	source : ["WGtE", 96],
+	source : [["WGtE", 96], ["UA:D", 2]],
 	plural : "Half-elves (dragonmark)",
 	size : 3,
 	speed : {
@@ -17171,13 +17173,13 @@ RaceList["dragonmark finding half-orc"] = {
 	regExpSearch : /^(?=.*half)(?=.*\bor(c|k))((?=.*mark)(?=.*finding)|(?=.*house)(?=.*tharashk)).*$/i,
 	name : "Half-orc (dragonmark)",
 	sortname : "Dragonmark, Finding (Half-Orc)",
-	source : ["WGtE", 97],
+	source : [["WGtE", 97], ["UA:D", 2]],
 	plural : "Half-orcs (dragonmark)",
 	size : 3,
 	speed : {
 		walk : { spd : 30, enc : 20 }
 	},
-	languageProfs : ["Common", "Goblin"],
+	languageProfs : ["Common", "Orc"],
 	vision : [["Darkvision", 60]],
 	age : " reach adulthood around age 14 and rarely live longer than 75 years",
 	height : " range from 5 to well over 6 feet tall (4'10\" + 2d10\")",
@@ -17186,7 +17188,7 @@ RaceList["dragonmark finding half-orc"] = {
 	weightMetric : " weigh around 100 kg (65 + 5d10 \xD7 4d6 / 10 kg)",
 	improvements : "Half-Orc, Dragonmark of Finding: +1 Strength, +1 Wisdom, and +1 to any one ability score of my choice;",
 	scores : [1, 0, 0, 0, 1, 0],
-	trait : "Half-Orc, Dragonmark of Finding (+1 Str" + (typePF ? ", +1 Wis, +1 to one ability" : "ength, +1 Wisdom, +1 to any one ability score") + ")\n   Hunter's Intuition: I add my Intuition Die (1d4) to my Perception and Survival checks.\n   Imprint Prey: As a bonus action once per short rest, I imprint to my mind a target I can see in 30 ft until it dies or leaves my sight. I can also do this with a Survival check for a creature I'm tracking. While imprinted, I double my Intuition Die for tracking it, can sense its exact location if within 60 ft, and my attacks vs. it ignore half cover.\n   Nature's Voice: Once I reach 3rd level, I can cast Locate Animals or Plants as a ritual.",
+	trait : "Half-Orc, Dragonmark of Finding (+1 Str" + (typePF ? ", +1 Wis, +1 to one ability" : "ength, +1 Wisdom, +1 to any one ability score") + ")\n   Hunter's Intuition: I add my Intuition Die (1d4) to my Perception and Survival checks.\n   Imprint Prey: As a bonus action once per short rest, I imprint a target I can see in 30 ft or with a Survival check when tracking it, lasting until it dies or I use this again. I double my Intuition Die for tracking it, sense its general location in 60 ft, my attacks vs. it ignore half cover and don't have disadv. if I can't see it, and it has no adv. vs. me if I can't see it.\n" + (typePF ? "Nature's Voice: cast Locate Animals/Plants as a ritual from 3rd level." : "   Nature's Voice: Once I reach 3rd level, I can cast Locate Animals or Plants as a ritual."),
 	features : {
 		"imprint prey" : {
 			name : "Imprint Prey",
@@ -17207,6 +17209,7 @@ RaceList["dragonmark finding half-orc"] = {
 		}
 	}
 };
+/* removed with UA:Dragonmark changes
 RaceList["dragonmark finding human"] = {
 	regExpSearch : /^(?=.*human)((?=.*mark)(?=.*finding)|(?=.*house)(?=.*tharashk)).*$/i,
 	name : "Human (dragonmark)",
@@ -17247,11 +17250,12 @@ RaceList["dragonmark finding human"] = {
 		}
 	}
 };
+*/
 RaceList["dragonmark handling human"] = {
 	regExpSearch : /^((?=.*mark)(?=.*handling)|(?=.*house)(?=.*vadalis)).*$/i,
 	name : "Human (dragonmark)",
 	sortname : "Dragonmark, Handling (Human)",
-	source : ["WGtE", 98],
+	source : [["WGtE", 98], ["UA:D", 3]],
 	plural : "Humans (dragonmark)",
 	size : 3,
 	speed : {
@@ -17265,7 +17269,7 @@ RaceList["dragonmark handling human"] = {
 	weightMetric : " weigh around 75 kg (50 + 5d10 \xD7 4d4 / 10 kg)",
 	improvements : "Human, Dragonmark of Handling: +1 Dexterity, +1 Wisdom, and +1 to any one ability score of my choice;",
 	scores : [0, 1, 0, 0, 1, 0],
-	trait : "Human, Dragonmark of Handling (+1 Dexterity, +1 Wisdom, +1 to any one ability score)\n   Wild Intuition: I can add my Intuition Die (1d4) to my Wisdom (Animal Handling) and Intelligence (Nature) checks.\n   Expert Handling: I can use the Help action to aid an ally animal companion or mount even when they are within 30 ft of me, rather than just within 5 ft.\n   Primal Connection: I can cast Animal Friendship once per short rest using Wisdom as my spellcasting ability.",
+	trait : "Human, Dragonmark of Handling (+1 Dex" + (typePF ? ", +1 Wis, +1 to one ability" : "terity, +1 Wisdom, +1 to any one ability score") + ")\n   Wild Intuition: I can add my Intuition Die (1d4) to my Wisdom (Animal Handling) and Intelligence (Nature) checks.\n   Expert Handling: I can use the Help action to aid an ally animal companion or mount even when they are within 30 ft of me, rather than just within 5 ft.\n   Primal Connection: Once per short rest, I can cast Animal Friendship using Wisdom " + (typePF ? "as my spellcasting ability" : "") + ".\n   " + (typePF ? "The Bigger They Are: My spells that normally affect only beasts now also affect monstrosities with an Intelligence of 3 or lower." : "Bigger They Are: My spells that affect only beasts, also affect monstrosities with Int < 4."),
 	spellcastingAbility : 5,
 	features : {
 		"animal friendship" : {
@@ -17287,7 +17291,7 @@ RaceList["dragonmark healing halfling"] = {
 	regExpSearch : /^((?=.*mark)(?=.*healing)|(?=.*house)(?=.*jorasco)).*$/i,
 	name : "Halfling (dragonmark)",
 	sortname : "Dragonmark, Healing (Halfling)",
-	source : ["WGtE", 99],
+	source : [["WGtE", 99], ["UA:D", 3]],
 	plural : "Halflings (dragonmark)",
 	size : 4,
 	speed : {
@@ -17302,7 +17306,13 @@ RaceList["dragonmark healing halfling"] = {
 	weightMetric : " weigh around 18 kg (16 + 5d4 / 10 kg)",
 	improvements : "Halfling, Dragonmark of Healing: +2 Dexterity, +1 Wisdom;",
 	scores : [0, 2, 0, 0, 1, 0],
-	trait : "Halfling, Dragonmark of Healing (+2 Dexterity, +1 Wisdom)\n   Lucky: When I roll a 1 on an attack roll, ability check, or saving throw, I can reroll the die and must use the new roll.\n   Halfling Nimbleness: I can move through the space of Medium and larger creatures.\n   Medical Intuition: I can add my Intuition Die (1d4) to my Wisdom (Medicine) checks.\n   Healing Touch: As an action once per short rest, I can spend one of my Hit Dice to heal myself or a creature I touch. I heal the roll of the die plus my Wisdom modifier.",
+	trait : "Halfling, Dragonmark of Healing (+2 Dexterity, +1 Wisdom)" + (typePF ? "\n  " : "") + 
+		" Lucky: When I roll a 1 on an attack roll, ability check, or saving throw, I can reroll the die and must use the new roll." + desc([
+		"Halfling Nimbleness: I can move through the space of Medium and larger creatures.",
+		"Medical Intuition: I " + (typePF ? "" : "can") + " add my Intuition Die (1d4) to " + (typePF ? "Medicine" : "my Wisdom (Medicine)") + " checks.",
+		"Healing Touch: As an action once per short rest, I can spend one of my Hit Dice to heal myself or a creature I touch. I heal the roll of the die plus my Wisdom modifier.",
+		"Jorasco's Blessing: I know the Spare the Dying cantrip."
+	]),
 	features : {
 		"healing touch" : {
 			name : "Healing Touch",
@@ -17311,13 +17321,20 @@ RaceList["dragonmark healing halfling"] = {
 			recovery : "short rest",
 			action : ["action", ""]
 		}
+	},
+	spellcastingAbility : 6,
+	spellcastingBonus : {
+		name : "Jorasco's Blessing",
+		spells : ["spare the dying"],
+		selection : ["spare the dying"],
+		atwill : true
 	}
 };
 RaceList["dragonmark hospitality halfling"] = {
 	regExpSearch : /^((?=.*mark)(?=.*hospitality)|(?=.*house)(?=.*ghallanda)).*$/i,
 	name : "Halfling (dragonmark)",
 	sortname : "Dragonmark, Hospitality (Halfling)",
-	source : ["WGtE", 100],
+	source : [["WGtE", 100], ["UA:D", 4]],
 	plural : "Halflings (dragonmark)",
 	size : 4,
 	speed : {
@@ -17346,7 +17363,7 @@ RaceList["dragonmark making human"] = {
 	regExpSearch : /^((?=.*mark)(?=.*making)|(?=.*house)(?=.*cannith)).*$/i,
 	name : "Human (dragonmark)",
 	sortname : "Dragonmark, Making (Human)",
-	source : ["WGtE", 101],
+	source : [["WGtE", 101], ["UA:D", 4]],
 	plural : "Humans (dragonmark)",
 	size : 3,
 	speed : {
@@ -17361,7 +17378,7 @@ RaceList["dragonmark making human"] = {
 	weightMetric : " weigh around 75 kg (50 + 5d10 \xD7 4d4 / 10 kg)",
 	improvements : "Human, Dragonmark of Making: +1 Dexterity, +1 Intelligence, and +1 to any one ability score of my choice;",
 	scores : [0, 1, 0, 1, 0, 0],
-	trait : "Human, Dragonmark of Making (+1 Dex" + (typePF ? ", +1 Int, +1 to one ability" : "terity, +1 Intelligence, +1 to any one ability score") + ")\nArtisan's Intuition: I can add my Intuition Die (1d4) to ability checks with artisan's tools.\nMagecraft: I can create a magic item that gives me the ability to cast one wizard cantrip of my choice, using Intelligence as my spellcasting ability. This works while the item is in my possession. At the end of a long rest, I can replace it with a new item and cantrip.\nSpellsmith: Once per long rest, I can spend 1 minute to make a nonmagical armor or weapon gain a +1 bonus for the next hour. Maker's Gift: I know the mending cantrip.",
+	trait : "Human, Dragonmark of Making (+1 Dex" + (typePF ? ", +2 Int or +2 Dex, +1 Int" : "terity, +1 Intelligence, +1 to Dex or Int, my choice") + ")\nArtisan's Intuition: I can add my Intuition Die (1d4) to ability checks with artisan's tools.\nMagecraft: I can create a magic item that gives me the ability to cast one wizard cantrip of my choice, using Intelligence as my spellcasting ability. This works while the item is in my possession. At the end of a long rest, I can replace it with a new item and cantrip.\nSpellsmith: Once per long rest, I can spend 1 minute to make a nonmagical armor or weapon gain a +1 bonus for the next hour. Maker's Gift: I know the mending cantrip.",
 	features : {
 		"spellsmith" : {
 			name : "Spellsmith",
@@ -17370,7 +17387,7 @@ RaceList["dragonmark making human"] = {
 			recovery : "long rest"
 		}
 	},
-	eval : "CurrentSpells['dragonmark making human'] = {name : 'Human (dragonmark)', ability : 4, list : { 'class' : sheetVersion < 13 ? 'wizard' : 'dragonmark making human', level : [0, 0] }, known : {cantrips : 1, spells : sheetVersion < 13 ? false : 'list'}, bonus : {bonus1 : {name : \"Maker's Gift\", spells : ['mending'], selection : ['mending'], atwill : true}}}; SetStringifieds('spells');",
+	eval : "CurrentSpells['dragonmark making human'] = {name : 'Human (dragonmark)', ability : 4, list : { 'class' : sheetVersion < 13 ? 'wizard' : 'dragonmark making human', level : [0, 0] }, known : {cantrips : 1, spells : sheetVersion < 13 ? false : 'list'}, bonus : {bonus1 : {name : \"Maker's Gift\", spells : ['mending'], selection : ['mending'], atwill : true}}, typeList : 2 }; SetStringifieds('spells');",
 	removeeval : "delete CurrentSpells['dragonmark making human']; SetStringifieds('spells');"
 };
 RunFunctionAtEnd(function() { // make the spell list for the 'making dragonmark human' in v13 and later
@@ -17413,7 +17430,7 @@ RaceList["dragonmark scribing gnome"] = {
 	regExpSearch : /^((?=.*mark)(?=.*scribing)|(?=.*house)(?=.*sivis)).*$/i,
 	name : "Gnome (dragonmark)",
 	sortname : "Dragonmark, Scribing (Gnome)",
-	source : ["WGtE", 103],
+	source : [["WGtE", 103], ["UA:D", 5]],
 	plural : "Gnomes (dragonmark)",
 	size : 4,
 	speed : {
@@ -17429,7 +17446,7 @@ RaceList["dragonmark scribing gnome"] = {
 	heightMetric : " are 90 to 120 cm tall (2'11\" + 5d4)",
 	weightMetric : " weigh around 18 kg (16 + 5d4 / 10 kg)",
 	improvements : "Gnome, Dragonmark of Scribing: +2 Intelligence, +1 Charisma;",
-	scores : [0, 1, 0, 2, 0, 0],
+	scores : [0, 0, 0, 2, 0, 1],
 	trait : "Gnome, Dragonmark of Scribing (+2 Intelligence, +1 Charisma)\n   Gifted Scribe: I can add my Intuition Die (1d4) to ability checks involving calligrapher's supplies or forgery kits. I am proficient with both of these tools.\n   Whispering Wind: I know the Message cantrip.\n   Scribe's Insight: I can cast Comprehend Languages once per long rest.\nIntelligence is my spellcasting ability for the spells gained from being a gnome, dragonmark of scribing.",
 	spellcastingAbility : 4,
 	spellcastingBonus : {
@@ -17458,7 +17475,7 @@ RaceList["dragonmark sentinel human"] = {
 	regExpSearch : /^((?=.*mark)(?=.*sentinel)|(?=.*house)(?=.*deneith)).*$/i,
 	name : "Human (dragonmark)",
 	sortname : "Dragonmark, Sentinel (Human)",
-	source : ["WGtE", 104],
+	source : [["WGtE", 104], ["UA:D", 5]],
 	plural : "Humans (dragonmark)",
 	size : 3,
 	speed : {
@@ -17501,7 +17518,7 @@ RaceList["dragonmark shadow elf"] = {
 	regExpSearch : /^((?=.*mark)(?=.*shadow)|(?=.*house)(?=.*(phiarlan|thuranni))).*$/i,
 	name : "Elf (dragonmark)",
 	sortname : "Dragonmark, Shadow (Elf)",
-	source : ["WGtE", 105],
+	source : [["WGtE", 105], ["UA:D", 6]],
 	plural : "Elves (dragonmark)",
 	size : 3,
 	speed : {
@@ -17542,13 +17559,13 @@ RaceList["dragonmark shadow elf"] = {
 };
 AddRacialVariant("dragonmark shadow elf", "performance, ", {
 	regExpSearch : /performance/i,
-	source : ["WGtE", 105],
+	source : [["WGtE", 105], ["UA:D", 6]],
 	skills : ["Perception", "Performance"],
 	skillstxt : ""
 });
 AddRacialVariant("dragonmark shadow elf", "musical instrument, ", {
 	regExpSearch : /musical instrument/i,
-	source : ["WGtE", 105],
+	source : [["WGtE", 105], ["UA:D", 6]],
 	skillstxt : "",
 	toolProfs : [["Musical instrument", 1]]
 });
@@ -17556,7 +17573,7 @@ RaceList["dragonmark storm half-elf"] = {
 	regExpSearch : /^((?=.*mark)(?=.*storm)|(?=.*house)(?=.*lyrandar)).*$/i,
 	name : "Half-elf (dragonmark)",
 	sortname : "Dragonmark, Storm (Half-Elf)",
-	source : ["WGtE", 106],
+	source : [["WGtE", 106], ["UA:D", 6]],
 	plural : "Half-elves (dragonmark)",
 	size : 3,
 	speed : {
@@ -17605,7 +17622,7 @@ RaceList["dragonmark warding dwarf"] = {
 	regExpSearch : /^((?=.*mark)(?=.*warding)|(?=.*house)(?=.*kundarak)).*$/i,
 	name : "Dwarf (dragonmark)",
 	sortname : "Dragonmark, Warding (Dwarf)",
-	source : ["WGtE", 108],
+	source : [["WGtE", 108], ["UA:D", 7]],
 	plural : "Dwarves (dragonmark)",
 	size : 3,
 	speed : {
@@ -17650,25 +17667,27 @@ RaceList["dragonmark warding dwarf"] = {
 };
 
 // Gust cantrip reprint
-SpellsList["gust"] = {
-	name : "Gust",
-	classes : ["druid", "sorcerer", "wizard"],
-	source : [["WGtE", 107], ["X", 157], ["E", 19]],
-	level : 0,
-	school : "Trans",
-	time : "1 a",
-	range : "30 ft",
-	components : "V,S",
-	duration : "Instantaneous",
-	save : "Str",
-	description : "Med. or smaller crea save or push 5 ft; or push unattended 5 lb obj 10 ft; or harmless sensory effect",
-	descriptionFull : "You seize the air and compel it to create one of the following effects at a point you can see within range." + "\n " + "\u2022 One Medium or smaller creature that you choose must succeed on a Strength saving throw or be pushed up to 5 feet away from you." + "\n " + "\u2022 You create a small blast of air capable of moving one object that is neither held nor carried and that weighs no more than 5 pounds. The object is pushed up to 10 feet away from you. It isn't pushed with enough force to cause damage." + "\n " + "\u2022 You create a harmless sensory affect using air, such as causing leaves to rustle, wind to slam shutters shut, or your clothing to ripple in a breeze."
-};
+if (!SpellsList["gust"]) {
+	SpellsList["gust"] = {
+		name : "Gust",
+		classes : ["druid", "sorcerer", "wizard"],
+		source : [["WGtE", 107], ["X", 157], ["E", 19], ["UA:D", 6]],
+		level : 0,
+		school : "Trans",
+		time : "1 a",
+		range : "30 ft",
+		components : "V,S",
+		duration : "Instantaneous",
+		save : "Str",
+		description : "Med. or smaller crea save or push 5 ft; or push unattended 5 lb obj 10 ft; or harmless sensory effect",
+		descriptionFull : "You seize the air and compel it to create one of the following effects at a point you can see within range." + "\n " + "\u2022 One Medium or smaller creature that you choose must succeed on a Strength saving throw or be pushed up to 5 feet away from you." + "\n " + "\u2022 You create a small blast of air capable of moving one object that is neither held nor carried and that weighs no more than 5 pounds. The object is pushed up to 10 feet away from you. It isn't pushed with enough force to cause damage." + "\n " + "\u2022 You create a harmless sensory affect using air, such as causing leaves to rustle, wind to slam shutters shut, or your clothing to ripple in a breeze."
+	};
+}
 
 // Greater Dragonmark feats
 FeatsList["greater dragonmark [detection]"] = {
 	name : "Greater Dragonmark [Detection]",
-	source : ["WGtE", 110],
+	source : [["WGtE", 110], ["UA:D", 7]],
 	prerequisite : "Being level 8 or higher and possessing the Dragonmark of Detection",
 	prereqeval : "Number(What('Character Level')) > 7 && (/^(?=.*dragonmark)(?=.*detection).*$/i).test(CurrentRace.known)",
 	description : "My Intuition Die increases with one step (for example d4 to d6). I can cast See Invisibility and True Seeing each once per long rest without using spell slots or requiring material components. Intelligence is my spellcasting ability for these. [+1 Charisma or Intelligence]",
@@ -17681,12 +17700,12 @@ FeatsList["greater dragonmark [detection]"] = {
 		oncelr : true,
 		times : 2
 	},
-	eval : "var raceTrait = Value('Racial Traits'); if ((/my Intuition Die \(1d4\)/i).test(raceTrait)) { What('Racial Traits', raceTrait.replace(/my Intuition Die \(1d4\)/i, 'my Intuition Die (1d6)'); ) }; ",
-	removeeval : "var raceTrait = Value('Racial Traits'); if ((/my Intuition Die \(1d6\)/i).test(raceTrait)) { What('Racial Traits', raceTrait.replace(/my Intuition Die \(1d6\)/i, 'my Intuition Die (1d4)'); ) }; "
+	eval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d4\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d4\\)/i, 'my Intuition Die (1d6)')); }; ",
+	removeeval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d6\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d6\\)/i, 'my Intuition Die (1d4)')); }; "
 };
 FeatsList["greater dragonmark [finding]"] = {
 	name : "Greater Dragonmark [Finding]",
-	source : ["WGtE", 110],
+	source : [["WGtE", 110], ["UA:D", 7]],
 	prerequisite : "Being level 8 or higher and possessing the Dragonmark of Finding",
 	prereqeval : "Number(What('Character Level')) > 7 && (/^(?=.*dragonmark)(?=.*finding).*$/i).test(CurrentRace.known)",
 	description : "My Intuition Die increases with one step (for example d4 to d6). I can cast Locate Creature and Find the Path each once per long rest without using spell slots or requiring material components. Wisdom is my spellcasting ability for these. [+1 " + (typePF ? "Strength, Dexterity, or Wisdom]" : "Str, Dex, or Wis]"),
@@ -17699,12 +17718,12 @@ FeatsList["greater dragonmark [finding]"] = {
 		oncelr : true,
 		times : 2
 	},
-	eval : "var raceTrait = Value('Racial Traits'); if ((/my Intuition Die \(1d4\)/i).test(raceTrait)) { What('Racial Traits', raceTrait.replace(/my Intuition Die \(1d4\)/i, 'my Intuition Die (1d6)'); ) }; ",
-	removeeval : "var raceTrait = Value('Racial Traits'); if ((/my Intuition Die \(1d6\)/i).test(raceTrait)) { What('Racial Traits', raceTrait.replace(/my Intuition Die \(1d6\)/i, 'my Intuition Die (1d4)'); ) }; "
+	eval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d4\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d4\\)/i, 'my Intuition Die (1d6)')); }; ",
+	removeeval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d6\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d6\\)/i, 'my Intuition Die (1d4)')); }; "
 };
 FeatsList["greater dragonmark [handling]"] = {
 	name : "Greater Dragonmark [Handling]",
-	source : ["WGtE", 110],
+	source : [["WGtE", 110], ["UA:D", 7]],
 	prerequisite : "Being level 8 or higher and possessing the Dragonmark of Handling",
 	prereqeval : "Number(What('Character Level')) > 7 && (/^(?=.*dragonmark)(?=.*handling).*$/i).test(CurrentRace.known)",
 	description : "My Intuition Die increases with one step (for example d4 to d6). I can cast Beast Sense and Dominate Beast each once per long rest without using spell slots or requiring material components. Wisdom is my spellcasting ability for these. [+1 Dexterity or Wisdom]",
@@ -17717,12 +17736,12 @@ FeatsList["greater dragonmark [handling]"] = {
 		oncelr : true,
 		times : 2
 	},
-	eval : "var raceTrait = Value('Racial Traits'); if ((/my Intuition Die \(1d4\)/i).test(raceTrait)) { What('Racial Traits', raceTrait.replace(/my Intuition Die \(1d4\)/i, 'my Intuition Die (1d6)'); ) }; ",
-	removeeval : "var raceTrait = Value('Racial Traits'); if ((/my Intuition Die \(1d6\)/i).test(raceTrait)) { What('Racial Traits', raceTrait.replace(/my Intuition Die \(1d6\)/i, 'my Intuition Die (1d4)'); ) }; "
+	eval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d4\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d4\\)/i, 'my Intuition Die (1d6)')); }; ",
+	removeeval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d6\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d6\\)/i, 'my Intuition Die (1d4)')); }; "
 };
 FeatsList["greater dragonmark [healing]"] = {
 	name : "Greater Dragonmark [Healing]",
-	source : ["WGtE", 110],
+	source : [["WGtE", 110], ["UA:D", 7]],
 	prerequisite : "Being level 8 or higher and possessing the Dragonmark of Healing",
 	prereqeval : "Number(What('Character Level')) > 7 && (/^(?=.*dragonmark)(?=.*healing).*$/i).test(CurrentRace.known)",
 	description : "My Intuition Die increases with one step (for example d4 to d6). I can cast Mass Healing Word and Greater Restoration each once per long rest without using spell slots or requiring material components. Wisdom is my spellcasting ability for these. [+1 Dexterity or Wisdom]",
@@ -17735,12 +17754,12 @@ FeatsList["greater dragonmark [healing]"] = {
 		oncelr : true,
 		times : 2
 	},
-	eval : "var raceTrait = Value('Racial Traits'); if ((/my Intuition Die \(1d4\)/i).test(raceTrait)) { What('Racial Traits', raceTrait.replace(/my Intuition Die \(1d4\)/i, 'my Intuition Die (1d6)'); ) }; ",
-	removeeval : "var raceTrait = Value('Racial Traits'); if ((/my Intuition Die \(1d6\)/i).test(raceTrait)) { What('Racial Traits', raceTrait.replace(/my Intuition Die \(1d6\)/i, 'my Intuition Die (1d4)'); ) }; "
+	eval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d4\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d4\\)/i, 'my Intuition Die (1d6)')); }; ",
+	removeeval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d6\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d6\\)/i, 'my Intuition Die (1d4)')); }; "
 };
 FeatsList["greater dragonmark [hospitality]"] = {
 	name : "Greater Dragonmark [Hospitality]",
-	source : ["WGtE", 110],
+	source : [["WGtE", 110], ["UA:D", 7]],
 	prerequisite : "Being level 8 or higher and possessing the Dragonmark of Hospitality",
 	prereqeval : "Number(What('Character Level')) > 7 && (/^(?=.*dragonmark)(?=.*hospitality).*$/i).test(CurrentRace.known)",
 	description : "My Intuition Die increases with one step (for example d4 to d6). I can cast Sanctuary and " + (typePF ? "Mordenkainen's " : "") + "Magnificent Mansion each once per long rest without using spell slots or requiring material components. Charisma is my spellcasting ability for these. [+1 Dexterity or Charisma]",
@@ -17753,12 +17772,12 @@ FeatsList["greater dragonmark [hospitality]"] = {
 		oncelr : true,
 		times : 2
 	},
-	eval : "var raceTrait = Value('Racial Traits'); if ((/my Intuition Die \(1d4\)/i).test(raceTrait)) { What('Racial Traits', raceTrait.replace(/my Intuition Die \(1d4\)/i, 'my Intuition Die (1d6)'); ) }; ",
-	removeeval : "var raceTrait = Value('Racial Traits'); if ((/my Intuition Die \(1d6\)/i).test(raceTrait)) { What('Racial Traits', raceTrait.replace(/my Intuition Die \(1d6\)/i, 'my Intuition Die (1d4)'); ) }; "
+	eval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d4\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d4\\)/i, 'my Intuition Die (1d6)')); }; ",
+	removeeval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d6\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d6\\)/i, 'my Intuition Die (1d4)')); }; "
 };
 FeatsList["greater dragonmark [making]"] = {
 	name : "Greater Dragonmark [Making]",
-	source : ["WGtE", 110],
+	source : [["WGtE", 110], ["UA:D", 7]],
 	prerequisite : "Being level 8 or higher and possessing the Dragonmark of Making",
 	prereqeval : "Number(What('Character Level')) > 7 && (/^(?=.*dragonmark)(?=.*making).*$/i).test(CurrentRace.known)",
 	description : "My Intuition Die increases with one step (for example d4 to d6). I can cast Fabricate and Creation each once per long rest without using spell slots or requiring material components. Intelligence is my spellcasting ability for these. [+1 Dexterity or Intelligence]",
@@ -17771,12 +17790,12 @@ FeatsList["greater dragonmark [making]"] = {
 		oncelr : true,
 		times : 2
 	},
-	eval : "var raceTrait = Value('Racial Traits'); if ((/my Intuition Die \(1d4\)/i).test(raceTrait)) { What('Racial Traits', raceTrait.replace(/my Intuition Die \(1d4\)/i, 'my Intuition Die (1d6)'); ) }; ",
-	removeeval : "var raceTrait = Value('Racial Traits'); if ((/my Intuition Die \(1d6\)/i).test(raceTrait)) { What('Racial Traits', raceTrait.replace(/my Intuition Die \(1d6\)/i, 'my Intuition Die (1d4)'); ) }; "
+	eval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d4\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d4\\)/i, 'my Intuition Die (1d6)')); }; ",
+	removeeval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d6\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d6\\)/i, 'my Intuition Die (1d4)')); }; "
 };
 FeatsList["greater dragonmark [passage]"] = {
 	name : "Greater Dragonmark [Passage]",
-	source : ["WGtE", 110],
+	source : [["WGtE", 110], ["UA:D", 7]],
 	prerequisite : "Being level 8 or higher and possessing the Dragonmark of Passage",
 	prereqeval : "Number(What('Character Level')) > 7 && (/^(?=.*dragonmark)(?=.*passage).*$/i).test(CurrentRace.known)",
 	description : "My Intuition Die increases with one step (for example d4 to d6). I can cast Blink and Teleportation Circle each once per long rest without using spell slots or requiring material components. Constitution is my spellcasting ability for these. [+1 Dexterity or Constitution]",
@@ -17789,12 +17808,12 @@ FeatsList["greater dragonmark [passage]"] = {
 		oncelr : true,
 		times : 2
 	},
-	eval : "var raceTrait = Value('Racial Traits'); if ((/my Intuition Die \(1d4\)/i).test(raceTrait)) { What('Racial Traits', raceTrait.replace(/my Intuition Die \(1d4\)/i, 'my Intuition Die (1d6)'); ) }; ",
-	removeeval : "var raceTrait = Value('Racial Traits'); if ((/my Intuition Die \(1d6\)/i).test(raceTrait)) { What('Racial Traits', raceTrait.replace(/my Intuition Die \(1d6\)/i, 'my Intuition Die (1d4)'); ) }; "
+	eval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d4\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d4\\)/i, 'my Intuition Die (1d6)')); }; ",
+	removeeval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d6\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d6\\)/i, 'my Intuition Die (1d4)')); }; "
 };
 FeatsList["greater dragonmark [scribing]"] = {
 	name : "Greater Dragonmark [Scribing]",
-	source : ["WGtE", 110],
+	source : [["WGtE", 110], ["UA:D", 7]],
 	prerequisite : "Being level 8 or higher and possessing the Dragonmark of Scribing",
 	prereqeval : "Number(What('Character Level')) > 7 && (/^(?=.*dragonmark)(?=.*scribing).*$/i).test(CurrentRace.known)",
 	description : "My Intuition Die increases with one step (for example d4 to d6). I can cast Sending and Tongues each once per short rest without using spell slots or requiring material components. Intelligence is my spellcasting ability for these. [+1 Intelligence or Charisma]",
@@ -17807,12 +17826,12 @@ FeatsList["greater dragonmark [scribing]"] = {
 		oncesr : true,
 		times : 2
 	},
-	eval : "var raceTrait = Value('Racial Traits'); if ((/my Intuition Die \(1d4\)/i).test(raceTrait)) { What('Racial Traits', raceTrait.replace(/my Intuition Die \(1d4\)/i, 'my Intuition Die (1d6)'); ) }; ",
-	removeeval : "var raceTrait = Value('Racial Traits'); if ((/my Intuition Die \(1d6\)/i).test(raceTrait)) { What('Racial Traits', raceTrait.replace(/my Intuition Die \(1d6\)/i, 'my Intuition Die (1d4)'); ) }; "
+	eval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d4\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d4\\)/i, 'my Intuition Die (1d6)')); }; ",
+	removeeval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d6\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d6\\)/i, 'my Intuition Die (1d4)')); }; "
 };
 FeatsList["greater dragonmark [sentinel]"] = {
 	name : "Greater Dragonmark [Sentinel]",
-	source : ["WGtE", 110],
+	source : [["WGtE", 110], ["UA:D", 7]],
 	prerequisite : "Being level 8 or higher and possessing the Dragonmark of Sentinel",
 	prereqeval : "Number(What('Character Level')) > 7 && (/^(?=.*dragonmark)(?=.*sentinel).*$/i).test(CurrentRace.known)",
 	description : "My Intuition Die increases with one step (for example d4 to d6). I can cast Compelled Duel and Warding Bond each once per short rest without using spell slots or requiring material components. Wisdom is my spellcasting ability for these. [+1 Strength or Wisdom]",
@@ -17825,12 +17844,12 @@ FeatsList["greater dragonmark [sentinel]"] = {
 		oncesr : true,
 		times : 2
 	},
-	eval : "var raceTrait = Value('Racial Traits'); if ((/my Intuition Die \(1d4\)/i).test(raceTrait)) { What('Racial Traits', raceTrait.replace(/my Intuition Die \(1d4\)/i, 'my Intuition Die (1d6)'); ) }; ",
-	removeeval : "var raceTrait = Value('Racial Traits'); if ((/my Intuition Die \(1d6\)/i).test(raceTrait)) { What('Racial Traits', raceTrait.replace(/my Intuition Die \(1d6\)/i, 'my Intuition Die (1d4)'); ) }; "
+	eval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d4\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d4\\)/i, 'my Intuition Die (1d6)')); }; ",
+	removeeval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d6\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d6\\)/i, 'my Intuition Die (1d4)')); }; "
 };
 FeatsList["greater dragonmark [shadow]"] = {
 	name : "Greater Dragonmark [Shadow]",
-	source : ["WGtE", 110],
+	source : [["WGtE", 110], ["UA:D", 7]],
 	prerequisite : "Being level 8 or higher and possessing the Dragonmark of Shadow",
 	prereqeval : "Number(What('Character Level')) > 7 && (/^(?=.*dragonmark)(?=.*shadow).*$/i).test(CurrentRace.known)",
 	description : "My Intuition Die increases with one step (for example d4 to d6). I can cast Nondetection and Mislead each once per long rest without using spell slots or requiring material components. Charisma is my spellcasting ability for these. [+1 Dexterity or Charisma]",
@@ -17843,30 +17862,30 @@ FeatsList["greater dragonmark [shadow]"] = {
 		oncelr : true,
 		times : 2
 	},
-	eval : "var raceTrait = Value('Racial Traits'); if ((/my Intuition Die \(1d4\)/i).test(raceTrait)) { What('Racial Traits', raceTrait.replace(/my Intuition Die \(1d4\)/i, 'my Intuition Die (1d6)'); ) }; ",
-	removeeval : "var raceTrait = Value('Racial Traits'); if ((/my Intuition Die \(1d6\)/i).test(raceTrait)) { What('Racial Traits', raceTrait.replace(/my Intuition Die \(1d6\)/i, 'my Intuition Die (1d4)'); ) }; "
+	eval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d4\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d4\\)/i, 'my Intuition Die (1d6)')); }; ",
+	removeeval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d6\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d6\\)/i, 'my Intuition Die (1d4)')); }; "
 };
 FeatsList["greater dragonmark [storm]"] = {
 	name : "Greater Dragonmark [Storm]",
-	source : ["WGtE", 110],
+	source : [["WGtE", 110], ["UA:D", 7]],
 	prerequisite : "Being level 8 or higher and possessing the Dragonmark of Storm",
 	prereqeval : "Number(What('Character Level')) > 7 && (/^(?=.*dragonmark)(?=.*storm).*$/i).test(CurrentRace.known)",
-	description : "My Intuition Die increases with one step (for example d4 to d6). I can cast Control Water and Control Wind each once per long rest without using spell slots or requiring material components. Charisma is my spellcasting ability for these. [+1 Dexterity or Charisma]",
+	description : "My Intuition Die increases with one step (for example d4 to d6). I can cast Control Water and Control Winds each once per long rest without using spell slots or requiring material components. Charisma is my spellcasting ability for these. [+1 Dexterity or Charisma]",
 	improvements : "Greater Dragonmark [Storm]: +1 Dexterity or Charisma;",
 	spellcastingBonus : {
 		name : "1\u00D7 per long",
-		spells : ["control water", "control wind"],
-		selection : ["control water", "control wind"],
+		spells : ["control water", "control winds"],
+		selection : ["control water", "control winds"],
 		spellcastingAbility : 6,
 		oncelr : true,
 		times : 2
 	},
-	eval : "var raceTrait = Value('Racial Traits'); if ((/my Intuition Die \(1d4\)/i).test(raceTrait)) { What('Racial Traits', raceTrait.replace(/my Intuition Die \(1d4\)/i, 'my Intuition Die (1d6)'); ) }; ",
-	removeeval : "var raceTrait = Value('Racial Traits'); if ((/my Intuition Die \(1d6\)/i).test(raceTrait)) { What('Racial Traits', raceTrait.replace(/my Intuition Die \(1d6\)/i, 'my Intuition Die (1d4)'); ) }; "
+	eval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d4\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d4\\)/i, 'my Intuition Die (1d6)')); }; ",
+	removeeval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d6\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d6\\)/i, 'my Intuition Die (1d4)')); }; "
 };
 FeatsList["greater dragonmark [warding]"] = {
 	name : "Greater Dragonmark [Warding]",
-	source : ["WGtE", 110],
+	source : [["WGtE", 110], ["UA:D", 7]],
 	prerequisite : "Being level 8 or higher and possessing the Dragonmark of Warding",
 	prereqeval : "Number(What('Character Level')) > 7 && (/^(?=.*dragonmark)(?=.*warding).*$/i).test(CurrentRace.known)",
 	description : "My Intuition Die increases one step. I can cast Knock, Secret Chest, and Glyph of Warding each once per long rest without spell slot or material component. Secret Chest requires a 100 gp Siberys dragonshard as a focus. These use Int as spellcasting ability. [+1 Dex or Int]",
@@ -17884,14 +17903,14 @@ FeatsList["greater dragonmark [warding]"] = {
 		selection : ["leomund's secret chest"],
 		oncelr : true
 	}],
-	eval : "var raceTrait = Value('Racial Traits'); if ((/my Intuition Die \(1d4\)/i).test(raceTrait)) { What('Racial Traits', raceTrait.replace(/my Intuition Die \(1d4\)/i, 'my Intuition Die (1d6)'); ) }; ",
-	removeeval : "var raceTrait = Value('Racial Traits'); if ((/my Intuition Die \(1d6\)/i).test(raceTrait)) { What('Racial Traits', raceTrait.replace(/my Intuition Die \(1d6\)/i, 'my Intuition Die (1d4)'); ) }; "
+	eval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d4\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d4\\)/i, 'my Intuition Die (1d6)')); }; ",
+	removeeval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d6\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d6\\)/i, 'my Intuition Die (1d4)')); }; "
 };
 
 // Aberrant Dragonmark feat
 FeatsList["aberrant dragonmark"] = {
 	name : "Aberrant Dragonmark",
-	source : ["WGtE", 112],
+	source : [["WGtE", 112], ["UA:D", 9]],
 	prerequisite : "Not having a dragonmark",
 	prereqeval : "!(/dragonmark/i).test(CurrentRace.known)",
 	description : "I learn a sorcerer cantrip and a 1st-level sorcerer spell, using Con as my spellcasting ability. I can cast the spell once per long rest without a spell slot. I can use a Hit Die when casting the spell, casting it as if with a level 2 spell slot and taking the HD as damage. [+1 Con]",
@@ -17910,6 +17929,1659 @@ FeatsList["aberrant dragonmark"] = {
 		oncelr : true
 	}]
 };
+var iFileName = "pub_20181120_GGtR.js";
+RequiredSheetVersion(12.999);
+// This file adds all material from the Guildmasters' Guide to Ravnica to MPMB's Character Record Sheet
+
+// Define the source
+SourceList.G = {
+	name : "Guildmasters' Guide to Ravnica",
+	abbreviation : "GGtR",
+	group : "Primary Sources",
+	url : "https://dnd.wizards.com/products/tabletop-games/rpg-products/guildmasters-guide-ravnica",
+	date : "2018/11/20"
+};
+
+// Add the Centaur race
+RaceList["centaur-ggtr"] = {
+	regExpSearch : /centaur/i,
+	name : "Centaur" + (tDoc.info.SheetVersion < 13 ? " " : ""),
+	sortname : "Centaur",
+	source : ["G", 15],
+	plural : "Centaurs",
+	size : 3,
+	speed : {
+		walk : { spd : 40, enc : 30 }
+	},
+	languageProfs : ["Common", "Sylvan"],
+	weapons : ["Hooves"],
+	skillstxt : "Choose one from Animal Handling, Medicine, Nature, or Survival",
+	age : " mature and age at about the same rate as humans",
+	height : " stand between 6 and 7 feet tall, with their equine bodies reaching about 4 feet at the withers (6'0\" + 1d10\")",
+	weight : " weigh around 670 lb (600 + 1d10 \xD7 2d12 lb)",
+	heightMetric : " stand around 2 metres tall, with their equine bodies reaching about 1,5 metres at the withers (183 + 3d8 cm)",
+	weightMetric : " weigh around 300 kg (270 + 3d8 \xD7 4d12 / 10 kg)",
+	improvements : "Centaur: +2 Strength, +1 Wisdom;",
+	scores : [2, 0, 0, 0, 1, 0],
+	trait : "Centaur (+2 Strength +1 Wisdom)" + desc([
+		"Fey: My creature type is fey, rather than humanoid.",
+		"Hooves: I can use my hooves for unarmed strikes (1d4 bludgeoning damage).",
+		"Charge: If I move 30 ft straight toward a creature and then hit it with a melee weapon attack on the same turn, I can make a hooves attack against it as a bonus action.",
+		"Equine Build: I count as one size larger for my carrying capacity and the weight I can push, drag, or lift. Because of my hooves, 1 ft of movement while climbing costs me 4 ft."
+	]),
+	features : {
+		"charge" : {
+			name : "Charge",
+			minlevel : 1,
+			action : ["bonus action", " (hooves attack)"]
+		}
+	},
+	eval : "tDoc.getField('Carrying Capacity Multiplier').value *= 2;",
+	removeeval : "tDoc.getField('Carrying Capacity Multiplier').value /= 2;"
+};
+// Centaur weapon
+WeaponsList["hooves-ggtr"] = {
+	regExpSearch : /\b(hoofs?|hooves)\b/i,
+	name : "Hooves" + (tDoc.info.SheetVersion < 13 ? " " : ""),
+	source : ["G", 15],
+	ability : 1,
+	type : "Natural",
+	damage : [1, 4, "bludgeoning"],
+	range : "Melee",
+	description : "Use as bonus action after charge 30 ft",
+	abilitytodamage : true,
+	monkweapon : true
+};
+
+if (!RaceList["goblin"]) { // reprint from Volo's Guide to Monsters
+	RaceList["goblin"] = {
+		regExpSearch : /^(?=.*\bgoblins?\b)(?!.*hobgoblin|bugbear).*$/i,
+		name : "Goblin",
+		source : [["V", 119], ["G", 17]],
+		plural : "Goblins",
+		size : 4,
+		speed : {
+			walk : { spd : 30, enc : 20 }
+		},
+		languageProfs : ["Common", "Goblin"],
+		vision : [["Darkvision", 60]],
+		age : " rearch adulthood at age 8 and live up to 60 years",
+		height : " are between 3 and a half and 4 feet tall (3'5\" + 2d4\")",
+		weight : " weigh between 40 and 70 lb (35 + 2d4 \xD7 1 lb)",
+		heightMetric : " are between 100 and 120 cm tall (100 + 5d4 cm)",
+		weightMetric : " weigh between 20 and 30 kg (17 + 5d4 \xD7 2 / 10 kg)",
+		improvements : "Goblin: +2 Dexterity, +1 Constitution;",
+		scores : [0, 2, 1, 0, 0, 0],
+		features : {
+			"fury of the small" : {
+				name : "Fury of the Small",
+				minlevel : 1,
+				usages : 1,
+				recovery : "short rest",
+				aadditional : levels.map(function (n) { return "+" + n + " damage"; })
+			},
+			"nimble escape" : {
+				name : "Nimble Escape",
+				minlevel : 1,
+				action : ["bonus action", " (disengage/hide)"]
+			}
+		},
+		trait : "Goblin (+2 Dexterity, +1 Constitution)\n\nFury of the Small: Once per short rest, when I hit a creature of a size category larger than mine, I deal extra damage equal to my level.\n\nNimble Escape: As a bonus action, I can take the Disengage or Hide action."
+	};
+}
+
+// Add Loxodon
+RaceList["loxodon-ggtr"] = {
+	regExpSearch : /loxodon/i,
+	name : "Loxodon" + (tDoc.info.SheetVersion < 13 ? " " : ""),
+	source : ["G", 18],
+	plural : "Loxodons",
+	size : 3,
+	speed : {
+		walk : { spd : 30, enc : 20 }
+	},
+	languageProfs : ["Common", "Loxodon"],
+	savetxt : { adv_vs : ["charmed", "frightened"] },
+	addarmor : "Loxodon Natural Armor (Con)",
+	vision : [["Keen Smell", 0]],
+	age : " physically mature at the same rate as humans, but are considered young until they reach the age of 60 and live about 450 years",
+	height : " stand between 7 and 8 feet tall (6'7\" + 2d10\")",
+	weight : " weigh between 300 and 400 pounds (295 + 2d10 \xD7 2d4 lb)",
+	heightMetric : " stand between 2 and 2,5 metres tall (200 + 5d10 cm)",
+	weightMetric : " weigh between 135 and 200 kg (133 + 5d10 \xD7 4d4 / 10 kg)",
+	improvements : "Loxodon: +2 Constitution, +1 Wisdom;",
+	scores : [0, 0, 2, 0, 1, 0],
+	trait : "Loxodon (+2 Constitution, +1 Wisdom)" +
+		"\n  Powerful Build: I count as one size larger for my carrying capacity, push, drag, and lift." +
+		"\n  Natural Armor: " + (typePF ? "I have an AC of" : "My thick, leathery skin gives me AC") + " 12 + Constitution modifier + shield." +
+		"\n  Trunk: I can grasp things with my trunk or use it as a snorkel. It has a reach of 5 ft and can lift things up to 5× my Strength in pounds. I can also use it to make unarmed strikes, but I can't use it to wield weapons, shields, or anything that requires manual precision." +
+		"\n  Keen Smell: I have " + (typePF ? "advantage on Wisdom (Perception), Wisdom (Survival), and Intelligence (Investigation) checks that involve smell." : "adv. on Perception, Survival, and Investigation checks involving smell."),
+	eval : "tDoc.getField('Carrying Capacity Multiplier').value *= 2;",
+	removeeval : "tDoc.getField('Carrying Capacity Multiplier').value /= 2;"
+};
+// Loxodon armour
+ArmourList['loxodon natural armor'] = {
+	regExpSearch : /^(?=.*loxodon)(?=.*(natural|hide|skin)).*$/i,
+	name : "Loxodon Natural Armor (Con)",
+	source : ["G", 18],
+	type : "",
+	ac : 12,
+	stealthdis : false,
+	strReq : 0,
+	dex : -10,
+	addMod : true
+};
+
+// Add the Minotaur race
+RaceList["minotaur-ggtr"] = {
+	regExpSearch : /minotaur/i,
+	name : "Minotaur" + (tDoc.info.SheetVersion < 13 ? " " : ""),
+	sortname : "Minotaur",
+	source : ["G", 19],
+	plural : "Minotaurs",
+	size : 3,
+	speed : {
+		walk : { spd : 30, enc : 20 }
+	},
+	languageProfs : ["Common", "Minotaur"],
+	weapons : ["Minotaur Horns"],
+	skillstxt : "Choose one from Intimidation or Persuasion",
+	age : " reach adulthood around age 17 and live up to 150 years",
+	height : " stand around 6 feet tall (5'4\" + 2d8\")",
+	weight : " weigh around 300 pounds (175 + 2d8 \xD7 2d6 lb)",
+	heightMetric : " stand around 175 cm tall (163 + 5d8 cm)",
+	weightMetric : " weigh around 135 kg (80 + 5d8 \xD7 4d6 / 10 kg)",
+	improvements : "Minotaur: +2 Strength +1 Constitution;",
+	scores : [2, 0, 1, 0, 0, 0],
+	abilitySave : 1,
+	trait : "Minotaur (+2 Strength +1 Constitution)" + desc([
+		"Horns: I can use my horns for unarmed strikes (1d6 piercing damage).",
+		"Goring Rush: When taking a Dash action and moving at least 20 ft, I can make a horns attack as a bonus action.",
+		"Hammering Horns: As a bonus action after I hit a melee attack during my Attack action, I can shove that target with my horns, if it is up to than one size larger than me. It must make a Str save (DC 8 + Str mod + Prof bonus) or be pushed up to 10 ft away from me."
+	]),
+	features : {
+		"goring rush" : {
+			name : "Goring Rush",
+			minlevel : 1,
+			action : ["bonus action", " (with Dash)"]
+		},
+		"hammering horns" : {
+			name : "Hammering Horns",
+			minlevel : 1,
+			action : ["bonus action", " (after hit)"]
+		}
+	}
+};
+// Minotaur weapon
+WeaponsList["minotaur horns"] = {
+	regExpSearch : /^(?=.*minotaur)(?=.*\bhorns?\b).*$/i,
+	name : "Minotaur Horns" + (tDoc.info.SheetVersion < 13 ? " " : ""),
+	source : ["G", 19],
+	ability : 1,
+	type : "Natural",
+	damage : [1, 6, "piercing"],
+	range : "Melee",
+	description : "Use as a bonus action after moving 20 ft with the Dash action",
+	abilitytodamage : true,
+	monkweapon : true
+};
+
+// Add Simic Hybrid
+RaceList["simic hybrid-ggtr"] = {
+	regExpSearch : /^(?=.*(simic|elf|dwarf|human|orc))(?=.*hybrid).*$/i,
+	name : "Simic hybrid" + (tDoc.info.SheetVersion < 13 ? " " : ""),
+	source : ["G", 20],
+	plural : "Simic hybrids",
+	size : 3,
+	speed : {
+		walk : { spd : 30, enc : 20 }
+	},
+	languageProfs : ["Common", ["Elvish or Vedalken", 1]],
+	vision : [["Darkvision", 60]],
+	age : " age slightly faster than their base humanoid race and their maximum lifespan is somewhat reduced",
+	height : " are of the same height as typical for their humanoid race",
+	weight : " are of the same weight as typical for their humanoid race",
+	improvements : "Simic Hybrid: +2 Constitution and +1 to one other ability score of my choice;",
+	scores : [0, 0, 2, 0, 0, 0],
+	trait : "Simic Hybrid (+2 Constitution and +1 to one other ability score of my choice)\n   Animal Enhancement (1st level): Choose one to three types of enhancement using the \"Racial Options\" button: Manta Glide, Nimble Climber, or Underwater Adaptation.\n   Animal Enhancement (5th level): At 5th level, I gain another animal enhancement. I can either choose one I didn't take at 1st level or choose Grappling Appendages, Carapace, or Acid Spit.",
+	features : {
+		"animal enhancement" : {
+			name : "Animal Enhancement",
+			minlevel : 5,
+			eval : 'RaceList["simic hybrid-ggtr"].set5thLvlAE()',
+			removeeval : 'RaceList["simic hybrid-ggtr"].remove5thLvlAE()'
+		}
+	},
+	set5thLvlAE : function() {
+		var curChoice = ParseRace(What('Race Remember'))[1].capitalize();
+		var AEoptions = ["Manta Glide", "Nimble Climber", "Underwater Adaptation", "Grappling Appendages", "Carapace", "Acid Spit"];
+		if (curChoice && AEoptions.indexOf(curChoice) !== -1) AEoptions.splice(AEoptions.indexOf(curChoice), 1);
+		var theChoice = AskUserOptions('Simic Hybrid 5th-level Animal Enhancement', (sheetVersion > 12.999 ? 'The Simic Hybrid race offers a choice of animal enhancement at 5th-level. ' : '') + 'Make a selection to update the sheet accordingly. You can only change this selection by removing the Simic Hybrid race or changing its variant.', AEoptions, 'radio', true);
+		var feaTxt = '';
+		var rNm = RaceList["simic hybrid-ggtr"].name;
+		switch (theChoice) {
+			case "Manta Glide":
+				feaTxt = "Animal Enhancement (Manta Glide): I have manta ray-like wings that I can use to slow my fall. I subtract 100 ft when calculating falling damage and I can move 2 ft horizontally for every 1 ft I descend.";
+				break;
+			case "Nimble Climber":
+				feaTxt = "Animal Enhancement (Nimble Climber): I have a climbing speed equal to my walking speed.";
+				SetProf("speed", true, { climb : { spd : 'walk', enc : 'walk' } }, rNm + ": Animal Enhancement (Nimble Climber)");
+				break;
+			case "Underwater Adaptation":
+				feaTxt = "Animal Enhancement (Underwater Adaptation): I can breathe air and water, and I have a swimming speed equal to my walking speed.";
+				SetProf("speed", true, { swim : { spd : 'walk', enc : 'walk' } }, rNm + ": Animal Enhancement (Underwater Adaptation)");
+				break;
+			case "Grappling Appendages":
+				feaTxt = "Animal Enhancement (Grappling Appendages): I have two extra appendages which I can use to make unarmed strikes for 1d6 bludgeoning damage. As a bonus action after hitting with them, I can try to grapple the target. I can't use these appendages to wield anything.";
+				AddWeapon("Grappling Appendages");
+				AddAction("bonus action", "Grappling Appendages (after hit)", rNm + ": Animal Enhancement (Grappling Appendages)");
+				break;
+			case "Carapace":
+				feaTxt = "Animal Enhancement (Carapace): My skin is covered by a thick shell, giving my a +1 to AC whenever I'm not wearing heavy armor.";
+				AddACMisc(1, 'Carapace Animal Enhancement', "+1 AC while not wearing Heavy armor.\n\nCarapace Animal Enhancement was gained from " + rNm + ": Animal Enhancement (Carapace)", "tDoc.getField('Heavy Armor').isBoxChecked(0)");
+				break;
+			case "Acid Spit":
+				feaTxt = "Animal Enhancement (Acid Spit): As an action, I can spit acid at a creature within 30 ft that I can see. It must make a Dex save (DC 8 + Con mod + Prof bonus) or take 2d10 acid damage (+1d10 at 11th and 17th level). I can do this my Con mod times per long rest.";
+				AddFeature("Acid Spit", "Con Mod", "", "long rest", "Simic Hybrid: Animal Enhancement (Acid Spit)", 0, "event.value = Math.max(1, What('Con Mod'));");
+				AddWeapon("Acid Spit");
+				break;
+		};
+		if (What("Unit System") !== "imperial") feaTxt = ConvertToMetric(feaTxt, 0.5);
+		Value("Racial Traits", What("Racial Traits").replace(/Animal Enhancement \(5th level\):.*/, '') + feaTxt);
+		Value("Race Remember", What("Race Remember") + "-*" + theChoice.replace(' ', '_') + "*");
+	},
+	remove5thLvlAE : function() {
+		var theRegex = /\*(Manta_Glide|Nimble_Climber|Underwater_Adaptation|Grappling_Appendages|Carapace|Acid_Spit)\*/i;
+		var raceRem = What("Race Remember");
+		if (!theRegex.test(raceRem)) return;
+		var rNm = RaceList["simic hybrid-ggtr"].name;
+		var theChoice = raceRem.match(theRegex)[1].replace('_', ' ').capitalize();
+		switch (theChoice) {
+			case "Nimble Climber":
+				SetProf("speed", false, { climb : { spd : 'walk', enc : 'walk' } }, rNm + ": Animal Enhancement (Nimble Climber)");
+				break;
+			case "Underwater Adaptation":
+				SetProf("speed", false, { swim : { spd : 'walk', enc : 'walk' } }, rNm + ": Animal Enhancement (Underwater Adaptation)");
+				break;
+			case "Grappling Appendages":
+				RemoveWeapon("Grappling Appendages");
+				RemoveAction("bonus action", "Grappling Appendages (after hit)", rNm + ": Animal Enhancement (Grappling Appendages)");
+				break;
+			case "Carapace":
+				AddACMisc(0, 'Carapace Animal Enhancement', "+1 AC while not wearing Heavy armor.\n\nCarapace Animal Enhancement was gained from " + rNm + ": Animal Enhancement (Carapace)");
+				break;
+			case "Acid Spit":
+				RemoveFeature("Acid Spit", "", "", "", "", "", "event.value = Math.max(1, What('Con Mod'));");
+				RemoveWeapon("Acid Spit");
+				break;
+		};
+		Value("Racial Traits", What("Unit System") === "imperial" ? CurrentRace.trait : ConvertToMetric(CurrentRace.trait, 0.5));
+	}
+};
+AddRacialVariant("simic hybrid-ggtr", "manta glide", {
+	regExpSearch : /manta glide/i,
+	source : ["G", 20],
+	trait : "Simic Hybrid (+2 Constitution and +1 to one other ability score of my choice)\n   Animal Enhancement (Manta Glide): I have manta ray-like wings that I can use to slow my fall. I subtract 100 ft when calculating falling damage and I can move 2 ft horizontally for every 1 ft I descend.\n   Animal Enhancement (5th level): At 5th level, I gain another animal enhancement. I can choose Nimble Climber, Underwater Adaptation, Grappling Appendages, Carapace, or Acid Spit."
+});
+AddRacialVariant("simic hybrid-ggtr", "nimble climber", {
+	regExpSearch : /nimble climber/i,
+	source : ["G", 20],
+	speed : {
+		walk : { spd : 30, enc : 20 },
+		climb : { spd : 'walk', enc : 'walk' }
+	},
+	trait : "Simic Hybrid (+2 Constitution and +1 to one other ability score of my choice)\n   Animal Enhancement (Nimble Climber): I have a climbing speed equal to my walking speed.\n   Animal Enhancement (5th level): At 5th level, I gain another animal enhancement. I can choose Manta Glide, Underwater Adaptation, Grappling Appendages, Carapace, or Acid Spit."
+});
+AddRacialVariant("simic hybrid-ggtr", "underwater adaptation", {
+	regExpSearch : /underwater adaptation/i,
+	source : ["G", 20],
+	speed : {
+		walk : { spd : 30, enc : 20 },
+		swim : { spd : 'walk', enc : 'walk' }
+	},
+	trait : "Simic Hybrid (+2 Constitution and +1 to one other ability score of my choice)\n   Animal Enhancement (Underwater Adaptation): I can breathe air and water, and I have a swimming speed equal to my walking speed.\n   Animal Enhancement (5th level): At 5th level, I gain another animal enhancement. I can choose Manta Glide, Nimble Climber, Grappling Appendages, Carapace, or Acid Split."
+});
+WeaponsList["grappling appendages"] = {
+	regExpSearch : /^(?=.*grappling)(?=.*(appendage|tentacle|claw)).*$/i,
+	name : "Grappling Appendages",
+	source : [["G", 20], ["UA:RoR", 3]],
+	ability : 1,
+	type : "Natural",
+	damage : [1, 6, "bludgeoning"],
+	range : "Melee",
+	description : "After hitting, start grapple on target as a bonus action",
+	abilitytodamage : true,
+	monkweapon : true
+};
+WeaponsList["acid spit"] = {
+	regExpSearch : /^(?=.*acid)(?=.*spit).*$/i,
+	name : "Acid Spit",
+	source : [["G", 21], ["UA:RoR", 3]],
+	ability : 3,
+	type : "Natural",
+	damage : ["C", 10, "acid"],
+	range : "30 ft",
+	description : "Dex save, success - no damage",
+	abilitytodamage : false,
+	dc : true
+};
+
+// Add Vedalken
+RaceList["vedalken-ggtr"] = {
+	regExpSearch : /vedalken/i,
+	name : "Vedalken" + (tDoc.info.SheetVersion < 13 ? " " : ""),
+	source : ["G", 21],
+	plural : "Vedalken",
+	size : 3,
+	speed : {
+		walk : { spd : 30, enc : 20 }
+	},
+	savetxt : { text : ["Adv. on Int/Wis/Cha saves"] },
+	skillstxt : "Choose one from Arcana, History, Investigation, Medicine, Performance, or Sleight of Hand. I add 1d4 to a check with the chosen skill",
+	languageProfs : ["Common", "Vedalken", 1],
+	toolProfs : [["Any tool", 1]],
+	age : " reach maturity around age 40 and typically live 350 years, with some living up to 500 years",
+	height : " stand between 6 and 6 and a half feet tall (5'4\" + 2d10\")",
+	weight : " are slender, weighing around 200 pounds (110 + 2d10 \xD7 2d4 lb)",
+	heightMetric : " stand between 1,8 and 2 metres tall (163 + 5d10 cm)",
+	weightMetric : " are slender, weighing around 100 kg (50 + 5d10 \xD7 4d4 / 10 kg)",
+	improvements : "Vedalken: +2 Intelligence, +1 Wisdom;",
+	scores : [0, 0, 0, 2, 1, 0],
+	trait : "Vedalken (+2 Intelligence, +1 Wisdom)" + desc([
+		"Vedalken Dispassion: I have advantage on all Intelligence, Wisdom, and Charisma saves.",
+		"Tireless Precision: I am proficient with any one tool and one skill of my choice: Arcana, History, Investigation, Medicine, Performance, or Sleight of Hand. Whenever I make an ability check with the chosen tool or skill, I can add 1d4 to the check's total.",
+		"Partially Amphibious: Once per long rest, I can breathe underwater for 1 hour by absorbing oxygen through my skin."
+	]),
+	features : {
+		"partially amphibious" : {
+			name : "Partially Amphibious",
+			minlevel : 1,
+			usages : 1,
+			recovery : "long rest"
+		}
+	},
+	eval : function () {
+		Checkbox('Int ST Adv', true, 'Advantage on Intelligence saving throws was gained from Vedalken');
+		Checkbox('Wis ST Adv', true, 'Advantage on Wisdom saving throws was gained from Vedalken');
+		Checkbox('Cha ST Adv', true, 'Advantage on Charisma saving throws was gained from Vedalken');
+	},
+	removeeval : function () {
+		Checkbox('Int ST Adv', false, '');
+		Checkbox('Wis ST Adv', false, '');
+		Checkbox('Cha ST Adv', false, '');
+	}
+};
+
+// New Subclass for Cleric: Order Domain
+AddSubClass("cleric", "order domain-ggtr", {
+	regExpSearch : /^(?=.*(cleric|priest|clergy|acolyte))(?=.*order).*$/i,
+	subname : "Order Domain",
+	source : ["G", 25],
+	spellcastingExtra : ["command", "heroism", "hold person", "zone of truth", "mass healing word", "slow", "compulsion", "locate creature", "commune", "dominate person"],
+	features : {
+		"subclassfeature1" : {
+			name : "Bonus Proficiency",
+			source : ["G", 26],
+			minlevel : 1,
+			description : "\n   " + "I gain proficiency with heavy armor, and either the Intimidation or Persuasion skill",
+			armor : [false, false, true, false],
+			skillstxt : "\n\n" + toUni("Order Domain") + ": Choose one from Intimidation or Persuasion"
+		},
+		"subclassfeature1.1" : {
+			name : "Voice of Authority",
+			source : ["G", 26],
+			minlevel : 1,
+			description : desc([
+				"Whenever I use a spell slot to cast a spell on an ally, it can use its reaction to attack",
+				"The ally makes one weapon attack against a target of my choice that I can see",
+				"If the spell targets multiple allies, I can choose which one can make the attack"
+			])
+		},
+		"subclassfeature2" : {
+			name : "Channel Divinity: Order's Demand",
+			source : ["G", 26],
+			minlevel : 2,
+			description : desc([
+				"As an action, all chosen targets in 30 ft that can see or hear me must make a Wis save",
+				"If failed, it is charmed by me until the end of my next turn or it takes any damage",
+				"Also, I can choose to have a charmed target drop what its holding when it fails its save"
+			]),
+			action : ["action", ""]
+		},
+		"subclassfeature6" : {
+			name : "Embodiment of the Law",
+			source : ["G", 26],
+			minlevel : 6,
+			description : desc([
+				"When I cast an enchantment spell using a spell slot, I can reduce its casting time",
+				"If the spell normally has a casting time of an action, I can now cast it as a bonus action"
+			]),
+			usages : "Wisdom modifier per ",
+			usagescalc : "event.value = Math.max(1, What('Wis Mod'));",
+			recovery : "long rest"
+		},
+		"subclassfeature8" : {
+			name : "Divine Strike",
+			source : ["G", 26],
+			minlevel : 8,
+			description : "\n   " + "Once per turn, when I hit a creature with a weapon attack, I can do extra damage",
+			additional : levels.map(function (n) {
+				if (n < 8) return "";
+				return "+" + (n < 14 ? 1 : 2) + "d8 psychic damage";
+			}),
+			calcChanges : {
+				atkAdd : ["if (classes.known.cleric && classes.known.cleric.level > 7 && !isSpell) {fields.Description += (fields.Description ? '; ' : '') + 'Once per turn +' + (classes.known.cleric.level < 14 ? 1 : 2) + 'd8 psychic damage'; }; ", "Once per turn, I can have one of my weapon attacks that hit do extra psychic damage."]
+			}
+		},
+		"subclassfeature17" : {
+			name : "Order's Wrath",
+			source : ["G", 26],
+			minlevel : 17,
+			description : desc([
+				"If I deal my Divine Strike damage to a creature, it is cursed until my next turn starts",
+				"The next time it is hit by a weapon attack from my allies, it takes +2d8 psychic damage"
+			])
+		}
+	}
+});
+
+// New Subclass for Druid: Circle of Spores
+AddSubClass("druid", "circle of spores-ggtr", {
+	regExpSearch : /^(?=.*(druid|shaman))(?=.*spores).*$/i,
+	subname : "Circle of Spores",
+	source : ["G", 26],
+	spellcastingExtra : ["blindness/deafness", "gentle repose", "animate dead", "gaseous form", "blight", "confusion", "cloudkill", "contagion"],
+	features : {
+		"subclassfeature2" : {
+			name : "Circle Spells",
+			source : ["G", 27],
+			minlevel : 2,
+			description : desc([
+				"I learn the Chill Touch cantrip and gain the ability to cast certain spells",
+				"These are always prepared, but don't count against the number of spells I can prepare"
+			]),
+			spellcastingBonus : {
+				name : "Circle Spells",
+				spells : ["chill touch"],
+				selection : ["chill touch"]
+			}
+		},
+		"subclassfeature2.1" : {
+			name : "Halo of Spores",
+			source : ["G", 27],
+			minlevel : 2,
+ 			description : desc([
+				"As a reaction when someone I can see in 10 ft starts its turn or moves, I can have it save",
+				"It must succeed on a Constitution save or take necrotic damage from my cloud of spores"
+			]),
+			additional : levels.map(function (n) { return n < 2 ? "" : 'Con save or 1d' + (n < 6 ? 4 : n < 10 ? 6 : n < 14 ? 8 : 10) + " necrotic damage"; }),
+			action : ["reaction", ""]
+		},
+		"subclassfeature2.2" : {
+			name : "Symbiotic Entity",
+			source : ["G", 27],
+			minlevel : 2,
+			description : desc([
+				"As an action, I expend a Wild Shape use to boost my spores instead of transforming",
+				"I gain 4 temporary hit points per druid level and my Halo of Spores damage increases",
+				"Also, my melee weapon attacks do +1d6 poison damage with every hit",
+				"This lasts for 10 min, until these temporary HP run out, or until I use Wild Shape again"
+			]),
+			additional : levels.map(function (n) {
+				return n < 2 ? "" : Math.floor(n*4) + " temp HP; Halo of Spores: 2d" + (n < 6 ? 4 : n < 10 ? 6 : n < 14 ? 8 : 10);
+			}),
+			action : ["action", ""],
+			calcChanges : {
+				atkAdd : ["if (isMeleeWeapon && (/\\b(spore|symbiotic)\\b/i).test(WeaponText) && !isNaturalWeapon) {fields.Description += (fields.Description ? '; ' : '') + '+1d6 poison damage';}; ", "If I include the word 'Spore' or 'Symbiotic' in a melee weapon's name or description, it gets treated as a weapon that is infused by my Symbiotic Entity feature, adding +1d6 poison damage in the description."]
+			}
+		},
+		"subclassfeature6" : {
+			name : "Fungal Infestation",
+			source : ["G", 27],
+			minlevel : 6,
+			description : desc([
+				"As a reaction when a Small/Medium beast/humanoid dies in 10 ft, I can animate it",
+				"It rises as a zombie with 1 HP that follows my mental commands and dies after 1 hour",
+				"It can only take the attack action for one melee attack; It takes its turns after mine"
+			]),
+			usages : "Wisdom modifier per ",
+			usagescalc : "event.value = Math.max(1, What('Wis Mod'));",
+			recovery : "long rest",
+			action : ["reaction", ""]
+		},
+		"subclassfeature10" : {
+			name : "Spreading Spores",
+			source : ["G", 27],
+			minlevel : 10,
+			description : " [only while Symbiotic Entity is active]" + desc([
+				"As a bonus action, I create a 10-ft cube of fungal spores within 30 ft, lasting for 1 min",
+				"Any creature moving into or starting its turn in it must save against my Halo of Spores",
+				"The cube ends if I use this feature again; While it persists, I can't use my Halo of Spores"
+			]),
+			action : ["bonus action", " (start/end)"]
+		},
+		"subclassfeature14" : {
+			name : "Fungal Body",
+			source : ["G", 27],
+			minlevel : 14,
+			description : desc([
+				"I'm immune to being blinded, deafened, frightened, poisoned, and critical hits",
+			]),
+			savetxt : { immune : ["blinded", "deafened", "frightened", "poisoned", "critical hits (unless incapacitated)"] }
+		}
+	}
+});
+
+BackgroundList["azorius functionary"] = {
+	regExpSearch :  /^(?=.*azorius)(?=.*functionary).*$/i,
+	name : "Azorius Functionary",
+	source : ["G", 33],
+	skills : ["Insight", "Intimidation"],
+	gold : 10,
+	equipleft : [
+		["Scroll with law text", "", ""],
+		["Blue ink, 1 ounce bottle of", 1, ""],
+		["Ink pen (quill)", "", ""]
+	],
+	equipright : [
+		["Fine clothes", "", 6],
+		["Azorius insignia", "", ""],
+		["Belt pouch (with coins)", "", 1]
+	],
+	languageProfs : [2],
+	feature : "Legal Authority",
+	trait : [
+		"I try never to let my judgment become clouded by emotion.",
+		"I have infinite patience with the dolts and boors I'm forced to deal with every day.",
+		"When I give an order, I expect it to be obeyed.",
+		"I just want things the way I like them: neat, orderly, and clean.",
+		"No wrongdoing can escape my watchful gaze.",
+		"I always say exactly what I mean, no matter how many words it takes to communicate the particular nuance I am attempting to convey.",
+		"I'm very literal and don't appreciate metaphor or sarcasm.",
+		"I never change my mind once it's made up."
+	],
+	ideal : [
+		["Guild", "Guild: My guild is all that really matters. (Any)"],
+		["Order", "Order: The law is meant to ensure that the gears of society turn smoothly and quietly. (Lawful)"],
+		["Peace", "Peace: The ultimate object of the law is to remove violence from society. (Good)"],
+		["Compliance", "Compliance: Coercion is a fine way of ensuring that the laws are obeyed. (Lawful)"],
+		["Legislation", "Legislation: The law embodies excellence in its precision and detail. (Lawful)"],
+		["Punishment", "Punishment: A public display of consequences is an excellent deterrent for other criminals. (Evil)"]
+	],
+	bond : [
+		"I am beholden to an Azorius arrester who captured the criminal who killed my parents, saving me from the same fate.",
+		"I hope one day to write the laws, not just enforce them.",
+		"I tried and failed to prevent a murder, and I have sworn to find and arrest the perpetrator.",
+		"I successfully prevented a murder, and the would-be perpetrator wants me dead.",
+		"One of my parents was prominent in the guild, and I resent constantly being compared to that standard.",
+		"I've modeled my career after a highly respected lawmage or arrester, but I fear that my role model might be involved in something illegal."
+	],
+	flaw : [
+		"I'm unable to distinguish between the letter and the spirit of the law.",
+		"I seem like a harsh judge to others, but I judge myself most harshly of all.",
+		"I have a secret, illegal vice.",
+		"I was traumatized by witnessing a crime as a child.",
+		"I'm incapable of deception.",
+		"I wish I had joined the Boros, but I fear they'd never accept me."
+	]
+};
+BackgroundFeatureList["legal authority"] = {
+	description : "I have the authority to enforce the laws of Ravnica, inspiring respect and fear as a result. People mind their manners, avoid my attention, and assume I have a right to be wherever I am. My Azorius insignia gets me an audience with anyone I want, though it might work adversely with incorrigible lawbreakers. Abusing this privilege can get me in serious trouble.",
+	source : ["G", 33]
+};
+
+BackgroundList["boros legionnaire"] = {
+	regExpSearch :  /^(?=.*boros)(?=.*legionnaire).*$/i,
+	name : "Boros Legionnaire",
+	source : ["G", 40],
+	skills : ["Athletics", "Intimidation"],
+	gold : 2,
+	equipleft : [
+		["Feather from angel's wing", "", ""],
+		["Tattered piece of Boros banner", 1, ""],
+		["Ink pen (quill)", "", ""]
+	],
+	equipright : [
+		["Common clothes", "", 3],
+		["Boros insignia", "", ""],
+		["Belt pouch (with coins)", "", 1]
+	],
+	languageProfs : [["Celestial, Draconic, Goblin, or Minotaur", 1]],
+	toolProfs : [["Gaming set", 1]],
+	feature : "Legion Station",
+	trait : [
+		"I approach every task with the same high degree of military precision.",
+		"I am always the first into the fray.",
+		"I bear any injury or indignity with stoic discipline.",
+		"My righteous wrath is easily inflamed by the slightest iniquity.",
+		"My honor is more important to me than my life.",
+		"Dangerous work is best accomplished by an orderly group working with common purpose.",
+		"I treat my weapons, uniform, and insignia with reverence, for they are gifts of the angels.",
+		"I pace when standing and fidget incessantly when forced to sit."
+	],
+	ideal : [
+		["Guild", "Guild: My guild is all that really matters. (Any)"],
+		["Justice", "Justice: Achieving justice requires establishing fair, equitable, and compassionate relationships within a community. (Good)"],
+		["Protection", "Protection: It isn't right for innocents to suffer because of the arrogance of the powerful. (Good)"],
+		["Solidarity", "Solidarity: It is most crucial to act with a single will, marching side by side in perfect accord. (Lawful)"],
+		["Order", "Order: Society functions only if people do their duty and respect the chain of command. (Lawful)"],
+		["Conviction", "Conviction: Anything worth doing is worth doing with your whole heart. (Lawful)"]
+	],
+	bond : [
+		"I would lay down my life for Aurelia and the angels.",
+		"I owe my life to the Boros captain who took me in when I was living on the streets.",
+		"My fellow legionnaires are my family.",
+		"I wield the same Boros weapon my grandparent did, for the honor of our family.",
+		"I ran with the Rakdos in my youth, and I'm striving to atone for my past misdeeds.",
+		"I do what I can to help out the spouse of a comrade who died in battle."
+	],
+	flaw : [
+		"I act bravely when I'm in a group, but I'm a coward when I'm alone.",
+		"I see everything in clear-cut black and white.",
+		"I'm just a little fascinated by the ways of the Gruul.",
+		"I trust the chain of command more than anything—more even than my closest friends.",
+		"I'm slow to trust members of other guilds.",
+		"I've been known to turn a blind eye to injustice, with the help of a modest bribe."
+	],
+	lifestyle : "poor"
+};
+BackgroundFeatureList["legion station"] = {
+	description : "I am established in the hierarchy of the Boros Legion. I can requisition simple equipment for temporary use. I have access to any Boros garrison in Ravnica where I can rest in safety and have access to medics. I'm paid 1 gp per week (a Boros-minted 1-zino coin), allowing me (together with the free garrison lodging) to have a poor lifestyle between adventures.",
+	source : ["G", 40]
+};
+
+BackgroundList["dimir operative"] = {
+	regExpSearch :  /^(?=.*dimir)(?=.*operative).*$/i,
+	name : "Dimir Operative",
+	source : ["G", 46],
+	skills : ["Deception", "Stealth"],
+	gold : 0,
+	equipleft : [
+		["Small knife", 3, 0.25],
+		["Starting equipment of secondary guild", "", ""]
+	],
+	equipright : [
+		["Dark-colored common clothes", "", 3],
+		["Dimi insignia", "", ""],
+		["Belt pouch (with coins)", "", 1]
+	],
+	languageProfs : [1],
+	toolProfs : ["Disguise kit"],
+	feature : "False Guild Identity",
+	trait : [
+		"I'm good at hiding my true thoughts and feelings.",
+		"When I'm in doubt about revealing something, I assume it's a secret, and I don't share it.",
+		"I like to sound mysterious, because wisdom hidden grows deeper with time.",
+		"I have no patience with people who get in my way.",
+		"I love hearing about other people's nightmares.",
+		"Combat is meant to be quick, clean, and one-sided.",
+		"I like to stick to the shadows.",
+		"I never show my anger. I just plot my revenge."
+	],
+	ideal : [
+		["Guild", "Guild: My true guild is all that really matters. (Any)"],
+		["Control", "Control: I like pulling the strings. (Lawful)"],
+		["Secrets", "Secrets: I collect secrets and never reveal them. (Any)"],
+		["Knowledge", "Knowledge: I want to know as much as I can about this city and how it works. (Any)"],
+		["Independence", "Independence: I value the freedom to pursue my own goals without interference. (Chaotic)"],
+		["Nihilism", "Nihilism: I don't believe in anything, and anyone who does is a fool. (Neutral)"]
+	],
+	bond : [
+		"I discovered a secret I can't let anyone else uncover—including my guild superiors.",
+		"I formed a close friendship or romance with someone in the guild I'm infiltrating.",
+		"The Dimir agent who recruited me was unmasked and killed. My revenge on the killers will be thorough and painful.",
+		"I spend as much time as I can in the Ismeri Library because I'm certain an information hub operates behind its facade. I want its secrets!",
+		"I'm utterly loyal to my superior in the guild, more than to the guild or its guildmaster.",
+		"Someone has discovered my true identity."
+	],
+	flaw : [
+		"I like secrets so much that I'm reluctant to share details of a plan even with those who need to know.",
+		"I would let my friends die rather than reveal my true identity.",
+		"I have trouble trusting anyone but myself.",
+		"I have a particular vice that puts all my secrets at risk if I'm not careful.",
+		"I'm pretty sure I've done something horrible that I can't remember because of the guild's mind magic.",
+		"I put too much trust in the people who give me orders."
+	],
+	extra : [
+		"Select a Reason for Infiltration",
+		"Parental link",
+		"Track activities",
+		"Spy on individual",
+		"Recruit more spies",
+		"Member before recruitment",
+		"Destroy from within",
+		"Secret wish to join",
+		"Randomly chosen"
+	]
+};
+BackgroundFeatureList["false guild identity"] = {
+	description : "I have more than one identity. The one I wear most of the time makes me appear to be a member of a guild other than my own. I have documentation, established acquaintances, and disguises that allow me to assume that persona and fit into the secondary guild. Whenever I choose, I can drop this identity and blend into the guildless masses of the city.",
+	source : ["G", 46]
+};
+
+BackgroundList["golgari agent"] = {
+	regExpSearch :  /^(?=.*golgari)(?=.*agent).*$/i,
+	name : "Golgari Agent",
+	source : ["G", 53],
+	skills : ["Nature", "Survival"],
+	gold : 10,
+	equipleft : [
+		["Poisoner's kit", "", 2]
+	],
+	equipright : [
+		["Common clothes", "", 3],
+		["Golgari insignia", "", ""],
+		["Pet beetle or spider", "", ""],
+		["Belt pouch (with coins)", "", 1]
+	],
+	languageProfs : [["Elvish, Giant, or Kraul", 1]],
+	toolProfs : ["Poisoner's kit"],
+	feature : "Undercity Paths",
+	trait : [
+		"Remember, I could kill you in your sleep. Or put centipedes in your bedroll.",
+		"I like to remind people of their inevitable demise.",
+		"Sometimes I give voice to the whispers of the rot, which I hear but no one else does.",
+		"I do my best to discourage anyone from approaching or talking to me.",
+		"I have accepted my death. Hence, I don't fear it.",
+		"Like roots growing through stone, I am relentless and determined in my action.",
+		"I put my knowledge of anatomy to use by narrating the injuries my enemies suffer in grisly detail.",
+		"Like a wild animal, I lash out viciously when I'm provoked—and I'm easily provoked."
+	],
+	ideal : [
+		["Guild", "Guild: My guild is all that really matters. (Any)"],
+		["Stoicism", "Stoicism: All of us are part of the cyclical march of nature, which will continue with or without us. (Neutral)"],
+		["Nature", "Nature: The natural world is more important than the edifices of the city and civilization. (Neutral)"],
+		["Interdependence", "Interdependence: We are all part of nature's web. (Lawful)"],
+		["Ambition", "Ambition: The time of Golgari ascendance is at hand, and I intend to have a prominent place in the new world order. (Evil)"],
+		["Live and Let Live", "Live and Let Live: Meddling in the affairs of other guilds is a great way to get squashed like a bug. (Neutral)"]
+	],
+	bond : [
+		"I cherish the finger of a family member who was petrified by a medusa.",
+		"I have an identical twin who is as different from me as any person could be.",
+		"I want to lead one faction of the guild to a new position of dominance.",
+		"I love spending time in the moss-covered building where I took part in my first reclamation mission.",
+		"I found something in the sewer that must never come to light.",
+		"I am forever grateful to the reclaimer who found me floating facedown in the sewer, moments from death."
+	],
+	flaw : [
+		"Death comes for us all, so you can't expect me to take care of someone who can't fight it off.",
+		"I assume that anyone outside the Golgari looks down on me.",
+		"I feel a need for revenge against those who enjoy the privilege of living above ground.",
+		"I don't bother to couch my opinions in flattering words.",
+		"I can't help but pocket any trinket or coin I come across, no matter how worthless.",
+		"I'm convinced that I'm better and stronger than members of other guilds, isolated as they are from the realities of life and death."
+	]
+};
+BackgroundFeatureList["undercity paths"] = {
+	description : "I know hidden, underground pathways that I can use to bypass crowds, obstacles, and observation as I move through the city. I can lead a group to travel between two locations in the city twice as fast as normally. The paths of the undercity are haunted by dangers that rarely brave the light of the surface world, so my journey isn't guaranteed to be safe.",
+	source : ["G", 53]
+};
+
+BackgroundList["gruul anarch"] = {
+	regExpSearch :  /^(?=.*gruul)(?=.*anarch).*$/i,
+	name : "Gruul Anarch",
+	source : ["G", 60],
+	skills : ["Nature", "Survival"],
+	gold : 10,
+	equipleft : [
+		["Herbalism kit", "", 3],
+		["Skull of a boar", "", ""]
+	],
+	equipright : [
+		["Traveler's clothes", "", 4],
+		["Gruul insignia", "", ""],
+		["Hunting trap", "", 25],
+		["Beast-hide cloak", "", 1],
+		["Belt pouch (with coins)", "", 1]
+	],
+	languageProfs : [["Draconic, Giant, Goblin, or Sylvan", 1]],
+	toolProfs : ["Herbalism kit"],
+	feature : "Rubblebelt Refuge",
+	trait : [
+		"Unlike people, the beasts of the wild are friends who won't stab me in the back.",
+		"Go ahead and insult me—I dare you.",
+		"I scorn those who can't survive away from the comforts of the city.",
+		"Don't tell me I'm not allowed to do something.",
+		"Laws are for people who are afraid to face their inner beasts.",
+		"I smear the blood of my enemies over my skin.",
+		"I was, in fact, raised by maaka.",
+		"HarrRRAAGGHH! [I rarely form a coherent sentence and prefer to express myself by breaking things.]"
+	],
+	ideal : [
+		["Clan", "Clan: My clan is all that really matters. (Any)"],
+		["Anarchy", "Anarchy: No person or law or custom can tell another what to do. (Chaotic)"],
+		["Nature", "Nature: We weren't born tame or domesticated, so we shouldn't have to live that way. (Neutral)"],
+		["Might", "Might: The strongest are meant to dominate the weak. (Evil)"],
+		["Rage", "Rage: AAAAAARRRRggggh! [To live is to feel and express the rage burning in your belly.] (Chaotic)"],
+		["Tradition", "Tradition: The Old Ways must be preserved and upheld. (Any)"]
+	],
+	bond : [
+		"I am determined that one day I will lead my clan—or a new one.",
+		"I would give my life for my clan chieftain.",
+		"The chieftain of another clan has a grudge against me.",
+		"I am devoted to a sacred site in the midst of the rubblebelt.",
+		"My weapon is made from the first raktusk I ever hunted.",
+		"GrrrRRAAAAGGHH! [I will do anything to prove myself greater than my siblings or ancestors.]"
+	],
+	flaw : [
+		"If you question my courage, I will never back down.",
+		"HrrrGGGAAAARRuuuh! [My anger in battle led to the death of a loved one.]",
+		"I'm as stubborn as a batterboar.",
+		"I'm so convinced of my superiority over soft, civilized people that I'll take great risks to prove it.",
+		"I'm easily manipulated by people I find attractive.",
+		"I'm not actually all that angry."
+	],
+	extra : [
+		"Select a Gruul Clan",
+		"Burning Tree clan",
+		"Ghor clan",
+		"Scab clan",
+		"Slitz clan",
+		"Gravel Hide clan",
+		"Zhur-Taa clan",
+		"Minor or new clan",
+		"Trog"
+	]
+};
+BackgroundFeatureList["rubblebelt refuge"] = {
+	description : "I'm very familiar with areas of the city that most people shun: neighborhoods ruined by wurms, overgrown parks gone untended for decades, and the vast, long abandoned rubblebelts of broken terrain. There, I can find a suitable place for me and my allies to hide or rest, as well as food and fresh water for myself and up to five other people each day.",
+	source : ["G", 60]
+};
+
+BackgroundList["izzet engineer"] = {
+	regExpSearch :  /^(?=.*izzet)(?=.*engineer).*$/i,
+	name : "Izzet Engineer",
+	source : ["G", 66],
+	skills : ["Arcana", "Investigation"],
+	gold : 5,
+	equipleft : [
+		["Set of artisan's tools", "", ""],
+		["Twisted remains of failed experiment", "", ""],
+		["Hammer", "", 3],
+		["Block and tackle", "", 5]
+	],
+	equipright : [
+		["Common clothes", "", 3],
+		["Izzet insignia", "", ""],
+		["Belt pouch (with coins)", "", 1]
+	],
+	languageProfs : [["Draconic, Goblin, or Vedalken", 1]],
+	toolProfs : [["Artisan's tools", 1]],
+	feature : "Urban Infrastructure",
+	trait : [
+		"I have a hard time staying focused on ... oh, and my brain tends to jump from one ... did I mention focus?",
+		"I get really excited about my ideas and I can't wait to talk about them and start putting them into practice and tinkering with them and I want to tell you about how exciting it all is!",
+		"It's not magic—or anything, really—if you do it only halfway. Whatever I do, I give it all I've got.",
+		"I do what my gut tells me.",
+		"Life's an experiment, and I can't wait to see what happens.",
+		"I pepper my speech with the incomprehensible jargon of my trade, like mizzium droplets inserted into a weird-field suspension.",
+		"Great ideas are fine, but great results are what counts.",
+		"If you can guess what I'm about to do, that means I've run out of imagination."
+	],
+	ideal : [
+		["Guild", "Guild: My guild is all that really matters. (Any)"],
+		["Creativity", "Creativity: Half the world's troubles come from stodgy thinking, stuck in the past. We need innovative solutions. (Chaotic)"],
+		["Discovery", "Discovery: Every experiment has the potential to reveal more secrets of the multiverse. (Any)"],
+		["Science", "Science: A rigorous application of logical principles and protocols will lead us toward progress more surely than any belief system. (Lawful)"],
+		["Fun", "Fun: I love my job! Despite the dangerous working conditions, there's nothing I'd rather do. (Chaotic)"],
+		["Power", "Power: Someday I'll find or create the magic that will make me the most powerful being in Ravnica. (Evil)"]
+	],
+	bond : [
+		"I have dedicated my life to finding a solution to a scientific problem.",
+		"I'll never forget the laboratory where I learned my skills, or the other attendants who learned alongside me.",
+		"I'm convinced it was sabotage that destroyed my first laboratory and killed many of my friends, and I seek revenge against whoever did it.",
+		"I have the schematics for an invention that I hope to build one day, once I have the necessary resources.",
+		"A fellow student and I are racing to solve the same scientific puzzle.",
+		"I would do anything the guildmaster told me to do."
+	],
+	flaw : [
+		"If there's a plan, I'll probably forget it. If I don't forget it, I'll probably ignore it.",
+		"I get bored easily, and if nothing is happening I'll make something happen.",
+		"Nothing is ever simple, and if it seems simple, I'll find a way to make it complicated.",
+		"I tend to ignore sleep for days when I'm conducting research, often at the expense of my own health and safety.",
+		"I'm convinced there's not a soul in Ravnica, except maybe the great Niv-Mizzet, who can match my boundless intellect.",
+		"I'm incapable of admitting a flaw in my logic."
+	]
+};
+BackgroundFeatureList["urban infrastructure"] = {
+	description : "Although the Izzet League is infamous for mad inventions it is also involved in construction of the city's infrastructure. I have a basic knowledge of the structure of buildings and what is behind its walls. I can find their blueprints showing entry points, secret pases, structural weaknesses, or secret spaces. My guild won't protect me if I use this knowledge unlawfully.",
+	source : ["G", 66]
+};
+
+BackgroundList["orzhov representative"] = {
+	regExpSearch :  /^(?=.*orzhov)(?=.*representative).*$/i,
+	name : "Orzhov Representative",
+	source : ["G", 72],
+	skills : ["Intimidation", "Religion"],
+	gold : 10,
+	equipright : [
+		["Fine clothes", "", 6],
+		["Orzhov insignia", "", ""],
+		["Vestments", "", 4],
+		["Chain of 10 golden coins", "", ""],
+		["Belt pouch (with coins)", "", 1]
+	],
+	languageProfs : [2],
+	feature : "Leverage",
+	trait : [
+		"I am always willing to act in accordance with the financial incentive offered.",
+		"Debts are never meant to be forgiven.",
+		"I am accustomed to enjoying the finest pleasures money can buy.",
+		"No one could doubt that I am a cut above the masses of pitiful peasants that infest the city.",
+		"I can't stand to spend a zib more than necessary to purchase what I need.",
+		"I hate it when people try to make light of a serious situation.",
+		"I want to make sure everyone is aware of how wealthy, powerful, and important I am.",
+		"I can't think of anything to look forward to."
+	],
+	ideal : [
+		["Guild", "Guild: My guild is all that really matters. (Any)"],
+		["Wealth", "Wealth: I will do whatever it takes to become as rich as the oligarchs. (Evil)"],
+		["Power", "Power: One day, I will be the one giving orders. (Evil)"],
+		["Prestige", "Prestige: I want to be admired, respected, feared, or even hated for my position and wealth. (Evil)"],
+		["Stability", "Stability: The economy functions best when chaos is kept under control and everyone knows their place. (Lawful)"],
+		["Eternity", "Eternity: I want to live forever—in the flesh as long as possible, and as a spirit afterward. (Any)"]
+	],
+	bond : [
+		"The unbearable weight of my debt has driven me to desperation.",
+		"I'm duty-bound to obey the dictates of an ancestor on the Ghost Council.",
+		"I value my worldly goods more highly than my mortal life.",
+		"An oligarch publicly humiliated me, and I will exact revenge on that whole family.",
+		"My faith in the Obzedat never wavers.",
+		"I want to prove myself more worthy than an older sibling and thereby ensure that I inherit a greater share of my parents' wealth."
+	],
+	flaw : [
+		"I hold a scandalous secret that could ruin my family forever—but could also earn me the favor of the Ghost Council.",
+		"I'm convinced that everyone I know is plotting against me.",
+		"I'll brave any risk if the monetary reward is great enough.",
+		"I am convinced that I am far more important than anyone else is willing to acknowledge.",
+		"I have little respect for anyone who isn't wealthy.",
+		"I'll take any opportunity to steal from wealthier people, even for worthless trinkets."
+	]
+};
+BackgroundFeatureList["leverage"] = {
+	description : "I can exert leverage over one or more below me in the guild's hierarchy and demand their help as needs warrant. For example, deliver a message, arrange a ride, or clean up a bloody mess. As my status in the guild improves, I gain influence over more people of higher station. The DM decides if the demands are reasonable and if subordinates are available.",
+	source : ["G", 72]
+};
+
+BackgroundList["rakdos cultist"] = {
+	regExpSearch :  /^(?=.*rakdos)(?=.*cultist).*$/i,
+	name : "Rakdos Cultist",
+	source : ["G", 79],
+	skills : ["Acrobatics", "Performance"],
+	gold : 10,
+	equipleft : [
+		["Musical instrument", "", ""],
+		["Costume", "", 4],
+		["Hooded lantern of wrought iron", "", 2],
+		["Chain with spiked links, feet of", 10, 1],
+		["Tinderbox", "", 1],
+		["Torches", 10, 1],
+		["Sweet, red juice, bottle of", "", 4]
+	],
+	equipright : [
+		["Common clothes", "", 3],
+		["Rakdos insignia", "", ""],
+		["Belt pouch (with coins)", "", 1]
+	],
+	languageProfs : [["Abyssal or Giant", 1]],
+	toolProfs : [["Musical instrument", 1]],
+	feature : "Fearsome Reputation",
+	trait : [
+		"I revel in mayhem, the more destructive the better.",
+		"When violence breaks out, I lose myself in rage, and it's sometimes hard to stop.",
+		"Everything is funny to me, and the most hilarious and bloodiest things leave me cackling with sadistic glee.",
+		"I derive genuine pleasure from the pain of others.",
+		"I enjoy testing other people's patience.",
+		"I can't stand it when things are predictable, so I like to add a little chaos to every situation.",
+		"I throw my weight around to make sure I get my way.",
+		"I enjoy breaking delicate works of art. And fingers, which are sort of the same."
+	],
+	ideal : [
+		["Guild", "Guild: My guild is all that really matters. (Any)"],
+		["Hedonism", "Hedonism: Death comes for everyone, so take as much pleasure as you can from every moment of life. (Neutral)"],
+		["Creativity", "Creativity: I strive to find more ways to express my art through pain—my own as well as others'. (Chaotic)"],
+		["Freedom", "Freedom: No one tells me what to do. (Chaotic)"],
+		["Equality", "Equality: I want to see Ravnica remade, with no guilds and no hierarchies. (Chaotic)"],
+		["Spectacle", "Spectacle: People are inspired by the greatness they see in art. (Any)"]
+	],
+	bond : [
+		"I have belonged to the same performance troupe for years, and these people mean everything to me.",
+		"A blood witch told me I have a special destiny to fulfill, and I'm trying to figure out what it is.",
+		"I'm secretly hoping that I can change the cult from the inside, using my influence to help rein in the wanton violence.",
+		"I own something that Rakdos once touched (it's seared black at the spot), and I cherish it.",
+		"I want to be better at my chosen form of performance than any other member of my troupe.",
+		"I am devoted to Rakdos and live to impress him."
+	],
+	flaw : [
+		"My family is prominent in another guild. I enjoy my wild life, but I don't want to embarrass them.",
+		"I couldn't hide my emotions and opinions even if I wanted to.",
+		"I throw caution to the wind.",
+		"I resent the rich and powerful.",
+		"When I'm angry, I lash out in violence.",
+		"There's no such thing as too much pleasure."
+	],
+	extra : [
+		"Select a Performance Style",
+		"Spikewheel acrobat",
+		"Lampooning satirist",
+		"Fire juggler",
+		"Marionette puppeteer",
+		"Pain artist",
+		"Noise musician",
+		"Nightmare clown",
+		"Master of ceremonies"
+	]
+};
+BackgroundFeatureList["fearsome reputation"] = {
+	description : "People recognize me as a member of the Cult of Rakdos, and they're careful not to draw my anger or ridicule. I can get away with minor criminal offenses, such as refusing to pay for food at a restaurant or breaking down a door at a local shop, if no legal authorities witness the crime. Most are too daunted by me to report my wrongdoing to the Azorius.",
+	source : ["G", 79]
+};
+
+BackgroundList["selesnya initiate"] = {
+	regExpSearch :  /^(?=.*selesnya)(?=.*initiate).*$/i,
+	name : "Selesnya Initiate",
+	source : ["G", 86],
+	skills : ["Nature", "Persuasion"],
+	gold : 5,
+	equipleft : [
+		["Healer's kit", "", 3]
+	],
+	equipright : [
+		["Common clothes", "", 3],
+		["Robes", "", 4],
+		["Selesnya insignia", "", ""],
+		["Belt pouch (with coins)", "", 1]
+	],
+	languageProfs : [["Elvish, Loxodon, or Sylvan", 1]],
+	toolProfs : [["Artisan's tools or musical instrument", 1]],
+	feature : "Conclave's Shelter",
+	trait : [
+		"I never raise my voice or lose my temper.",
+		"I feel the pains and joys of everyone around me, friend or foe.",
+		"I would rather make a friend than thwart an enemy.",
+		"I'm always straining to peer into another reality that seems to be just beyond my senses.",
+		"I'm uneasy if I can't see plants growing or feel soil beneath my feet.",
+		"Seeing illness or injury in any creature saddens me.",
+		"I have much to be proud of, but I am still just one strand in the grand, interwoven tapestry of life.",
+		"Nature offers rich and abundant metaphors for understanding the complexities of life."
+	],
+	ideal : [
+		["Guild", "Guild: My guild is all that really matters. (Any)"],
+		["Harmony", "Harmony: Nothing is more beautiful than voices and actions aligned in common purpose. (Good)"],
+		["Order", "Order: Like a well-pruned tree, society thrives when everything is kept in good order. (Lawful)"],
+		["Life", "Life: Preserving life and nature is always a worthwhile endeavor. (Good)"],
+		["Humility", "Humility: Ambition and pride are the roots of strife. (Good)"],
+		["Evangelism", "Evangelism: When all have joined the Selesnya Conclave, Ravnica will finally know peace. (Any)"]
+	],
+	bond : [
+		"I would give my life in the defense of the small enclave where I first encountered Mat'Selesnya.",
+		"I love beasts and plants of all kinds, and am loath to harm them.",
+		"A healer nursed me to recovery from a mortal illness.",
+		"I'll sing the invitation of Mat'Selesnya with my dying breath.",
+		"I cherish a leaf from Vitu-Ghazi that changes color with the seasons, even though it is no longer attached to the tree.",
+		"Every member of the conclave is my kin, and I would fight for any one of them."
+	],
+	flaw : [
+		"I'm terrified of getting into a fight where my side is outnumbered.",
+		"I assume that people mean well until they prove otherwise.",
+		"I enjoy comfort and quiet, and prefer to avoid extra effort.",
+		"I have a fierce temper that doesn't reflect the inner calm I seek.",
+		"I'm convinced that everyone else in the conclave has a deeper connection to the Worldsoul than I do.",
+		"I'm trying to atone for the life of crime I led before I joined the Selesnya, but I find it hard to give up my bad habits."
+	]
+};
+BackgroundFeatureList["conclave's shelter"] = {
+	description : "My companions and I can find a place to hide or rest in any Selesnya enclave in the city, unless I have proven to be a danger to them. The members of the enclave will shield me from anyone searching for me, but will not risk their lives. I can receive free healing and care at a Selesnya enclave, though I must provide material components needed for spells.",
+	source : ["G", 86]
+};
+
+BackgroundList["simic scientist"] = {
+	regExpSearch :  /^(?=.*simic)(?=.*scientist).*$/i,
+	name : "Simic Scientist",
+	source : ["G", 93],
+	skills : ["Arcana", "Medicine"],
+	gold : 10,
+	equipleft : [
+		["Book of research notes", "", 5],
+		["Squid ink, 1 ounce bottle of", "", ""],
+		["Ink pen", "", ""],
+		["Blubber oil, flasks of", "", 1],
+		["Acid, vials of", "", 1],
+		["Fish scales, vial of", "", 1],
+		["Seaweed, vial of", "", 1],
+		["Jellyfish stingers, vial of", "", 1],
+		["Unidentified slime, glass bottle of", "", 4]
+	],
+	equipright : [
+		["Common clothes", "", 3],
+		["Belt pouch (with coins)", "", 1]
+	],
+	languageProfs : [2],
+	feature : "Simic Researcher",
+	trait : [
+		"I can't wait to see what I become next!",
+		"I am convinced that everything inclines toward constant improvement.",
+		"I'm eager to explain every detail of my most intricate experiments and theories to anyone who shows the least bit of interest.",
+		"I assume that everyone needs even the most basic concepts explained to them.",
+		"I describe everything that happens as if it were going into my research notes (and it often is).",
+		"I am insatiably curious about the seemingly infinite forms and adaptations of life.",
+		"I can't resist prying into anything forbidden, since it must be terribly interesting.",
+		"I employ a highly technical vocabulary to avoid imprecision and ambiguity in my communication."
+	],
+	ideal : [
+		["Guild", "Guild: My guild is all that really matters. (Any)"],
+		["Change", "Change: All life is meant to progress toward perfection, and our work is to hurry it along—no matter what must be upended along the way. (Chaotic)"],
+		["Knowledge", "Knowledge: Understanding the world is more important than what you do with your knowledge. (Neutral)"],
+		"Greater Good. I want to reshape the world into higher forms of life so that all can enjoy evolution. (Good)",
+		["Logic", "Logic: It's foolish to let emotions and principles interfere with the conclusions of logic. (Lawful)"],
+		["Superiority", "Superiority: My vast intellect and strength are directed toward increasing my sway over others. (Evil)"]
+	],
+	bond : [
+		"I helped create a krasis that I love like a pet and would carry with me everywhere ... except it's the size of a building, and it might eat me.",
+		"In my laboratory, I discovered something that I think could eliminate half the life on Ravnica.",
+		"The other researchers in my clade are my family—a big, eccentric family including members and parts of many species.",
+		"The laboratory where I did my research contains everything that is precious to me.",
+		"I will get revenge on the shortsighted fool who killed my precious krasis creation.",
+		"Everything I do is an attempt to impress someone I love."
+	],
+	flaw : [
+		"I have a rather embarrassing mutation that I do everything I can to keep hidden.",
+		"I'm more interested in taking notes on monstrous anatomy than in fighting monsters.",
+		"Every social situation I'm in seems to lead to my asking rude personal questions.",
+		"I'm supremely confident in my ability to adapt to any situation and handle any danger.",
+		"I'll take any risk to earn recognition for my scientific brilliance.",
+		"I have a tendency to take shortcuts in my research and any other tasks I have to complete."
+	],
+	extra : [
+		"Select a Clade or Research",
+		"Hull Clade: protection/durability",
+		"Fin Clade: movement",
+		"Gyre Clade: patterns/metamagic",
+		"Guardian Project: guard monsters/super soldiers",
+		"Crypsis Project: (counter)intelligence",
+		"Independent research in a new area"
+	]
+};
+BackgroundFeatureList["simic researcher"] = {
+	description : "I know where or from whom I can acquire scientific facts, usually from a Simic laboratory, or sometimes an Izzet facility, library, university, independent scholar, or creature. I might need to offer bribes, favors, or other incentives to induce people to reveal their secrets. The DM can rule that the knowledge is inaccessible place, can't be found, or requires a quest.",
+	source : ["G", 93]
+};
+
+// Spells
+SpellsList["encode thoughts"] = {
+	name : "Encode Thoughts",
+	classes : [],
+	source : ["G", 47],
+	ritual : false,
+	level : 0,
+	school : "Ench",
+	time : "1 a",
+	range : "Self",
+	components : "S",
+	duration : "Up to 8 h",
+	description : "Make physical through strand of memory or vice versa; works with detect thoughts \u0026 modify memory",
+	descriptionFull : "Putting a finger to your head, you pull a memory, an idea, or a message from your mind and transform it into a tangible string of glowing energy called a thought strand, which persists for the duration or until you cast this spell again. The thought strand appears in an unoccupied space within 5 feet of you as a Tiny, weightless, semisolid object that can be held and carried like a ribbon. It is otherwise stationary." + "\n   " + "If you cast this spell while concentrating on a spell or an ability that allows you to read or manipulate the thoughts of others (such as detect thoughts or modify memory), you can transform the thoughts or memories you read, rather than your own, into a thought strand." + "\n   " + "Casting this spell while holding a thought strand allows you to instantly receive whatever memory, idea, or message the thought strand contains. (Casting detect thoughts on the strand has the same effect.)"
+};
+if (!SourceList.X) { // reprint from Xanathar's Guide to Everything
+	SpellsList["chaos bolt-xgte"] = {
+		name : "Chaos Bolt",
+		classes : ["sorcerer"],
+		source : [["X", 151], ["G", 67]],
+		ritual : false,
+		level : 1,
+		school : "Evoc",
+		time : "1 a",
+		range : "120 ft",
+		components : "V,S",
+		duration : "Instantaneous",
+		description : "Spell atk 2d8+1d6+1d6/SL dmg, d8s set dmg type, see B; double on d8s: new atk vs. crea in 30 ft",
+		descriptionFull : "You hurl an undulating, warbling mass of chaotic energy at one creature in range. Make a ranged spell attack against the target. On a hit, the target takes 2d8 + 1d6 damage. Choose one of the d8s. The number rolled on that die determines the attack's damage type, as shown below." + "\n\n" + toUni("d8") + "\t" + toUni("Damage Type") + "\n  1\tAcid" + "\n  2\tCold" + "\n  3\tFire" + "\n  4\tForce" + "\n  5\tLightning" + "\n  6\tPoison" + "\n  7\tPsychic" + "\n  8\tThunder" + "\n\n   " + "If you roll the same number on both d8s, the chaotic energy leaps from the target to a different creature of your choice within 30 feet of it. Make a new attack roll against the new target, and make a new damage roll, which could cause the chaotic energy to leap again." + "\n   " + "A creature can be targeted only once by each casting of this spell." + AtHigherLevels + "When you cast this spell using a spell slot of 2nd level or higher, each target takes 1d6 extra damage of the type rolled for each slot level above 1st."
+	};
+}
+var iFileName = "pub_20190521_GoS.js";
+RequiredSheetVersion(12.999);
+// This file adds all material from the Ghosts of Saltmarsh adventure to MPMB's Character Record Sheet
+
+// Define the source
+SourceList["GoS"] = {
+	name : "Ghosts of Saltmarsh [backgrounds, beasts, items]",
+	abbreviation : "GoS",
+	group : "Adventure Books",
+	url : "https://dnd.wizards.com/products/tabletop-games/rpg-products/ghosts-saltmarsh",
+	date : "2019/05/21"
+};
+
+BackgroundList["fisher"] = {
+	regExpSearch : /fisher/i,
+	name : "Fisher",
+	source : [["GoS", 29], ["ALbackground", 0]],
+	skills : ["History", "Survival"],
+	gold : 10,
+	equipleft : [
+		["Fishing tackle", "", 4],
+		["Net", "", 3]
+	],
+	equipright : [
+		["Traveler's clothes", "", 4],
+		["Fishing lure or oiled leather boots", "", ""],
+		["Belt pouch (with coins)", "", 1]
+	],
+	languageProfs : [1],
+	feature : "Harvest the Water",
+	trait : [
+		"I am unmoved by the wrath of nature.",
+		"My friends are my crew; we sink or float together.",
+		"I need long stretches of quiet to clear my head.",
+		"Rich folk don't know the satisfaction of hard work.",
+		"I laugh heartily, feel deeply, and fear nothing.",
+		"I work hard; nature offers no handouts.",
+		"I dislike bargaining; state your price and mean it.",
+		"Luck favors me, and I take risks others might not."
+	],
+	ideal : [
+		["Camaraderie", "Camaraderie. Good people make even the longest voyage bearable. (Good)"],
+		["Luck", "Luck. Our luck depends on respecting its rules—now throw this salt over your shoulder. (Lawful)"],
+		["Daring", "Daring. The richest bounty goes to those who risk everything. (Chaotic)"],
+		["Plunder", "Plunder. Take all that you can and leave nothing for the scavengers. (Evil)"],
+		["Balance", "Balance. Do not fish the same spot twice in a row; suppress your greed, and nature will reward you. (Neutral)"],
+		["Hard Work", "Hard Work. No wave can move a soul hard at work. (Any)"]
+	],
+	bond : [
+		"I lost something important in the deep sea, and I intend to find it.",
+		"Someone else's greed destroyed my livelihood, and I will be compensated.",
+		"I will fish the many famous waters of this land.",
+		"The gods saved me during a terrible storm, and I will honor their gift.",
+		"My destiny awaits me at the bottom of a particular pond in the Feywild.",
+		"I must repay my village's debt."
+	],
+	flaw : [
+		"I am judgmental, especially of those I deem homebodies or otherwise lazy.",
+		"I become depressed and anxious if I'm away from the sea too long.",
+		"I have lived a hard life and find it difficult to empathize with others.",
+		"I am inclined to tell long-winded stories at inopportune times.",
+		"I work hard, but I play harder.",
+		"I am obsessed with catching an elusive aquatic beast, often to the detriment of other pursuits."
+	],
+	extra : [
+		"Select a Fishing Tale",
+		"Lobster wrestling",
+		"It dragged the boat",
+		"Fins of pure gold",
+		"Ghost fish",
+		"Nemesis clam",
+		"It swallowed the sun",
+		"Dive into the abyss",
+		"Love story"
+	]
+};
+BackgroundFeatureList["harvest the water"] = {
+	description : "I gain advantage on ability checks made using fishing tackle. If I have access to a body of water that sustains marine life, I can maintain a moderate lifestyle while working as a fisher, and I can catch enough food to feed myself and up to ten other people each day.",
+	source : ["GoS", 29]
+};
+
+BackgroundList["marine"] = {
+	regExpSearch : /marine/i,
+	name : "Marine",
+	source : [["GoS", 31], ["ALbackground", 0]],
+	skills : ["Athletics", "Survival"],
+	gold : 10,
+	equipleft : [
+		["Folded flag with company symbol", "", 1]
+	],
+	equipright : [
+		["Traveler's clothes", "", 4],
+		["Dagger", "", 1],
+		["Belt pouch (with coins)", "", 1]
+	],
+	toolProfs : ["Vehicles (water)", "Vehicles (land)"],
+	feature : "Steady",
+	trait : [
+		"I speak rarely but mean every word I say.",
+		"I laugh loudly and see the humor in stressful situations.",
+		"I prefer to solve problems without violence, but I finish fights decisively.",
+		"I enjoy being out in nature; poor weather never sours my mood.",
+		"I am dependable.",
+		"I am always working on some project or other.",
+		"I become cantankerous and quiet in the rain.",
+		"When the sea is within my sight, my mood is jovial and optimistic."
+	],
+	ideal : [
+		["Teamwork", "Teamwork. Success depends on cooperation and communication. (Good)"],
+		["Code", "Code. The marines' code provides a solution for every problem, and following it is imperative. (Lawful)"],
+		["Embracing", "Embracing. Life is messy. Throwing yourself into the worst of it is necessary to get the job done. (Chaotic)"],
+		["Might", "Might. The strong train so that they might rule those who are weak. (Evil)"],
+		["Bravery", "Bravery. To act when others quake in fear—this is the essence of the warrior. (Any)"],
+		["Perseverance", "Perseverance. No injury or obstacle can turn me from my goal. (Any)"]
+	],
+	bond : [
+		"I face danger and evil to offset an unredeemable act in my past.",
+		"I. Will. Finish. The. Job.",
+		"I must set an example of hope for those who have given up.",
+		"I'm searching for a fellow marine captured by an elusive enemy.",
+		"Fear leads to tyranny, and both must be eradicated.",
+		"My commander betrayed my unit, and I will have revenge."
+	],
+	flaw : [
+		"I grow combative and unpredictable when I drink.",
+		"I find civilian life difficult and struggle to say the right thing in social situations.",
+		"My intensity can drive others away.",
+		"I hold grudges and have difficulty forgiving others.",
+		"I become irrational when innocent people are hurt.",
+		"I sometimes stay up all night listening to the ghosts of my fallen enemies."
+	],
+	extra : [
+		"Select a Hardship Endured",
+		"Nearly drowned",
+		"Captured",
+		"Sacrifice",
+		"Juggernaut",
+		"Stowaway",
+		"Leave none behind"
+	]
+};
+BackgroundFeatureList["steady"] = {
+	description : "I can move twice the normal amount of time (up to 16 hours) each day before being subject to the effect of a forced march and need to make Constitution saves at the end of each extra hour to avoid gaining a level of exhaustion. Additionally, I can automatically find a safe route to land a boat on shore, provided such a route exists.",
+	source : ["GoS", 31]
+};
+
+BackgroundList["shipwright"] = {
+	regExpSearch : /shipwright/i,
+	name : "Shipwright",
+	source : [["GoS", 33], ["ALbackground", 0]],
+	skills : ["History", "Perception"],
+	gold : 10,
+	equipleft : [
+		["Blank book", "", 5],
+		["Ink, 1 ounce bottle of", 1, ""],
+		["Ink pen (quill)", "", ""],
+		["Carpenter's tools", "", 8]
+	],
+	equipright : [
+		["Traveler's clothes", "", 4],
+		["Belt pouch (with coins)", "", 1]
+	],
+	toolProfs : ["Carpenter's tools", "Vehicles (water)"],
+	feature : "I'll Patch It!",
+	trait : [
+		"I love talking and being heard more than I like to listen.",
+		"I'm extremely fond of puzzles.",
+		"I thrive under pressure.",
+		"I love sketching and designing objects, especially boats.",
+		"I'm not afraid of hard work—in fact, I prefer it.",
+		"A pipe, an ale, and the smell of the sea: paradise.",
+		"I have an endless supply of cautionary tales related to the sea.",
+		"I don't mind getting my hands dirty."
+	],
+	ideal : [
+		["Crew", "Crew. If everyone on deck pitches in, we'll never sink. (Good)"],
+		["Careful Lines", "Careful Lines. A ship must be balanced according to the laws of the universe. (Lawful)"],
+		["Invention", "Invention. Make what you need out of whatever is at hand. (Chaotic)"],
+		["Perfection", "Perfection. To measure a being and find it lacking is the greatest disappointment. (Evil)"],
+		["Reflection", "Reflection. Muddied water always clears in time. (Any)"],
+		["Hope", "Hope. The horizon at sea holds the greatest promise. (Any)"]
+	],
+	bond : [
+		"I must visit all the oceans of the world and behold the ships that sail there.",
+		"Much of the treasure I claim will be used to enrich my community.",
+		"I must find a kind of wood rumored to possess magical qualities.",
+		"I repair broken things to redeem what's broken in myself.",
+		"I will craft a boat capable of sailing through the most dangerous of storms.",
+		"A kraken destroyed my masterpiece; its teeth shall adorn my hearth."
+	],
+	flaw : [
+		"I don't know when to throw something away. You never know when it might be useful again.",
+		"I get frustrated to the point of distraction by shoddy craftsmanship.",
+		"Though I am an excellent crafter, my work tends to look as though it belongs on a ship.",
+		"I am so obsessed with sketching my ideas for elaborate inventions that I sometimes forget little thing like eating and sleeping.",
+		"I'm judgmental of those who are not skilled with tools of some kind.",
+		"I sometimes take things that don't belong to me, especially if they are very well made."
+	],
+	extra : [
+		"Select a Sea's Influence",
+		"Grand designs",
+		"Solid and sound",
+		"Favored",
+		"Master of armaments",
+		"Low places",
+		"Mysteries of the deep"
+	]
+};
+BackgroundFeatureList["i'll patch it!"] = {
+	description : "Provided I have carpenter's tools and wood, I can perform repairs on a water vehicle. When I use this ability, I restore a number of hit points to the hull of a water vehicle equal to 5\xD7 my proficiency modifier. A vehicle cannot be patched by me in this way again until after it has been pulled ashore and fully repaired.",
+	source : ["GoS", 33]
+};
+
+BackgroundList["smuggler"] = {
+	regExpSearch : /smuggler/i,
+	name : "Smuggler",
+	source : [["GoS", 34], ["ALbackground", 0]],
+	skills : ["Athletics", "Deception"],
+	gold : 15,
+	equipright : [
+		["Common clothes", "", 3],
+		["Leather boots or vest", "", 1],
+		["Belt pouch (with coins)", "", 1]
+	],
+	toolProfs : ["Vehicles (water)"],
+	feature : "Down Low",
+	trait : [
+		"I love being on the water but hate fishing.",
+		"I think of everything in terms of monetary value.",
+		"I never stop smiling.",
+		"Nothing rattles me; I have a lie for every occasion.",
+		"I love gold but won't cheat a friend.",
+		"I enjoy doing things others believe to be impossible.",
+		"I become wistful when I see the sun rise over the ocean.",
+		"I am no common criminal; I am a mastermind."
+	],
+	ideal : [
+		["Wealth", "Wealth. Heaps of coins in a secure vault is all I dream of. (Any)"],
+		["Smuggler's Code", "Smuggler's Code. I uphold the unwritten rules of the smugglers, who do not cheat one another or directly harm innocents. (Lawful)"],
+		["All for a Coin", "All for a Coin. I'll do nearly anything if it means I turn a profit. (Evil)"],
+		["Peace and Prosperity", "Peace and Prosperity. I smuggle only to achieve a greater goal that benefits my community. (Good)"],
+		["People", "People. For all my many lies, I place a high value on friendship. (Any)"],
+		["Daring", "Daring. I am most happy when risking everything. (Any)"]
+	],
+	bond : [
+		"My vessel was stolen from me, and I burn with the desire to recover it.",
+		"I intend to become the leader of the network of smugglers that I belong to.",
+		"I owe a debt that cannot be repaid in gold.",
+		"After one last job, I will retire from the business.",
+		"I was tricked by a fellow smuggler who stole something precious from me. I will find that thief.",
+		"I give most of my profits to a charitable cause, and I don't like to brag about it."
+	],
+	flaw : [
+		"Lying is reflexive, and I sometimes engage in it without realizing.",
+		"I tend to assess my relationships in terms of profit and loss.",
+		"I believe everyone has a price and am cynical toward those who present themselves as virtuous.",
+		"I struggle to trust the words of others.",
+		"Few people know the real me.",
+		"Though I act charming, I feel nothing for others and don't know what friendship is."
+	],
+	extra : [
+		"Select a Claim to Fame",
+		"Spirit of the whale",
+		"Cart and sword",
+		"The recruit",
+		"River of shadows",
+		"Gold-hearted",
+		"Playing both sides"
+	]
+};
+BackgroundFeatureList["down low"] = {
+	description : "I am acquainted with a network of smugglers who are willing to help me out of tight spots. While in a particular town, city, or other similarly sized community, my companions and I can stay for free in safe houses. Safe houses provide a poor lifestyle. While staying at a safe house, I can choose to keep my presence (and that of my companions) a secret.",
+	source : ["GoS", 34]
+};
+
+CreatureList["fish"] = {
+	name : "Fish",
+	source : ["GoS", 215],
+	size : 5,
+	type : "Beast",
+	subtype : "",
+	alignment : "Unaligned",
+	ac : 13,
+	hp : 1,
+	hd : [1, 4],
+	speed : "swim 40 ft",
+	scores : [2, 16, 9, 1, 7, 2],
+	saves : ["", "", "", "", "", ""],
+	senses : "Darkvision 60 ft",
+	passivePerception : 8,
+	languages : "",
+	challengeRating : "0",
+	proficiencyBonus : 2,
+	attacksAction : 1,
+	attacks : [],
+	traits : [{
+		name : "Water Breathing",
+		description : "The fish can breathe only underwater."
+	}]
+}
+CreatureList["giant white moray eel"] = {
+	name : "Giant White Moray Eel",
+	source : ["GoS", 216],
+	size : 1,
+	type : "Beast",
+	subtype : "",
+	alignment : "Unaligned",
+	ac : 12,
+	hp : 60,
+	hd : [8, 12],
+	speed : "swim 40 ft",
+	scores : [19, 14, 12, 1, 10, 3],
+	saves : ["", "", "", "", "", ""],
+	skills : {
+		"perception" : 2,
+		"stealth" : 4
+	},
+	senses : "Blindsight 10 ft",
+	passivePerception : 12,
+	languages : "",
+	challengeRating : "2",
+	proficiencyBonus : 2,
+	attacksAction : 1,
+	attacks : [{
+		name : "Bite",
+		ability : 1,
+		damage : [2, 6, "piercing"],
+		range : "Melee (10 ft)",
+		description : ""
+	}],
+	traits : [{
+		name : "Water Breathing",
+		description : "The eel can breathe only underwater."
+	}]
+}
+CreatureList["giant coral snake"] = {
+	name : "Giant Coral Snake",
+	source : ["GoS", 236],
+	size : 2,
+	type : "Beast",
+	subtype : "",
+	alignment : "Unaligned",
+	ac : 13,
+	hp : 90,
+	hd : [12, 10],
+	speed : "30 ft, swim 30 ft",
+	scores : [12, 16, 14, 2, 10, 3],
+	saves : ["", "", "", "", "", ""],
+	skills : {
+		"perception" : 2
+	},
+	senses : "Blindsight 10 ft",
+	passivePerception : 12,
+	languages : "",
+	challengeRating : "4",
+	proficiencyBonus : 2,
+	attacksAction : 1,
+	attacks : [{
+		name : "Bite",
+		ability : 2,
+		damage : [2, 4, "piercing"],
+		range : "Melee (5 ft)",
+		description : "Target DC 12 Con save or stunned until end of its next turn and short-term madness for 10 min"
+	}]
+}
+CreatureList["giant sea eel"] = {
+	name : "Giant Sea Eel",
+	source : ["GoS", 237],
+	size : 2,
+	type : "Beast",
+	subtype : "",
+	alignment : "Unaligned",
+	ac : 14,
+	hp : 19,
+	hd : [3, 10],
+	speed : "swim 40 ft",
+	scores : [11, 14, 12, 2, 10, 7],
+	saves : ["", 4, "", "", "", ""],
+	skills : {
+		"perception" : 2,
+		"stealth" : 4
+	},
+	senses : "Darkvision 60 ft",
+	passivePerception : 12,
+	languages : "",
+	challengeRating : "1/2",
+	proficiencyBonus : 2,
+	attacksAction : 1,
+	attacks : [{
+		name : "Bite",
+		ability : 2,
+		damage : [2, 10, "piercing"],
+		range : "Melee (5 ft)",
+		description : ""
+	}],
+	traits : [{
+		name : "Water Breathing",
+		description : "The eel can breathe only underwater."
+	}]
+}
+CreatureList["sea lion"] = {
+	name : "Sea Lion",
+	source : ["GoS", 252],
+	size : 2,
+	type : "Beast",
+	subtype : "",
+	alignment : "Unaligned",
+	ac : 16,
+	hp : 15,
+	hd : [2, 10],
+	speed : "15 ft, swim 30 ft",
+	scores : [17, 10, 14, 5, 10, 12],
+	saves : ["", 2, 4, "", "", ""],
+	skills : {
+		"athletics" : 5,
+		"perception" : 2
+	},
+	senses : "",
+	passivePerception : 12,
+	languages : "",
+	challengeRating : "1/2",
+	proficiencyBonus : 2,
+	attacksAction : 3,
+	attacks : [{
+		name : "Bite",
+		ability : 1,
+		damage : [1, 8, "piercing"],
+		range : "Melee (5 ft)",
+		description : "One bite and two claw attacks as an Attack action"
+	}, {
+		name : "Claw",
+		ability : 1,
+		damage : [1, 4, "slashing"],
+		range : "Melee (5 ft)",
+		description : "Target pushed up to 5 ft away; 2 claw and 1 bite attack as Attack action"
+	}],
+	traits : [{
+		name : "Hold Breath",
+		description : "The sea lion can hold its breath for 15 minutes."
+	}, {
+		name : "Multiattack",
+		description : "The sea lion makes three attacks: one with its bite and two with its claws."
+	}]
+}
 var iFileName = "all_WotC_unearthed_arcana.js";
 var iFileName = "ua_20150202_Eberron.js";
 RequiredSheetVersion(12.999);
@@ -18356,9 +20028,7 @@ RunFunctionAtEnd(function() {
 		if (cDomain && cDomain.spellcastingExtra) {
 			var eSpells = eval(cDomain.spellcastingExtra.toSource());
 			eSpells[100] = "AddToKnown";
-			var dSource = parseSource(cDomain.source);
-			if (!dSource) dSource = parseSource(cDomain.features["subclassfeature1"].source);
-			if (!dSource) dSource = [["UA:MC", 8]];
+			var dSource = cDomain.source ? cDomain.source : cDomain.features["subclassfeature1"] && cDomain.features["subclassfeature1"].source ? cDomain.features["subclassfeature1"].source :[["UA:MC", 8]];
 			
 			var suffix = 1;
 			var entryDoNm = cDomain.subname;
@@ -18934,7 +20604,7 @@ AddWarlockInvocation("Arcane Gunslinger (prereq: Pact of the Blade)", {
 	source : ["UA:MM", 3],
 	prereqeval : "What('Class Features Remember').indexOf('warlock,pact boon,pact of the blade') !== -1",
 	calcChanges : {
-		atkAdd : ["if (isRangedWeapon &&  && (/\\bpact\\b/i).test(WeaponText)) {fields.Proficiency = true; fields.Description += thisWeapon[1] ? '' : (fields.Description ? '; ' : '') + 'Counts as magical'; }; ", "If I include the word 'Pact' in a firearm weapon's name, it gets treated as my Pact Weapon."]
+		atkAdd : ["if (isRangedWeapon && ((/firearm/i).test(theWea.type) || (/firearm/i).test(theWea.list)) && (/\\bpact\\b/i).test(WeaponText)) {fields.Proficiency = true; fields.Description += thisWeapon[1] ? '' : (fields.Description ? '; ' : '') + 'Counts as magical'; }; ", "If I include the word 'Pact' in a firearm weapon's name, it gets treated as my Pact Weapon."]
 	}
 });
 
@@ -19178,7 +20848,7 @@ ClassList["ua-playtest-ranger"] = {
 	improvements : [0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 5],
 	saves : ["Dex", "Wis"],
 	skills : ["\n\n" + toUni("Ranger") + ": Choose three from Animal Handling, Athletics, Insight, Investigation, Nature, Perception, Stealth, and Survival", "\n\n" + toUni("Multiclass Ranger") + ": Choose one from Animal Handling, Athletics, Insight, Investigation, Nature, Perception, Stealth, and Survival"],
-	toolProfs : { primay : ["Herbalism kit"] },
+	toolProfs : { primary : ["Herbalism kit"] },
 	armor : [
 		[true, false, false, true],
 		[true, false, false, true]
@@ -19675,7 +21345,7 @@ AddSubClass("warlock", "the undying light", {
 			minlevel : 14,
 			description : "\n   " + "As a bonus action, I touch a creature and heal it by expending dice from my pool" + "\n   " + "I subtract the number of d6's used from my pool; I can expend up to 5d6 at a time" + "\n   " + "The target heals HP equal to the roll of the dice; I regain expended uses with a long rest",
 			usages : "15d6 per ",
-			usagescalc : "event.value = \"15d6\";",
+			usagescalc : "event.value = '15d6';",
 			recovery : "long rest",
 			action : ["bonus action", ""]
 		}
@@ -20101,7 +21771,7 @@ RaceList["aasimar revenant"] = { // Based on the VGtM Aasimar, made with /u/Rebe
 	heightMetric : " range from barely 1,5 to well over 1,8 metres tall (145 + 5d10 cm)",
 	weightMetric : " weigh around 75 kg (50 + 5d10 \xD7 4d4 / 10 kg)",
 	improvements : "Aasimar Revenant: +1 Constitution, +2 Charisma;",
-	scores : [1, 0, 0, 0, 0, 2],
+	scores : [0, 0, 1, 0, 0, 2],
 	trait : "Aasimar Revenant (+1 Constitution, +2 Charisma)" + (typePF ? "\n" : " ") + "Light Bearer: I know the Light cantrip. Healing Hands: As an action, once per long rest, I can touch to heal for my level in HP.\nRelentless Nature: I have returned to life with one goal: avenge my death or finish an unresolved task. I will rest once I fulfill my goal, but until then I can't truly die. Whenever I'm below half my max HP at the start of my turn, I regain 1 HP. If I die, I return to life within 24 hours. If my body was destroyed, it is reformed within 1 mile of where I died. I always know the distance and direction to creatures involved with my goal.",
 	spellcastingAbility : 6,
 	spellcastingBonus : {
@@ -20645,9 +22315,7 @@ RunFunctionAtEnd(function() {
 	for (var i = 0; i < ClassList.cleric.subclasses[1].length; i++) {
 		var aDomain = ClassSubList[ClassList.cleric.subclasses[1][i]];
 		if (!aDomain) continue;
-		var dSource = parseSource(aDomain.source);
-		if (!dSource) dSource = parseSource(aDomain.features["subclassfeature1"].source);
-		if (!dSource) dSource = [["UA:MC", 8]];
+		var dSource = aDomain.source ? aDomain.source : aDomain.features["subclassfeature1"] && aDomain.features["subclassfeature1"].source ? aDomain.features["subclassfeature1"].source : [["UA:TF", 0], ["UA:WR", 0]];
 		
 		var suffix = 1;
 		var entryDoNm = aDomain.subname;
@@ -20670,13 +22338,13 @@ RunFunctionAtEnd(function() {
 				MTfeat["subclassfeature2.3"].choices.push(entryDoNm);
 				MTfeat["subclassfeature2.3"][entryDoNm.toLowerCase()] = eval(dFea.toSource());
 				MTfeat["subclassfeature2.3"][entryDoNm.toLowerCase()].name = MTfeat["subclassfeature2.3"][entryDoNm.toLowerCase()].name.replace(/channel divinity/i, "Channel Arcana");
-				AIdomain.eval += "var ToAdd = ['wizard', 'subclassfeature2.3', \"" + entryDoNm.toLowerCase() + "\"]; if (classes.known.wizard.level >= 2 && this.getField('Class Features Remember').value.indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)}; ";
+				AIdomain.eval += "var ToAdd = ['wizard', 'subclassfeature2.3', \"" + entryDoNm.toLowerCase() + "\"]; if (classes.known.wizard.level >= 2 && What('Class Features Remember').indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)}; ";
 			};
 			if (dFea.minlevel === 1 && !dFea.armor && !dFea.weapons) {
 				if (MTfeat["subclassfeature6"].choices.indexOf(entryDoNm) === -1) { //if the entry does not exist yet
 					MTfeat["subclassfeature6"].choices.push(entryDoNm);
 					MTfeat["subclassfeature6"][entryDoNm.toLowerCase()] = eval(dFea.toSource());
-					AIdomain.eval += "var ToAdd = ['wizard', 'subclassfeature6', \"" + entryDoNm.toLowerCase() + "\"]; if (classes.known.wizard.level >= 6 && this.getField('Class Features Remember').value.indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)}; ";
+					AIdomain.eval += "var ToAdd = ['wizard', 'subclassfeature6', \"" + entryDoNm.toLowerCase() + "\"]; if (classes.known.wizard.level >= 6 && What('Class Features Remember').indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)}; ";
 				} else { //add to the existing entry
 					var theFea = MTfeat["subclassfeature6"][entryDoNm.toLowerCase()];
 					theFea.name += " \u0026 " + dFea.name;
@@ -20690,7 +22358,7 @@ RunFunctionAtEnd(function() {
 				if (MTfeat["subclassfeature10"].choices.indexOf(entryDoNm) === -1) { //if the entry does not exist yet
 					MTfeat["subclassfeature10"].choices.push(entryDoNm);
 					MTfeat["subclassfeature10"][entryDoNm.toLowerCase()] = eval(dFea.toSource());
-					AIdomain.eval += "var ToAdd = ['wizard', 'subclassfeature10', \"" + entryDoNm.toLowerCase() + "\"]; if (classes.known.wizard.level >= 10 && this.getField('Class Features Remember').value.indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)}; ";
+					AIdomain.eval += "var ToAdd = ['wizard', 'subclassfeature10', \"" + entryDoNm.toLowerCase() + "\"]; if (classes.known.wizard.level >= 10 && What('Class Features Remember').indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)}; ";
 				} else { //add to the existing entry
 					var theFea = MTfeat["subclassfeature10"][entryDoNm.toLowerCase()];
 					theFea.name += " \u0026 " + dFea.name;
@@ -20704,7 +22372,7 @@ RunFunctionAtEnd(function() {
 				if (MTfeat["subclassfeature14"].choices.indexOf(entryDoNm) === -1) { //if the entry does not exist yet
 					MTfeat["subclassfeature14"].choices.push(entryDoNm);
 					MTfeat["subclassfeature14"][entryDoNm.toLowerCase()] = eval(dFea.toSource());
-					AIdomain.eval += "var ToAdd = ['wizard', 'subclassfeature14', \"" + entryDoNm.toLowerCase() + "\"]; if (classes.known.wizard.level >= 14 && this.getField('Class Features Remember').value.indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)}; ";
+					AIdomain.eval += "var ToAdd = ['wizard', 'subclassfeature14', \"" + entryDoNm.toLowerCase() + "\"]; if (classes.known.wizard.level >= 14 && What('Class Features Remember').indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)}; ";
 				} else { //add to the existing entry
 					var theFea = MTfeat["subclassfeature14"][entryDoNm.toLowerCase()];
 					theFea.name += " \u0026 " + dFea.name;
@@ -21167,7 +22835,7 @@ AddSubClass("barbarian", "storm herald", {
 				name : "Storm of Fury: Desert",
 				description : "\n   " + "While raging, I emanate a 10-ft radius aura that shapes the environment around me" + "\n   " + "Any enemy that ends its turn in my aura takes fire damage",
 				additional : ["", "", "2 fire damage", "3 fire damage", "3 fire damage", "3 fire damage", "3 fire damage", "4 fire damage", "4 fire damage", "4 fire damage", "4 fire damage", "5 fire damage", "5 fire damage", "5 fire damage", "5 fire damage", "6 fire damage", "6 fire damage", "6 fire damage", "6 fire damage", "7 fire damage"],
-				eval : "var ToAdd = ['barbarian', 'subclassfeature6', 'desert']; if (classes.known.barbarian.level >= 6 && this.getField('Class Features Remember').value.indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)}; ToAdd[1] = 'subclassfeature14'; if (classes.known.barbarian.level >= 14 && this.getField('Class Features Remember').value.indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)};"
+				eval : "var ToAdd = ['barbarian', 'subclassfeature6', 'desert']; if (classes.known.barbarian.level >= 6 && What('Class Features Remember').indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)}; ToAdd[1] = 'subclassfeature14'; if (classes.known.barbarian.level >= 14 && What('Class Features Remember').indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)};"
 			},
 			"sea" : {
 				name : "Storm of Fury: Sea",
@@ -21175,13 +22843,13 @@ AddSubClass("barbarian", "storm herald", {
 				additional : ["", "", "2d6", "2d6", "2d6", "2d6", "2d6", "2d6", "2d6", "3d6", "3d6", "3d6", "3d6", "3d6", "4d6", "4d6", "4d6", "4d6", "4d6", "4d6"],
 				usages : 1,
 				recovery : "turn",
-				eval : "var ToAdd = ['barbarian', 'subclassfeature6', 'sea']; if (classes.known.barbarian.level >= 6 && this.getField('Class Features Remember').value.indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)}; ToAdd[1] = 'subclassfeature14'; if (classes.known.barbarian.level >= 14 && this.getField('Class Features Remember').value.indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)};"
+				eval : "var ToAdd = ['barbarian', 'subclassfeature6', 'sea']; if (classes.known.barbarian.level >= 6 && What('Class Features Remember').indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)}; ToAdd[1] = 'subclassfeature14'; if (classes.known.barbarian.level >= 14 && What('Class Features Remember').indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)};"
 			},
 			"tundra" : {
 				name : "Storm of Fury: Tundra",
 				description : "\n   " + "While raging, I emanate a 10-ft radius aura that shapes the environment around me" + "\n   " + "Any enemy that ends its turn in my aura takes cold damage",
 				additional : ["", "", "2 cold damage", "3 cold damage", "3 cold damage", "3 cold damage", "3 cold damage", "4 cold damage", "4 cold damage", "4 cold damage", "4 cold damage", "5 cold damage", "5 cold damage", "5 cold damage", "5 cold damage", "6 cold damage", "6 cold damage", "6 cold damage", "6 cold damage", "7 cold damage"],
-				eval : "var ToAdd = ['barbarian', 'subclassfeature6', 'tundra']; if (classes.known.barbarian.level >= 6 && this.getField('Class Features Remember').value.indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)}; ToAdd[1] = 'subclassfeature14'; if (classes.known.barbarian.level >= 14 && this.getField('Class Features Remember').value.indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)};"
+				eval : "var ToAdd = ['barbarian', 'subclassfeature6', 'tundra']; if (classes.known.barbarian.level >= 6 && What('Class Features Remember').indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)}; ToAdd[1] = 'subclassfeature14'; if (classes.known.barbarian.level >= 14 && What('Class Features Remember').indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)};"
 			}
 		},
 		"subclassfeature6" : {
@@ -22378,7 +24046,7 @@ ClassList.artificer = {
 			name : "Magic Item Analysis",
 			source : ["UA:A", 2],
 			minlevel : 1,
-			description : desc(["I can cast Detect Magic and Identify as rituals without requiring material components"]),
+			description : "\n   " + "I can cast Detect Magic and Identify as rituals without requiring material components",
 			spellcastingBonus : [{
 				name : "Magic Item Analysis",
 				spells : ["detect magic"],
@@ -22395,8 +24063,8 @@ ClassList.artificer = {
 			name : "Tool Expertise",
 			source : ["UA:A", 3],
 			minlevel : 2,
-			description : desc(["I have expertise with any tool proficiencies I gain from the Artificer class"]),
-			skillstxt : "\n\n" + toUni("Artificer") + ": expertise with with any tool proficiencies gained from the Artificer class.",
+			description : "\n   " + "I have expertise with any tool proficiencies I gain from the artificer class",
+			skillstxt : "\n\n" + toUni("Artificer") + ": expertise with any tool proficiencies gained from the artificer class.",
 			eval : "if ((/thieves.? tools/i).test(What('Too Text'))) { Checkbox('Too Exp', true); };",
 			removeeval : "if ((/thieves.? tools/i).test(What('Too Text'))) { Checkbox('Too Exp', false); };"
 		},
@@ -22404,17 +24072,12 @@ ClassList.artificer = {
 			name : "Wondrous Invention",
 			source : ["UA:A", 3],
 			minlevel : 2,
-			description : desc(["I gain a magic item that I have crafted; Use the \"Choose Feature\" button above"]),
+			description : "\n   " + "I gain a magic item that I have crafted; Use the \"Choose Feature\" button above",
 			additional : levels.map(function (n) {
-				if (n < 2) return "";
-				if (n < 5) return "1 item";
-				if (n < 10) return "2 items";
-				if (n < 15) return "3 items";
-				if (n < 20) return "4 items";
-				return "5 items";
+				return n < 2 ? "" : n < 5 ? "1 item" : (n < 10 ? 2 : n < 15 ? 3 : n < 20 ? 4 : 5) + " items";
 			}),
 			extraname : "Wondrous Invention",
-			extrachoices : ["Bag of Holding (prereq: level 2 artificer)", "Cap of Water Breathing (prereq: level 2 artificer)", "Driftglobe (prereq: level 2 artificer)", "Goggles of Night (prereq: level 2 artificer)", "Sending Stones (prereq: level 2 artificer)", "Alchemy Jug (prereq: level 5 artificer)", "Helm of Comprehending Languages (prereq: level 5 artificer)", "Lantern of Revealing (prereq: level 5 artificer)", "Ring of Swimming (prereq: level 5 artificer)", "Robe of Useful Items (prereq: level 5 artificer)", "Rope of Climbing (prereq: level 5 artificer)", "Wand of Magic Detection (prereq: level 5 artificer)", "Wand of Secrets (prereq: level 5 artificer)", "Bag of Beans (prereq: level 10 artificer)", "Chime of Opening (prereq: level 10 artificer)", "Decanter of Endless Water (prereq: level 10 artificer)", "Eyes of Minute Seeing (prereq: level 10 artificer)", "Folding Boat (prereq: level 10 artificer)", "Heward's Handy Haversack (prereq: level 10 artificer)", "Boots of Striding and Springing (prereq: level 15 artificer)", "Bracers of Archery (prereq: level 15 artificer)", "Brooch of Shielding (prereq: level 15 artificer)", "Broom of Flying (prereq: level 15 artificer)", "Hat of Disguise (prereq: level 15 artificer)", "Slippers of Spider Climbing (prereq: level 15 artificer)", "Eyes of the Eagle (prereq: level 20 artificer)", "Gem of Brightness (prereq: level 20 artificer)", "Gloves of Missile Snaring (prereq: level 20 artificer)", "Gloves of Swimming and Climbing (prereq: level 20 artificer)", "Ring of Jumping (prereq: level 20 artificer)", "Ring of Mind Shielding (prereq: level 20 artificer)", "Wings of Flying (prereq: level 20 artificer)"] //come back to this with the function to make the individual entries
+			extrachoices : ["Bag of Holding", "Cap of Water Breathing", "Driftglobe", "Goggles of Night", "Sending Stones", "Alchemy Jug (prereq: level 5 artificer)", "Helm of Comprehending Languages (prereq: level 5 artificer)", "Lantern of Revealing (prereq: level 5 artificer)", "Ring of Swimming (prereq: level 5 artificer)", "Robe of Useful Items (prereq: level 5 artificer)", "Rope of Climbing (prereq: level 5 artificer)", "Wand of Magic Detection (prereq: level 5 artificer)", "Wand of Secrets (prereq: level 5 artificer)", "Bag of Beans (prereq: level 10 artificer)", "Chime of Opening (prereq: level 10 artificer)", "Decanter of Endless Water (prereq: level 10 artificer)", "Eyes of Minute Seeing (prereq: level 10 artificer)", "Folding Boat (prereq: level 10 artificer)", "Heward's Handy Haversack (prereq: level 10 artificer)", "Boots of Striding and Springing (prereq: level 15 artificer)", "Bracers of Archery (prereq: level 15 artificer)", "Brooch of Shielding (prereq: level 15 artificer)", "Broom of Flying (prereq: level 15 artificer)", "Hat of Disguise (prereq: level 15 artificer)", "Slippers of Spider Climbing (prereq: level 15 artificer)", "Eyes of the Eagle (prereq: level 20 artificer)", "Gem of Brightness (prereq: level 20 artificer)", "Gloves of Missile Snaring (prereq: level 20 artificer)", "Gloves of Swimming and Climbing (prereq: level 20 artificer)", "Ring of Jumping (prereq: level 20 artificer)", "Ring of Mind Shielding (prereq: level 20 artificer)", "Wings of Flying (prereq: level 20 artificer)"] //come back to this with the function to make the individual entries
 		},
 		"spellcasting" : {
 			name : "Spellcasting",
@@ -22423,7 +24086,10 @@ ClassList.artificer = {
 			description : desc([
 				"I can cast artificer spells that I know, using Intelligence as my spellcasting ability",
 				"I can use an arcane focus as a spellcasting focus"
-			])
+			]),
+			additional : levels.map(function (n, idx) {
+				return n < 3 ? "" : [0, 0, 3, 4, 4, 4, 5, 6, 6, 7, 8, 8, 9, 10, 10, 11, 11, 11, 12, 13][idx] + " spells known";
+			})
 		},
 		"infuse magic" : {
 			name : "Infuse Magic",
@@ -22453,17 +24119,14 @@ ClassList.artificer = {
 			minlevel : 5,
 			description : "",
 			additional : levels.map(function (n) {
-				if (n < 5) return "";
-				if (n < 15) return "attune to 4 magic items instead of 3";
-				if (n < 20) return "attune to 5 magic items instead of 3";
-				return "attune to 6 magic items instead of 3";
+				return n < 5 ? "" : "attune to " + (n < 15 ? 4 : n < 20 ? 5 : 6) + " magic items instead of 3";
 			})
 		},
 		"soul of artifice" : {
 			name : "Soul of Artifice",
 			source : ["UA:A", 4],
 			minlevel : 20,
-			description : desc(["I gain a +1 bonus to all saving throws per magic item I am currently attuned to"]),
+			description : "\n   " + "I gain a +1 bonus to all saving throws per magic item I am currently attuned to",
 			savetxt : {
 				text : ["+1 to all saves per attuned magic item"]
 			}
@@ -22514,7 +24177,10 @@ ClassSubList["artificer-alchemist"] = {
 					"After being healed this way, a creature can't do so again until it finishes a long rest",
 					"While a Healing Draught exists, I can't use this formula to create another one"
 				]),
-				action : ["action", ""]
+				action : ["action", ""],
+				additional : levels.map(function (n) {
+					return "Heals " + Math.ceil(n / 2) + "d8";
+				})
 			},
 			"smoke stick" : {
 				name : "Smoke Stick",
@@ -22603,7 +24269,7 @@ ClassSubList["artificer-gunsmith"] = {
 	subname : "Gunsmith",
 	source : ["UA:A", 6],
 	features : {
-		"subclassfeature1.1" : {
+		"subclassfeature1" : {
 			name : "Master Smith",
 			source : ["UA:A", 6],
 			minlevel : 1,
@@ -22615,7 +24281,7 @@ ClassSubList["artificer-gunsmith"] = {
 			},
 			toolProfs : ["Smith's tools"]
 		},
-		"subclassfeature1.2" : {
+		"subclassfeature1.1" : {
 			name : "Thunder Cannon",
 			source : ["UA:A", 6],
 			minlevel : 1,
@@ -22628,7 +24294,7 @@ ClassSubList["artificer-gunsmith"] = {
 			eval : "AddWeapon('Thunder Cannon');",
 			removeeval : "RemoveWeapon('Thunder Cannon');"
 		},
-		"subclassfeature1.3" : {
+		"subclassfeature1.2" : {
 			name : "Arcane Magazine",
 			source : ["UA:A", 6],
 			minlevel : 1,
@@ -23071,13 +24737,15 @@ ArtMagicItemsList = {
 // Create the magic items for the wondrous items class feature of the artificer
 ClassList.artificer.features["wondrous invention"].extrachoices.forEach(function (theI) {
 	var theItem = theI.replace(/ *\(.*\)/, "");
+	var minLevel = Number(theI.replace(/.*level (\d+) artificer.*/, "$1"));
 	if (ArtMagicItemsList[theItem.toLowerCase()]) {
 		ClassList.artificer.features["wondrous invention"][theI.toLowerCase()] = {
 			name : theItem,
 			description : "",
 			source : ["UA:A", 3],
 			eval : "var maI = ArtMagicItemsList[\"" + theItem.toLowerCase() + "\"]; AddMagicItem(maI.name, maI.attunement, maI.description, maI.weight, maI.descriptionLong);",
-			removeeval : "RemoveMagicItem(\"" + theItem.toLowerCase() + "\");"
+			removeeval : "RemoveMagicItem(\"" + theItem.toLowerCase() + "\");",
+			prereqeval : isNaN(minLevel) ? "" : "classes.known.artificer.level >= " + minLevel
 		};
 	};
 });
@@ -23264,7 +24932,7 @@ SourceList["UA:RnR"] = {
 
 // Adds 3 subclasses: 2 for the Ranger (and the Revised Ranger), and 1 for the Rogue
 var theHorizonWalkerSubclass = {
-	regExpSearch : /^(?=.*horizon)(?=.*(walker|conclave)).*$/i,
+	regExpSearch : /^(?=.*horizon)(?=.*walker).*$/i,
 	subname : "Horizon Walker",
 	source : ["UA:RnR", 1],
 	fullname : "Horizon Walker",
@@ -23394,6 +25062,7 @@ AddSubClass("ranger", "primeval guardian", thePrimevalGuardianSubclass);
 if (ClassList["rangerua"]) { // add them to the Revised Ranger as well, if it is defined
 	var theHorizonConclaveSubclass = newObj(theHorizonWalkerSubclass);
 	theHorizonConclaveSubclass.subname = "Horizon Conclave";
+	theHorizonConclaveSubclass.regExpSearch = /^(?=.*horizon)(?=.*conclave).*$/i
 	delete theHorizonConclaveSubclass.fullname;
 	AddSubClass("rangerua", "horizon conclave", theHorizonConclaveSubclass);
 	var thePrimevalGuardianConclaveSubclass = newObj(thePrimevalGuardianSubclass);
@@ -23537,7 +25206,7 @@ AddSubClass("sorcerer", "favoured soul", {
 			name : "Unearthly Recovery",
 			source : ["UA:SO", 1],
 			minlevel : 18,
-			description : "\n   " + "As a bonus action when I have less than half of my max HP, I can heal myself" + "\n   " + "I regain a number of HP equal to half my maximum Hit Points",
+			description : "\n   " + "As a bonus action when I have less than half of my max HP, I can heal myself" + "\n   " + "I regain a number of HP equal to half my maximum hit points",
 			action : ["bonus action", ""],
 			recovery : "long rest",
 			usages : 1
@@ -28330,9 +29999,7 @@ if (!SourceList["UA:TF"]) {
 		for (var i = 0; i < ClassList.cleric.subclasses[1].length; i++) {
 			var aDomain = ClassSubList[ClassList.cleric.subclasses[1][i]];
 			if (!aDomain) continue;
-			var dSource = parseSource(aDomain.source);
-			if (!dSource) dSource = parseSource(aDomain.features["subclassfeature1"].source);
-			if (!dSource) dSource = [["UA:MC", 8]];
+			var dSource = aDomain.source ? aDomain.source : aDomain.features["subclassfeature1"] && aDomain.features["subclassfeature1"].source ? aDomain.features["subclassfeature1"].source : [["UA:TF", 0], ["UA:WR", 0]];
 			
 			var suffix = 1;
 			var entryDoNm = aDomain.subname;
@@ -28355,13 +30022,13 @@ if (!SourceList["UA:TF"]) {
 					MTfeat["subclassfeature2.3"].choices.push(entryDoNm);
 					MTfeat["subclassfeature2.3"][entryDoNm.toLowerCase()] = eval(dFea.toSource());
 					MTfeat["subclassfeature2.3"][entryDoNm.toLowerCase()].name = MTfeat["subclassfeature2.3"][entryDoNm.toLowerCase()].name.replace(/channel divinity/i, "Channel Arcana");
-					AIdomain.eval += "var ToAdd = ['wizard', 'subclassfeature2.3', \"" + entryDoNm.toLowerCase() + "\"]; if (classes.known.wizard.level >= 2 && this.getField('Class Features Remember').value.indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)}; ";
+					AIdomain.eval += "var ToAdd = ['wizard', 'subclassfeature2.3', \"" + entryDoNm.toLowerCase() + "\"]; if (classes.known.wizard.level >= 2 && What('Class Features Remember').indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)}; ";
 				};
 				if (dFea.minlevel === 1 && !dFea.armor && !dFea.weapons) {
 					if (MTfeat["subclassfeature6"].choices.indexOf(entryDoNm) === -1) { //if the entry does not exist yet
 						MTfeat["subclassfeature6"].choices.push(entryDoNm);
 						MTfeat["subclassfeature6"][entryDoNm.toLowerCase()] = eval(dFea.toSource());
-						AIdomain.eval += "var ToAdd = ['wizard', 'subclassfeature6', \"" + entryDoNm.toLowerCase() + "\"]; if (classes.known.wizard.level >= 6 && this.getField('Class Features Remember').value.indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)}; ";
+						AIdomain.eval += "var ToAdd = ['wizard', 'subclassfeature6', \"" + entryDoNm.toLowerCase() + "\"]; if (classes.known.wizard.level >= 6 && What('Class Features Remember').indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)}; ";
 					} else { //add to the existing entry
 						var theFea = MTfeat["subclassfeature6"][entryDoNm.toLowerCase()];
 						theFea.name += " \u0026 " + dFea.name;
@@ -28375,7 +30042,7 @@ if (!SourceList["UA:TF"]) {
 					if (MTfeat["subclassfeature10"].choices.indexOf(entryDoNm) === -1) { //if the entry does not exist yet
 						MTfeat["subclassfeature10"].choices.push(entryDoNm);
 						MTfeat["subclassfeature10"][entryDoNm.toLowerCase()] = eval(dFea.toSource());
-						AIdomain.eval += "var ToAdd = ['wizard', 'subclassfeature10', \"" + entryDoNm.toLowerCase() + "\"]; if (classes.known.wizard.level >= 10 && this.getField('Class Features Remember').value.indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)}; ";
+						AIdomain.eval += "var ToAdd = ['wizard', 'subclassfeature10', \"" + entryDoNm.toLowerCase() + "\"]; if (classes.known.wizard.level >= 10 && What('Class Features Remember').indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)}; ";
 					} else { //add to the existing entry
 						var theFea = MTfeat["subclassfeature10"][entryDoNm.toLowerCase()];
 						theFea.name += " \u0026 " + dFea.name;
@@ -28389,7 +30056,7 @@ if (!SourceList["UA:TF"]) {
 					if (MTfeat["subclassfeature14"].choices.indexOf(entryDoNm) === -1) { //if the entry does not exist yet
 						MTfeat["subclassfeature14"].choices.push(entryDoNm);
 						MTfeat["subclassfeature14"][entryDoNm.toLowerCase()] = eval(dFea.toSource());
-						AIdomain.eval += "var ToAdd = ['wizard', 'subclassfeature14', \"" + entryDoNm.toLowerCase() + "\"]; if (classes.known.wizard.level >= 14 && this.getField('Class Features Remember').value.indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)}; ";
+						AIdomain.eval += "var ToAdd = ['wizard', 'subclassfeature14', \"" + entryDoNm.toLowerCase() + "\"]; if (classes.known.wizard.level >= 14 && What('Class Features Remember').indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)}; ";
 					} else { //add to the existing entry
 						var theFea = MTfeat["subclassfeature14"][entryDoNm.toLowerCase()];
 						theFea.name += " \u0026 " + dFea.name;
@@ -28788,21 +30455,6 @@ SpellsList["sudden awakening"] = {
 	description : "Any creatures within range awaken and can then stand up from prone without expending movement",
 	descriptionFull : "Each sleeping creature you choose within range awakens, and then each prone creature within range can stand up without expending any movement."
 };
-SpellsList["toll the dead"] = {
-	name : "Toll the Dead",
-	classes : ["cleric", "warlock", "wizard"],
-	source : ["UA:SS", 4],
-	ritual : false,
-	level : 0,
-	school : "Necro",
-	time : "1 a",
-	range : "60 ft",
-	components : "V,S",
-	duration : "Instantaneous",
-	save : "Wis",
-	description : "1 crea save or 1d12 Necrotic damage (only 1d8 if at full hp); +1d12/+1d8 at CL 5, 11, and 17",
-	descriptionFull : "You point at one creature you can see within range, and the sound of a dolorous bell fills the air around it for a moment. The target must succeed on a Wisdom saving throw or take 1d8 necrotic damage. If the target is missing any of its hit points, it instead takes 1d12 necrotic damage." + "\n   " + "The spell's damage increases by one die when you reach 5th level (2d8 or 2d12), 11th level (3d8 or 3d12), and 17th level (4d8 or 4d12)."
-};
 SpellsList["unearthly chorus"] = {
 	name : "Unearthly Chorus",
 	classes : ["bard"],
@@ -28900,19 +30552,37 @@ WeaponsList["primal savagery"] = {
 	description : "Does either Piercing or Slashing damage (my choice) (UA:SS 3)",
 	abilitytodamage : false
 };
-WeaponsList["toll the dead"] = {
-	regExpSearch : /^(?=.*toll)(?=.*the)(?=.*dead).*$/i,
-	name : "Toll the Dead",
-	source : ["UA:SS", 4],
-	list : "spell",
-	ability : 5,
-	type : "Cantrip",
-	damage : ["C", 12, "necrotic"],
-	range : "60 ft",
-	description : "Wis save, success - no damage; If target is at full hp, d8 instead of d12 damage (UA:SS 4)",
-	abilitytodamage : false,
-	dc : true
-};
+
+if (!SourceList.X) {
+	SpellsList["toll the dead"] = {
+		name : "Toll the Dead",
+		classes : ["cleric", "warlock", "wizard"],
+		source : [["X", 169], ["UA:SS", 4]],
+		ritual : false,
+		level : 0,
+		school : "Necro",
+		time : "1 a",
+		range : "60 ft",
+		components : "V,S",
+		duration : "Instantaneous",
+		save : "Wis",
+		description : "1 crea save or 1d12 Necrotic damage (only 1d8 if at full hp); +1d12/+1d8 at CL 5, 11, and 17",
+		descriptionFull : "You point at one creature you can see within range, and the sound of a dolorous bell fills the air around it for a moment. The target must succeed on a Wisdom saving throw or take 1d8 necrotic damage. If the target is missing any of its hit points, it instead takes 1d12 necrotic damage." + "\n   " + "The spell's damage increases by one die when you reach 5th level (2d8 or 2d12), 11th level (3d8 or 3d12), and 17th level (4d8 or 4d12)."
+	};
+	WeaponsList["toll the dead"] = {
+		regExpSearch : /^(?=.*toll)(?=.*the)(?=.*dead).*$/i,
+		name : "Toll the Dead",
+		source : [["X", 169], ["UA:SS", 4]],
+		list : "spell",
+		ability : 5,
+		type : "Cantrip",
+		damage : ["C", 12, "necrotic"],
+		range : "60 ft",
+		description : "Wis save, success - no damage; If target is at full hp, d8 instead of d12 damage (UA:SS 4)",
+		abilitytodamage : false,
+		dc : true
+	};
+}
 var iFileName = "ua_20170417_Feats-for-Skills.js";
 RequiredSheetVersion(12.999);
 // This file adds the content from the Unearthed Arcana: Feats for Skills article to MPMB's Character Record Sheet
@@ -29218,7 +30888,7 @@ FeatsList["dragon fear"] = {
 	source : ["UA:FR", 2],
 	prerequisite : "Being a Dragonborn",
 	prereqeval : "CurrentRace.known.indexOf('dragonborn') !== -1",
-	calculate : "event.value = 'I can expend a Breath Weapon use to roar instead. Each creature of my choice within 30 ft that can see or hear me must make a DC ' + (8 + Number(What('Proficiency Bonus')) + Number(What('Wis Mod'))) + ' Wis save (8 + prof. bonus + Cha mod) or be frightened for 1 min. It can repeat the save whenever it takes damage. [+1 Str or Cha]';",
+	calculate : "event.value = 'I can expend a Breath Weapon use to roar instead. Each creature of my choice within 30 ft that can see or hear me must make a DC ' + (8 + Number(What('Proficiency Bonus')) + Number(What('Cha Mod'))) + ' Wis save (8 + prof. bonus + Cha mod) or be frightened for 1 min. It can repeat the save whenever it takes damage. [+1 Str or Cha]';",
 	improvements : "Dragon Fear (feat): +1 Strength or Charisma;",
 	eval : "AddAction('action', 'Breath Weapon or Dragon Fear', 'Dragon Fear (feat)', 'Breath Weapon');",
 	removeeval : "AddAction('action', 'Breath Weapon', 'Dragonborn (Draconic Ancestry)', 'Breath Weapon or Dragon Fear'); if (CurrentRace.known !== 'dragonborn') { RemoveAction('action', 'Breath Weapon'); }; "
@@ -29762,7 +31432,7 @@ AddSubClass("monk", "way of the kensei2", {
 			calcChanges : {
 				atkAdd : [
 					"var monkDie = function(n) {return n < 5 ? 4 : n < 11 ? 6 : n < 17 ? 8 : 10;}; if (classes.known.monk && classes.known.monk.level > 2 && theWea && !isSpell && !theWea.monkweapon && (!(/heavy|special/i).test(fields.Description) || WeaponName === 'longbow') && WeaponText.toLowerCase().indexOf('kensei') !== -1) {var aMonkDie = aMonkDie ? aMonkDie : monkDie(classes.known.monk.level); try {var curDie = eval(fields.Damage_Die.replace('d', '*'));} catch (e) {var curDie = 'x';}; if (isNaN(curDie) || curDie < aMonkDie) {fields.Damage_Die = '1d' + aMonkDie; }; if (theWea.ability === 1) {fields.Mod = StrDex; }; if (isRangedWeapon) {fields.Description += (fields.Description ? '; ' : '') + 'As bonus action with Attack action, +1d4 damage'; }; fields.Proficiency = true; }; ",
-					"If I inlcude the word 'Kensei' in the name of a weapon that doesn't have the Heavy or Special attribute, or that is a longbow, that weapon gains the same benefits as any other 'Monk Weapon'.\nIn addition, with ranged 'Kensei Weapons', I can take a bonus action to have that hit, and any other hit after that as part of the same action, do +1d4 damage."
+					"If I include the word 'Kensei' in the name of a weapon that doesn't have the Heavy or Special attribute, or that is a longbow, that weapon gains the same benefits as any other 'Monk Weapon'.\nIn addition, with ranged 'Kensei Weapons', I can take a bonus action to have that hit, and any other hit after that as part of the same action, do +1d4 damage."
 				]
 			}
 		},
@@ -31147,7 +32817,7 @@ RaceList["grugach"] = {
 if (sheetVersion >= 13 && RaceList["wood elf"]) {
 	RaceList["wood elf"].regExpSearch = RaceList["wood elf"].regExpSearch.replace(/grugach\|?|wilds\?\|?/g, "");
 } else if (RaceList["wood elf"]) {
-	RaceList["wood elf"].regExpSearch = /^(?!.*half)((?=.*kagonesti)|((?=.*\b(elfs?|elves|elvish|elven)\b)(?=.*\b(woodlands?|woods?|forests?|green)\b))).*$/i;
+	RaceList["wood elf"].regExpSearch = /^(?!.*half)((?=.*(kagonesti|silhana))|((?=.*\b(elfs?|elves|elvish|elven)\b)(?=.*\b(woodlands?|woods?|forests?|green)\b))).*$/i;
 };
 RaceList["sea elf"] = {
 	regExpSearch : /^(?!.*half)((?=.*\b(elfs?|elves|elvish|elven)\b)(?=.*\b(seas?|oceans?|water)\b)).*$/i,
@@ -31690,7 +33360,7 @@ WeaponsList["horns-uacnm"] = {
 };
 var iFileName = "ua_20180611_Giant-Soul-Sorcerer.js";
 RequiredSheetVersion(12.999);
-// This file adds the content from the Unearthed Arcana: Centaur and Minotaur article to MPMB's Character Record Sheet
+// This file adds the content from the Unearthed Arcana: Giant Soul Sorcerer article to MPMB's Character Record Sheet
 
 // Define the source
 SourceList["UA:GSS"] = {
@@ -31701,13 +33371,11 @@ SourceList["UA:GSS"] = {
 	date : "2018/06/11"
 };
 
-// Add the Centaur race
-AddSubClass("sorcerer", "giant soul sorcerer", {
+AddSubClass("sorcerer", "giant soul", {
 	regExpSearch : /^(?=.*giant)(?=.*soul)(?=.*sorcerer).*$/i,
 	subname : "Giant Soul",
 	source : ["UA:GSS", 1],
 	fullname : "Giant Soul Sorcerer",
-	abilitySave : 3,
 	features : {
 		"subclassfeature1" : {
 			name : "Jotun Resilience",
@@ -31739,7 +33407,7 @@ AddSubClass("sorcerer", "giant soul sorcerer", {
 					selection : ["minor illusion", "fog cloud", "invisibility"],
 					times : [2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
 				},
-				eval : "var ToAdd = ['sorcerer', 'subclassfeature6', 'cloud giant']; if (classes.known.sorcerer.level >= 6 && this.getField('Class Features Remember').value.indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)};"
+				eval : "var ToAdd = ['sorcerer', 'subclassfeature6', 'cloud giant']; if (classes.known.sorcerer.level >= 6 && What('Class Features Remember').indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)};"
 			},
 			"fire giant" : {
 				name : "Mark of Ordning: Fire Giant",
@@ -31753,7 +33421,7 @@ AddSubClass("sorcerer", "giant soul sorcerer", {
 					selection : ["fire bolt", "burning hands", "flaming sphere"],
 					times : [2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
 				},
-				eval : "var ToAdd = ['sorcerer', 'subclassfeature6', 'fire giant']; if (classes.known.sorcerer.level >= 6 && this.getField('Class Features Remember').value.indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)};"
+				eval : "var ToAdd = ['sorcerer', 'subclassfeature6', 'fire giant']; if (classes.known.sorcerer.level >= 6 && What('Class Features Remember').indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)};"
 			},
 			"frost giant" : {
 				name : "Mark of Ordning: Frost Giant",
@@ -31767,7 +33435,7 @@ AddSubClass("sorcerer", "giant soul sorcerer", {
 					selection : ["ray of frost", "armor of agathys", "hold person"],
 					times : [2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
 				},
-				eval : "var ToAdd = ['sorcerer', 'subclassfeature6', 'frost giant']; if (classes.known.sorcerer.level >= 6 && this.getField('Class Features Remember').value.indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)};"
+				eval : "var ToAdd = ['sorcerer', 'subclassfeature6', 'frost giant']; if (classes.known.sorcerer.level >= 6 && What('Class Features Remember').indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)};"
 			},
 			"hill giant" : {
 				name : "Mark of Ordning: Hill Giant",
@@ -31781,7 +33449,7 @@ AddSubClass("sorcerer", "giant soul sorcerer", {
 					selection : ["shillelagh", "heroism", "enlarge/reduce"],
 					times : [2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
 				},
-				eval : "var ToAdd = ['sorcerer', 'subclassfeature6', 'hill giant']; if (classes.known.sorcerer.level >= 6 && this.getField('Class Features Remember').value.indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)};"
+				eval : "var ToAdd = ['sorcerer', 'subclassfeature6', 'hill giant']; if (classes.known.sorcerer.level >= 6 && What('Class Features Remember').indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)};"
 			},
 			"stone giant" : {
 				name : "Mark of Ordning: Stone Giant",
@@ -31795,7 +33463,7 @@ AddSubClass("sorcerer", "giant soul sorcerer", {
 					selection : ["resistance", "entangle", "spike growth"],
 					times : [2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
 				},
-				eval : "var ToAdd = ['sorcerer', 'subclassfeature6', 'stone giant']; if (classes.known.sorcerer.level >= 6 && this.getField('Class Features Remember').value.indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)};"
+				eval : "var ToAdd = ['sorcerer', 'subclassfeature6', 'stone giant']; if (classes.known.sorcerer.level >= 6 && What('Class Features Remember').indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)};"
 			},
 			"storm giant" : {
 				name : "Mark of Ordning: Storm Giant",
@@ -31809,7 +33477,7 @@ AddSubClass("sorcerer", "giant soul sorcerer", {
 					selection : ["thunderwave", "shocking grasp", "gust of wind"],
 					times : [2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
 				},
-				eval : "var ToAdd = ['sorcerer', 'subclassfeature6', 'storm giant']; if (classes.known.sorcerer.level >= 6 && this.getField('Class Features Remember').value.indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)};"
+				eval : "var ToAdd = ['sorcerer', 'subclassfeature6', 'storm giant']; if (classes.known.sorcerer.level >= 6 && What('Class Features Remember').indexOf(ToAdd.toString()) === -1) {ClassFeatureOptions(ToAdd)};"
 			}
 		},
 		"subclassfeature6" : {
@@ -31912,354 +33580,356 @@ SourceList["UA:RoE"] = {
 	date : "2018/07/23"
 };
 
-// Add the four new races and their subraces
-RaceList["changeling-wgte"] = {
-	regExpSearch : /changeling/i,
-	name : "Changeling" + (tDoc.info.SheetVersion < 13 ? " " : ""),
-	source : [["WGtE", 61], ["UA:RoE", 2]],
-	plural : "Changelings",
-	size : 3,
-	speed : {
-		walk : { spd : 30, enc : 20 }
-	},
-	skillstxt : "Choose two from Deception, Intimidation, Insight, and Persuasion",
-	languageProfs : ["Common", 2],
-	toolProfs : [["Any tool", 1]],
-	age : " reach adulthood in their early teens and live around 80 years",
-	height : " stand between 5 and 6 feet tall (5'1\" + 2d4\")", // Taken from 3e Eberron Campaign Setting
-	weight : " weigh around 140 lb (115 + 2d4 \xD7 2d4 lb)", // Taken from 3e Eberron Campaign Setting
-	heightMetric : " stand between 1,5 to over 1,8 metres tall (155 + 5d4 cm)",
-	weightMetric : " weigh around 65 kg (52 + 5d4 \xD7 4d4 / 10 kg)",
-	improvements : "Changeling: +2 Charisma, and +1 Dexterity or +1 Intelligence;",
-	scores : [0, 0, 0, 0, 0, 2],
-	trait : "Changeling (+2 Charisma, and +1 Dexterity or +1 Intelligence)\nChange Appearance: As an action, I can polymorph to or from a humanoid form of my size I have seen, not changing my equipment. I revert back if I die and have adv. on Deception.\nUnsettling Visage: As a reaction once per short rest when I'm attacked by a seen attacker, I can impose disadv. Doing this reveals my shapeshifting nature to all within 30 ft.\nDivergent Persona: I have proficiency with one tool, and an alternate persona. While in the alternate form, my proficiency bonus with that tool is doubled.",
-	eval : "AddAction('action', 'Change Appearance', 'being a Changeling');",
-	removeeval : "RemoveAction('action', 'Change Appearance');",
-	features : {
-		"unsettling visage" : {
-			name : "Unsettling Visage",
-			minlevel : 1,
-			usages : 1,
-			recovery : "short rest",
-			tooltip : "",
-			action : ["reaction", ""]
-		}
-	}
-};
-
-RaceList["kalashtar"] = { //this code includes contributions by /u/SoilentBrad
-	regExpSearch : /kalashtar/i,
-	name : "Kalashtar",
-	source : [["WGtE", 63], ["UA:RoE", 4]],
-	plural : "Kalashtar",
-	size : 3,
-	speed : {
-		walk : { spd : 30, enc : 20 }
-	},
-	skillstxt : "Advantage with one: Insight, Intimidation, Performance, or Persuasion",
-	languageProfs : ["Common", "Quori", 1],
-	savetxt : { immune : ["effects that require me to dream"] },
-	dmgres : ["Psychic"],
-	age : " reach adulthood in their late teens and live less than 100 years",
-	height : " range from 5 and a half to well over 6 feet tall (5'3\" + 2d6\")", // Taken from 3e Eberron Campaign Setting
-	weight : " weigh around 145 lb (120 + 2d6 \xD7 1d6 lb)", // Taken from 3e Eberron Campaign Setting
-	heightMetric : " range from 1,7 to 1,9 metres tall (160 + 5d6 cm)",
-	weightMetric : " weigh around 65 kg (55 + 5d6 \xD7 2d6 / 10 kg)",
-	improvements : "Kalashtar: +1 Wisdom, +1 Charisma, and +1 to one other ability score of my choice;",
-	scores : [0, 0, 0, 0, 1, 1],
-	trait : "Kalashtar (+1 Wisdom, +1 Charisma, and +1 to one other" + (typePF ? "" : " ability score of my choice") + ")\nDual Mind: As a reaction after I roll a Wis" + (typePF ? " save, I can gain adv." : "dom saving throw, I can gain advantage") + " on it.\nMind Link: I can speak telepathically to any creature I can see within 60 ft, as long as it can speak at least one language. As a bonus action, I can give that creature the ability to speak telepathically back to me until the start of my next turn.\nPsychic Glamour: I have adv. on Insight, Intimidation, Performance, or Persuasion checks.\nSevered from Dreams: I don't dream and thus immune to spells that affect dreams.",
-	eval : "AddAction('reaction', 'Dual Mind', 'being a Kalashtar'); AddAction('bonus action', 'Mind Link', 'being a Kalashtar');",
-	removeeval : "RemoveAction('reaction', 'Dual Mind'); RemoveAction('bonus action', 'Mind Link');"
-};
-
-// The four subraces of the shifter
-RaceList["beasthide shifter"] = {
-	regExpSearch : /^(?=.*shifter)(?=.*beast)(?=.*hide).*$/i,
-	name : "Beasthide shifter" + (tDoc.info.SheetVersion < 13 ? " " : ""),
-	sortname : "Shifter, Beasthide",
-	source : [["WGtE", 66], ["UA:RoE", 6]],
-	plural : "Beasthide shifters",
-	size : 3,
-	speed : {
-		walk : { spd : 30, enc : 20 }
-	},
-	languageProfs : ["Common"],
-	vision : [["Darkvision", 60]],
-	skills : ["Athletics", "Perception"],
-	age : " reach young adulthood at age 10 and rarely live over 70",
-	height : " range from under 5 to almost 6 feet tall (4'6\" + 2d8\")", // Taken from 3e Eberron Campaign Setting
-	weight : " weigh around 140 lb (95 + 2d8 \xD7 2d4 lb)", // Taken from 3e Eberron Campaign Setting
-	heightMetric : " range from under 1,5 to 1,8 metres tall (4'6\" + 5d8 cm)",
-	weightMetric : " weigh around 65 kg (43 + 5d8 \xD7 4d4 / kg)",
-	improvements : "Beasthide Shifter: +1 Dexterity, +2 Constitution;",
-	scores : [0, 1, 2, 0, 0, 0],
-	trait : "Beasthide Shifter: (+1 Dexterity, +2 Constitution)\n\nShifting: As a bonus action once per short rest, I can assume a more bestial appearance.\nThis transformation lasts for 1 minute, until I die, or until I revert back as a bonus action.\nWhen I shift, I gain temporary HP equal to 1d6 + my level + my Constitution modifier (minimum 1 temporary hit point).\nWhile transformed like this, I have a +1 bonus to AC",
-	features : {
-		"shift" : {
-			name : "Shift",
-			minlevel : 1,
-			usages : 1,
-			recovery : "short rest",
-			tooltip : "",
-			action : ["bonus action", " (start/end)"]
-		}
-	}
-};
-RaceList["longtooth shifter"] = {
-	regExpSearch : /^(?=.*shifter)(?=.*long)(?=.*(tooth|teeth)).*$/i,
-	name : "Longtooth shifter" + (tDoc.info.SheetVersion < 13 ? " " : ""),
-	sortname : "Shifter, Longtooth",
-	source : [["WGtE", 66], ["UA:RoE", 6]],
-	plural : "Longtooth shifters",
-	size : 3,
-	speed : {
-		walk : { spd : 30, enc : 20 }
-	},
-	languageProfs : ["Common"],
-	weapons : ["longtooth fangs"],
-	vision : [["Darkvision", 60]],
-	skills : ["Intimidation", "Perception"],
-	age : " reach young adulthood at age 10 and rarely live over 70",
-	height : " range from under 5 to almost 6 feet tall (4'6\" + 2d8\")", // Taken from 3e Eberron Campaign Setting
-	weight : " weigh around 140 lb (95 + 2d8 \xD7 2d4 lb)", // Taken from 3e Eberron Campaign Setting
-	heightMetric : " range from under 1,5 to 1,8 metres tall (4'6\" + 5d8 cm)",
-	weightMetric : " weigh around 65 kg (43 + 5d8 \xD7 4d4 / kg)",
-	improvements : "Longtooth Shifter: +2 Strength, +1 Dexterity;",
-	scores : [2, 1, 0, 0, 0, 0],
-	trait : "Longtooth Shifter: (+2 Strength, +1 Dexterity)\nShifting: As a bonus action once per short rest, I can assume a more bestial appearance.\nThis transformation lasts for 1 minute, until I die, or until I revert back as a bonus action.\nWhen I shift, I gain temporary HP equal to my level + my Constitution modifier (minimum 1 temporary hit point).\nWhile transformed like this, I use my elongated fangs to make unarmed strikes, dealing 1d6 piercing damage. As a bonus action, I can maken one attack with my fangs.",
-	features : {
-		"shift" : {
-			name : "Shift",
-			minlevel : 1,
-			usages : 1,
-			recovery : "short rest",
-			tooltip : "",
-			action : ["bonus action", " (start/end)"]
-		}
-	},
-	eval : "AddAction('bonus action', 'Attack with Longtooth Fangs', 'being a Longtooth shifter');",
-	removeeval : "RemoveAction('bonus action', 'Attack with Longtooth Fangs');"
-};
-WeaponsList["longtooth fangs"] = { // longtooth shifter weapon
-	regExpSearch : /^(?=.*fangs?)(?=.*long)(?=.*(tooth|teeth)).*$/i,
-	name : "Longtooth Fangs",
-	source : [["WGtE", 66], ["UA:RoE", 6]],
-	ability : 1,
-	type : "Natural",
-	damage : [1, 6, "piercing"],
-	range : "Melee",
-	description : "Only while shifted; One attack as bonus action",
-	monkweapon : true,
-	abilitytodamage : true
-};
-RaceList["swiftstride shifter"] = {
-	regExpSearch : /^(?=.*shifter)(?=.*swift)(?=.*stride).*$/i,
-	name : "Swiftstride shifter",
-	sortname : "Shifter, Swiftstride",
-	source : [["WGtE", 66], ["UA:RoE", 6]],
-	plural : "Swiftstride shifters",
-	size : 3,
-	speed : {
-		walk : { spd : 35, enc : 25 }
-	},
-	languageProfs : ["Common"],
-	vision : [["Darkvision", 60]],
-	skills : ["Acrobatics", "Perception"],
-	age : " reach young adulthood at age 10 and rarely live over 70",
-	height : " range from under 5 to almost 6 feet tall (4'6\" + 2d8\")", // Taken from 3e Eberron Campaign Setting
-	weight : " weigh around 140 lb (95 + 2d8 \xD7 2d4 lb)", // Taken from 3e Eberron Campaign Setting
-	heightMetric : " range from under 1,5 to 1,8 metres tall (4'6\" + 5d8 cm)",
-	weightMetric : " weigh around 65 kg (43 + 5d8 \xD7 4d4 / kg)",
-	improvements : "Swiftstride Shifter: +2 Dexterity, +1 Charisma;",
-	scores : [0, 2, 0, 0, 0, 1],
-	trait : "Swiftstride Shifter: (+2 Dexterity, +1 Charisma)\nShifting: As a bonus action once per short rest, I can assume a more bestial appearance.\nThis transformation lasts for 1 minute, until I die, or until I revert back as a bonus action.\nWhen I shift, I gain temporary HP equal to my level + my Con" + (typePF ? "stitution modifier (minimum 1 temporary hit point" : " mod (minimum 1 temp HP") + ").\nWhile transformed like this, my walking speed increases with 5 ft.\nAs a reaction when an enemy ends its turn within 5 ft of me while I'm shifted, I can move 10 ft without provoking opportunity attacks.",
-	features : {
-		"shift" : {
-			name : "Shift",
-			minlevel : 1,
-			usages : 1,
-			recovery : "short rest",
-			tooltip : "",
-			action : ["bonus action", " (start/end)"]
-		}
-	},
-	eval : "AddAction('reaction', 'Stride (while shifted)', 'being a Swiftstride shifter');",
-	removeeval : "RemoveAction('reaction', 'Stride (while shifted)');"
-};
-RaceList["wildhunt shifter"] = {
-	regExpSearch : /^(?=.*shifter)(?=.*wild)(?=.*hunt).*$/i,
-	name : "Wildhunt shifter" + (tDoc.info.SheetVersion < 13 ? " " : ""),
-	sortname : "Shifter, Wildhunt",
-	source : [["WGtE", 66], ["UA:RoE", 6]],
-	plural : "Wildhunt shifters",
-	size : 3,
-	speed : {
-		walk : { spd : 30, enc : 20 }
-	},
-	languageProfs : ["Common"],
-	vision : [["Darkvision", 60]],
-	skills : ["Perception", "Survival"],
-	age : " reach young adulthood at age 10 and rarely live over 70",
-	height : " range from under 5 to almost 6 feet tall (4'6\" + 2d8\")", // Taken from 3e Eberron Campaign Setting
-	weight : " weigh around 140 lb (95 + 2d8 \xD7 2d4 lb)", // Taken from 3e Eberron Campaign Setting
-	heightMetric : " range from under 1,5 to 1,8 metres tall (4'6\" + 5d8 cm)",
-	weightMetric : " weigh around 65 kg (43 + 5d8 \xD7 4d4 / kg)",
-	improvements : "Wildhunt Shifter: +1 Dexterity, +2 Wisdom;",
-	scores : [0, 1, 0, 0, 2, 0],
-	trait : "Wildhunt Shifter: (+1 Dexterity, +2 Wisdom)\nShifting: As a bonus action once per short rest, I can transform and get adv. on Wis checks." + (typePF ? " " : "\n") + "This transformation lasts for 1 minute, until I die, or until I revert back as a bonus action.\nWhen I shift, I gain temporary HP equal to my level + my Con" + (typePF ? "stitution modifier (minimum 1 temporary hit point" : " mod (minimum 1 temp HP") + ").\nMark the Scent: As a bonus action once per short rest, I can mark a creature that I can see within 10 ft. Until the end of my next long rest, my proficiency bonus is doubled for checks to find this target, and I always know its location if it is within 60 ft of me.",
-	features : {
-		"shift" : {
-			name : "Shift",
-			minlevel : 1,
-			usages : 1,
-			recovery : "short rest",
-			tooltip : "",
-			action : ["bonus action", " (start/end)"]
+if (!SourceList.WGtE) {
+	// Add the four new races and their subraces
+	RaceList["changeling-wgte"] = {
+		regExpSearch : /changeling/i,
+		name : "Changeling" + (tDoc.info.SheetVersion < 13 ? " " : ""),
+		source : [["WGtE", 61], ["UA:RoE", 2]],
+		plural : "Changelings",
+		size : 3,
+		speed : {
+			walk : { spd : 30, enc : 20 }
 		},
-		"mark the scent" : {
-			name : "Mark the Scent",
-			minlevel : 1,
-			usages : 1,
-			recovery : "short rest",
-			tooltip : "",
-			action : ["bonus action", ""]
+		skillstxt : "Choose two from Deception, Intimidation, Insight, and Persuasion",
+		languageProfs : ["Common", 2],
+		toolProfs : [["Any tool", 1]],
+		age : " reach adulthood in their early teens and live around 80 years",
+		height : " stand between 5 and 6 feet tall (5'1\" + 2d4\")", // Taken from 3e Eberron Campaign Setting
+		weight : " weigh around 140 lb (115 + 2d4 \xD7 2d4 lb)", // Taken from 3e Eberron Campaign Setting
+		heightMetric : " stand between 1,5 to over 1,8 metres tall (155 + 5d4 cm)",
+		weightMetric : " weigh around 65 kg (52 + 5d4 \xD7 4d4 / 10 kg)",
+		improvements : "Changeling: +2 Charisma, and +1 Dexterity or +1 Intelligence;",
+		scores : [0, 0, 0, 0, 0, 2],
+		trait : "Changeling (+2 Charisma, and +1 Dexterity or +1 Intelligence)\nChange Appearance: As an action, I can polymorph to or from a humanoid form of my size I have seen, not changing my equipment. I revert back if I die and have adv. on Deception.\nUnsettling Visage: As a reaction once per short rest when I'm attacked by a seen attacker, I can impose disadv. Doing this reveals my shapeshifting nature to all within 30 ft.\nDivergent Persona: I have proficiency with one tool, and an alternate persona. While in the alternate form, my proficiency bonus with that tool is doubled.",
+		eval : "AddAction('action', 'Change Appearance', 'being a Changeling');",
+		removeeval : "RemoveAction('action', 'Change Appearance');",
+		features : {
+			"unsettling visage" : {
+				name : "Unsettling Visage",
+				minlevel : 1,
+				usages : 1,
+				recovery : "short rest",
+				tooltip : "",
+				action : ["reaction", ""]
+			}
 		}
-	}
-};
+	};
 
-// The three subraces of the warforged
-RaceList["envoy warforged"] = {
-	regExpSearch : /^(?=.*warforged)(?=.*envoy).*$/i,
-	name : "Envoy warforged",
-	sortname : "Warforged, Envoy",
-	source : [["WGtE", 69], ["UA:RoE", 9]],
-	plural : "Envoy warforged",
-	size : 3,
-	speed : {
-		walk : { spd : 30, enc : 20 }
-	},
-	languageProfs : ["Common", 1],
-	toolProfs : [["Expertise with any one tool", 1]],
-	skillstxt : "Choose any one skill",
-	savetxt : {
-		text : ["Magic can't put me to sleep"],
-		immune : ["disease", "exhaustion from lack of rest"],
-		adv_vs : ["poison"]
-	},
-	dmgres : ["Poison"],
-	age : " are created as adults and will only start to show signs of physical deterioration after 150 years, but have no further aging effects",
-	height : " stand between 6 and 7 feet tall (5'10\" + 2d6\")", // Taken from 3e Eberron Campaign Setting
-	weight : " weigh around 300 lb (270 + 2d6 \xD7 4 lb)", // Taken from 3e Eberron Campaign Setting
-	heightMetric : " stand between 1,8 and 2,1 metres tall (178 + 5d6 cm)",
-	weightMetric : " weigh around 135 kg (125 + 5d6 \xD7 8 / kg)",
-	improvements : "Envoy Warforged: +1 Constitution and +1 to two other ability scores of my choice;",
-	scores : [0, 0, 1, 0, 0, 0],
-	trait : "Envoy Warforged (+1 Constitution and +1 to two other abilit" + (typePF ? "ies" : "y scores of my choice") + ")\nWarforged Resilience: I do not need to sleep, eat, drink, or breathe.\nSentry's Rest: To benefit from a long rest, I need to enter an inactive state for 6 hours, during which I am not rendered unconscious and can see and hear as normal.\nIntegrated Protection: My AC depends on armor proficiency: none (11+Dex), light (11+Dex+Prof B), medium (13+Dex+Prof B), heavy (16+Prof B; Stealth disadv.). I can use a shield.\nIntegrated Tool: I have expertise with one tool and it is integrated into my body.",
-	eval : "AddACMisc('Prof', 'Integrated Protection', 'Integrated Protection was gained from being a Warforged', '!(/warforged (darkwood core|composite plating|heavy plating)/).test(CurrentArmour.known) || (!tDoc.getField(\"Proficiency Armor Light\").isBoxChecked(0) && !tDoc.getField(\"Proficiency Armor Medium\").isBoxChecked(0) && !tDoc.getField(\"Proficiency Armor Heavy\").isBoxChecked(0))'); var lightProf = tDoc.getField('Proficiency Armor Light').isBoxChecked(0); if (tDoc.getField('Proficiency Armor Heavy').isBoxChecked(0)) { AddArmor('Warforged Heavy Plating', true); } else if (tDoc.getField('Proficiency Armor Medium').isBoxChecked(0) && ((What('Dex') < 18 && lightProf) || !lightProf)) { AddArmor('Warforged Composite Plating', true); } else { AddArmor('Warforged Darkwood Core', true); };",
-	removeeval : "AddACMisc(0, 'Integrated Protection', 'Integrated Protection was gained from being a Warforged');"
-};
-RaceList["juggernaut warforged"] = {
-	regExpSearch : /^(?=.*warforged)(?=.*juggernaut).*$/i,
-	name : "Juggernaut warforged",
-	sortname : "Warforged, Juggernaut",
-	source : [["WGtE", 70], ["UA:RoE", 9]],
-	plural : "Juggernaut warforged",
-	size : 3,
-	speed : {
-		walk : { spd : 30, enc : 20 }
-	},
-	languageProfs : ["Common"],
-	weapons : ["warforged iron fists"],
-	savetxt : {
-		text : ["Magic can't put me to sleep"],
-		immune : ["disease", "exhaustion from lack of rest"],
-		adv_vs : ["poison"]
-	},
-	dmgres : ["Poison"],
-	age : " are created as adults and will only start to show signs of physical deterioration after 150 years, but have no further aging effects",
-	height : " stand between 6 and 7 feet tall (5'10\" + 2d6\")", // Taken from 3e Eberron Campaign Setting
-	weight : " weigh around 300 lb (270 + 2d6 \xD7 4 lb)", // Taken from 3e Eberron Campaign Setting
-	heightMetric : " stand between 1,8 and 2,1 metres tall (178 + 5d6 cm)",
-	weightMetric : " weigh around 135 kg (125 + 5d6 \xD7 8 / kg)",
-	improvements : "Juggernaut Warforged: +2 Strength, +1 Constitution;",
-	scores : [2, 0, 1, 0, 0, 0],
-	trait : "Juggernaut Warforged (+2 Strength, +1 Constitution)" + (typePF ? "" : " Iron Fists: unarmed strikes do 1d4.") + "\nWarforged Resilience: I do not need to sleep, eat, drink, or breathe.\nSentry's Rest: To benefit from a long rest, I need to enter an inactive state for 6 hours, during which I am not rendered unconscious and can see and hear as normal.\nIntegrated Protection: My AC depends on armor proficiency: none (11+Dex), light (11+Dex+Prof B), medium (13+Dex+Prof B), heavy (16+Prof B; Stealth disadv.). I can use a shield.\nPowerful Build: I count as one size larger for my carrying capacity, push, drag, and lift." + (typePF ? " Iron Fists: My unarmed strikes do 1d4 damage." : ""),
-	eval : "tDoc.getField('Carrying Capacity Multiplier').value *= 2; AddACMisc('Prof', 'Integrated Protection', 'Integrated Protection was gained from being a Warforged', '!(/warforged (darkwood core|composite plating|heavy plating)/).test(CurrentArmour.known) || (!tDoc.getField(\"Proficiency Armor Light\").isBoxChecked(0) && !tDoc.getField(\"Proficiency Armor Medium\").isBoxChecked(0) && !tDoc.getField(\"Proficiency Armor Heavy\").isBoxChecked(0))'); var lightProf = tDoc.getField('Proficiency Armor Light').isBoxChecked(0); if (tDoc.getField('Proficiency Armor Heavy').isBoxChecked(0)) { AddArmor('Warforged Heavy Plating', true); } else if (tDoc.getField('Proficiency Armor Medium').isBoxChecked(0) && ((What('Dex') < 18 && lightProf) || !lightProf)) { AddArmor('Warforged Composite Plating', true); } else { AddArmor('Warforged Darkwood Core', true); };",
-	removeeval : "tDoc.getField('Carrying Capacity Multiplier').value /= 2; AddACMisc(0, 'Integrated Protection', 'Integrated Protection was gained from being a Warforged');"
-};
-WeaponsList["warforged iron fists"] = { // Juggernaut warforged weapon
-	regExpSearch : /^(?=.*warforged)(?=.*iron)(?=.*fists?).*$/i,
-	name : "Warforged Iron Fists",
-	source : [["WGtE", 70], ["UA:RoE", 9]],
-	ability : 1,
-	type : "Natural",
-	damage : [1, 4, "bludgeoning"],
-	range : "Melee",
-	description : "",
-	abilitytodamage : true,
-	monkweapon : true
-};
-RaceList["Skirmisher warforged"] = {
-	regExpSearch : /^(?=.*warforged)(?=.*skirmisher).*$/i,
-	name : "Skirmisher warforged",
-	sortname : "Warforged, Skirmisher",
-	source : [["WGtE", 70], ["UA:RoE", 9]],
-	plural : "Skirmisher warforged",
-	size : 3,
-	speed : {
-		walk : { spd : 35, enc : 25 }
-	},
-	languageProfs : ["Common"],
-	savetxt : {
-		text : ["Magic can't put me to sleep"],
-		immune : ["disease", "exhaustion from lack of rest"],
-		adv_vs : ["poison"]
-	},
-	dmgres : ["Poison"],
-	age : " are created as adults and will only start to show signs of physical deterioration after 150 years, but have no further aging effects",
-	height : " stand between 6 and 7 feet tall (5'10\" + 2d6\")", // Taken from 3e Eberron Campaign Setting
-	weight : " weigh around 300 lb (270 + 2d6 \xD7 4 lb)", // Taken from 3e Eberron Campaign Setting
-	heightMetric : " stand between 1,8 and 2,1 metres tall (178 + 5d6 cm)",
-	weightMetric : " weigh around 135 kg (125 + 5d6 \xD7 8 / kg)",
-	improvements : "Skirmisher Warforged: +2 Dexterity, +1 Constitution;",
-	scores : [0, 2, 1, 0, 0, 0],
-	trait : "Skirmisher Warforged (+2 Dexterity, +1 Constitution)\nWarforged Resilience: I do not need to sleep, eat, drink, or breathe.\nSentry's Rest: To benefit from a long rest, I need to enter an inactive state for 6 hours, during which I am not rendered unconscious and can see and hear as normal.\nIntegrated Protection: My AC depends on armor proficiency: none (11+Dex), light (11+Dex+Prof B), medium (13+Dex+Prof B), heavy (16+Prof B; Stealth disadv.). I can use a shield.\nLight Step: If I travel alone for an hour or more, I can move stealthily at a normal pace.",
-	eval : "AddACMisc('Prof', 'Integrated Protection', 'Integrated Protection was gained from being a Warforged', '!(/warforged (darkwood core|composite plating|heavy plating)/).test(CurrentArmour.known) || (!tDoc.getField(\"Proficiency Armor Light\").isBoxChecked(0) && !tDoc.getField(\"Proficiency Armor Medium\").isBoxChecked(0) && !tDoc.getField(\"Proficiency Armor Heavy\").isBoxChecked(0))'); var lightProf = tDoc.getField('Proficiency Armor Light').isBoxChecked(0); if (tDoc.getField('Proficiency Armor Heavy').isBoxChecked(0)) { AddArmor('Warforged Heavy Plating', true); } else if (tDoc.getField('Proficiency Armor Medium').isBoxChecked(0) && ((What('Dex') < 18 && lightProf) || !lightProf)) { AddArmor('Warforged Composite Plating', true); } else { AddArmor('Warforged Darkwood Core', true); };",
-	removeeval : "AddACMisc(0, 'Integrated Protection', 'Integrated Protection was gained from being a Warforged');"
-};
-// Warforged armour
-ArmourList["warforged darkwood core"] = {
-	regExpSearch : /^(?=.*warforged)(?=.*darkwood)(?=.*core).*$/i,
-	name : "Warforged darkwood core",
-	source : [["WGtE", 69], ["UA:RoE", 9]],
-	type : "warforged",
-	ac : 11,
-	stealthdis : false,
-	weight : 0,
-	strReq : 0
-};
-ArmourList["warforged composite plating"] = {
-	regExpSearch : /^(?=.*warforged)(?=.*composite)(?=.*plating).*$/i,
-	name : "Warforged composite plating",
-	source : [["WGtE", 69], ["UA:RoE", 9]],
-	type : "warforged",
-	ac : 13,
-	stealthdis : false,
-	weight : 0,
-	strReq : 0,
-	dex : 2
-};
-ArmourList["warforged heavy plating"] = {
-	regExpSearch : /^(?=.*warforged)(?=.*heavy)(?=.*plating).*$/i,
-	name : "Warforged heavy plating",
-	source : [["WGtE", 69], ["UA:RoE", 9]],
-	type : "warforged",
-	ac : 16,
-	stealthdis : true,
-	weight : 0,
-	strReq : 0,
-	dex : -10
-};
+	RaceList["kalashtar"] = { //this code includes contributions by /u/SoilentBrad
+		regExpSearch : /kalashtar/i,
+		name : "Kalashtar",
+		source : [["WGtE", 63], ["UA:RoE", 4]],
+		plural : "Kalashtar",
+		size : 3,
+		speed : {
+			walk : { spd : 30, enc : 20 }
+		},
+		skillstxt : "Advantage with one: Insight, Intimidation, Performance, or Persuasion",
+		languageProfs : ["Common", "Quori", 1],
+		savetxt : { immune : ["effects that require me to dream"] },
+		dmgres : ["Psychic"],
+		age : " reach adulthood in their late teens and live less than 100 years",
+		height : " range from 5 and a half to well over 6 feet tall (5'3\" + 2d6\")", // Taken from 3e Eberron Campaign Setting
+		weight : " weigh around 145 lb (120 + 2d6 \xD7 1d6 lb)", // Taken from 3e Eberron Campaign Setting
+		heightMetric : " range from 1,7 to 1,9 metres tall (160 + 5d6 cm)",
+		weightMetric : " weigh around 65 kg (55 + 5d6 \xD7 2d6 / 10 kg)",
+		improvements : "Kalashtar: +1 Wisdom, +1 Charisma, and +1 to one other ability score of my choice;",
+		scores : [0, 0, 0, 0, 1, 1],
+		trait : "Kalashtar (+1 Wisdom, +1 Charisma, and +1 to one other" + (typePF ? "" : " ability score of my choice") + ")\nDual Mind: As a reaction after I roll a Wis" + (typePF ? " save, I can gain adv." : "dom saving throw, I can gain advantage") + " on it.\nMind Link: I can speak telepathically to any creature I can see within 60 ft, as long as it can speak at least one language. As a bonus action, I can give that creature the ability to speak telepathically back to me until the start of my next turn.\nPsychic Glamour: I have adv. on Insight, Intimidation, Performance, or Persuasion checks.\nSevered from Dreams: I don't dream and thus immune to spells that affect dreams.",
+		eval : "AddAction('reaction', 'Dual Mind', 'being a Kalashtar'); AddAction('bonus action', 'Mind Link', 'being a Kalashtar');",
+		removeeval : "RemoveAction('reaction', 'Dual Mind'); RemoveAction('bonus action', 'Mind Link');"
+	};
+
+	// The four subraces of the shifter
+	RaceList["beasthide shifter"] = {
+		regExpSearch : /^(?=.*shifter)(?=.*beast)(?=.*hide).*$/i,
+		name : "Beasthide shifter" + (tDoc.info.SheetVersion < 13 ? " " : ""),
+		sortname : "Shifter, Beasthide",
+		source : [["WGtE", 66], ["UA:RoE", 6]],
+		plural : "Beasthide shifters",
+		size : 3,
+		speed : {
+			walk : { spd : 30, enc : 20 }
+		},
+		languageProfs : ["Common"],
+		vision : [["Darkvision", 60]],
+		skills : ["Athletics", "Perception"],
+		age : " reach young adulthood at age 10 and rarely live over 70",
+		height : " range from under 5 to almost 6 feet tall (4'6\" + 2d8\")", // Taken from 3e Eberron Campaign Setting
+		weight : " weigh around 140 lb (95 + 2d8 \xD7 2d4 lb)", // Taken from 3e Eberron Campaign Setting
+		heightMetric : " range from under 1,5 to 1,8 metres tall (4'6\" + 5d8 cm)",
+		weightMetric : " weigh around 65 kg (43 + 5d8 \xD7 4d4 / kg)",
+		improvements : "Beasthide Shifter: +1 Dexterity, +2 Constitution;",
+		scores : [0, 1, 2, 0, 0, 0],
+		trait : "Beasthide Shifter: (+1 Dexterity, +2 Constitution)\n\nShifting: As a bonus action once per short rest, I can assume a more bestial appearance.\nThis transformation lasts for 1 minute, until I die, or until I revert back as a bonus action.\nWhen I shift, I gain temporary HP equal to 1d6 + my level + my Constitution modifier (minimum 1 temporary hit point).\nWhile transformed like this, I have a +1 bonus to AC",
+		features : {
+			"shift" : {
+				name : "Shift",
+				minlevel : 1,
+				usages : 1,
+				recovery : "short rest",
+				tooltip : "",
+				action : ["bonus action", " (start/end)"]
+			}
+		}
+	};
+	RaceList["longtooth shifter"] = {
+		regExpSearch : /^(?=.*shifter)(?=.*long)(?=.*(tooth|teeth)).*$/i,
+		name : "Longtooth shifter" + (tDoc.info.SheetVersion < 13 ? " " : ""),
+		sortname : "Shifter, Longtooth",
+		source : [["WGtE", 66], ["UA:RoE", 6]],
+		plural : "Longtooth shifters",
+		size : 3,
+		speed : {
+			walk : { spd : 30, enc : 20 }
+		},
+		languageProfs : ["Common"],
+		weapons : ["longtooth fangs"],
+		vision : [["Darkvision", 60]],
+		skills : ["Intimidation", "Perception"],
+		age : " reach young adulthood at age 10 and rarely live over 70",
+		height : " range from under 5 to almost 6 feet tall (4'6\" + 2d8\")", // Taken from 3e Eberron Campaign Setting
+		weight : " weigh around 140 lb (95 + 2d8 \xD7 2d4 lb)", // Taken from 3e Eberron Campaign Setting
+		heightMetric : " range from under 1,5 to 1,8 metres tall (4'6\" + 5d8 cm)",
+		weightMetric : " weigh around 65 kg (43 + 5d8 \xD7 4d4 / kg)",
+		improvements : "Longtooth Shifter: +2 Strength, +1 Dexterity;",
+		scores : [2, 1, 0, 0, 0, 0],
+		trait : "Longtooth Shifter: (+2 Strength, +1 Dexterity)\nShifting: As a bonus action once per short rest, I can assume a more bestial appearance.\nThis transformation lasts for 1 minute, until I die, or until I revert back as a bonus action.\nWhen I shift, I gain temporary HP equal to my level + my Constitution modifier (minimum 1 temporary hit point).\nWhile transformed like this, I use my elongated fangs to make unarmed strikes, dealing 1d6 piercing damage. As a bonus action, I can maken one attack with my fangs.",
+		features : {
+			"shift" : {
+				name : "Shift",
+				minlevel : 1,
+				usages : 1,
+				recovery : "short rest",
+				tooltip : "",
+				action : ["bonus action", " (start/end)"]
+			}
+		},
+		eval : "AddAction('bonus action', 'Attack with Longtooth Fangs', 'being a Longtooth shifter');",
+		removeeval : "RemoveAction('bonus action', 'Attack with Longtooth Fangs');"
+	};
+	WeaponsList["longtooth fangs"] = { // longtooth shifter weapon
+		regExpSearch : /^(?=.*fangs?)(?=.*long)(?=.*(tooth|teeth)).*$/i,
+		name : "Longtooth Fangs",
+		source : [["WGtE", 66], ["UA:RoE", 6]],
+		ability : 1,
+		type : "Natural",
+		damage : [1, 6, "piercing"],
+		range : "Melee",
+		description : "Only while shifted; One attack as bonus action",
+		monkweapon : true,
+		abilitytodamage : true
+	};
+	RaceList["swiftstride shifter"] = {
+		regExpSearch : /^(?=.*shifter)(?=.*swift)(?=.*stride).*$/i,
+		name : "Swiftstride shifter",
+		sortname : "Shifter, Swiftstride",
+		source : [["WGtE", 66], ["UA:RoE", 6]],
+		plural : "Swiftstride shifters",
+		size : 3,
+		speed : {
+			walk : { spd : 35, enc : 25 }
+		},
+		languageProfs : ["Common"],
+		vision : [["Darkvision", 60]],
+		skills : ["Acrobatics", "Perception"],
+		age : " reach young adulthood at age 10 and rarely live over 70",
+		height : " range from under 5 to almost 6 feet tall (4'6\" + 2d8\")", // Taken from 3e Eberron Campaign Setting
+		weight : " weigh around 140 lb (95 + 2d8 \xD7 2d4 lb)", // Taken from 3e Eberron Campaign Setting
+		heightMetric : " range from under 1,5 to 1,8 metres tall (4'6\" + 5d8 cm)",
+		weightMetric : " weigh around 65 kg (43 + 5d8 \xD7 4d4 / kg)",
+		improvements : "Swiftstride Shifter: +2 Dexterity, +1 Charisma;",
+		scores : [0, 2, 0, 0, 0, 1],
+		trait : "Swiftstride Shifter: (+2 Dexterity, +1 Charisma)\nShifting: As a bonus action once per short rest, I can assume a more bestial appearance.\nThis transformation lasts for 1 minute, until I die, or until I revert back as a bonus action.\nWhen I shift, I gain temporary HP equal to my level + my Con" + (typePF ? "stitution modifier (minimum 1 temporary hit point" : " mod (minimum 1 temp HP") + ").\nWhile transformed like this, my walking speed increases with 5 ft.\nAs a reaction when an enemy ends its turn within 5 ft of me while I'm shifted, I can move 10 ft without provoking opportunity attacks.",
+		features : {
+			"shift" : {
+				name : "Shift",
+				minlevel : 1,
+				usages : 1,
+				recovery : "short rest",
+				tooltip : "",
+				action : ["bonus action", " (start/end)"]
+			}
+		},
+		eval : "AddAction('reaction', 'Stride (while shifted)', 'being a Swiftstride shifter');",
+		removeeval : "RemoveAction('reaction', 'Stride (while shifted)');"
+	};
+	RaceList["wildhunt shifter"] = {
+		regExpSearch : /^(?=.*shifter)(?=.*wild)(?=.*hunt).*$/i,
+		name : "Wildhunt shifter" + (tDoc.info.SheetVersion < 13 ? " " : ""),
+		sortname : "Shifter, Wildhunt",
+		source : [["WGtE", 66], ["UA:RoE", 6]],
+		plural : "Wildhunt shifters",
+		size : 3,
+		speed : {
+			walk : { spd : 30, enc : 20 }
+		},
+		languageProfs : ["Common"],
+		vision : [["Darkvision", 60]],
+		skills : ["Perception", "Survival"],
+		age : " reach young adulthood at age 10 and rarely live over 70",
+		height : " range from under 5 to almost 6 feet tall (4'6\" + 2d8\")", // Taken from 3e Eberron Campaign Setting
+		weight : " weigh around 140 lb (95 + 2d8 \xD7 2d4 lb)", // Taken from 3e Eberron Campaign Setting
+		heightMetric : " range from under 1,5 to 1,8 metres tall (4'6\" + 5d8 cm)",
+		weightMetric : " weigh around 65 kg (43 + 5d8 \xD7 4d4 / kg)",
+		improvements : "Wildhunt Shifter: +1 Dexterity, +2 Wisdom;",
+		scores : [0, 1, 0, 0, 2, 0],
+		trait : "Wildhunt Shifter: (+1 Dexterity, +2 Wisdom)\nShifting: As a bonus action once per short rest, I can transform and get adv. on Wis checks." + (typePF ? " " : "\n") + "This transformation lasts for 1 minute, until I die, or until I revert back as a bonus action.\nWhen I shift, I gain temporary HP equal to my level + my Con" + (typePF ? "stitution modifier (minimum 1 temporary hit point" : " mod (minimum 1 temp HP") + ").\nMark the Scent: As a bonus action once per short rest, I can mark a creature that I can see within 10 ft. Until the end of my next long rest, my proficiency bonus is doubled for checks to find this target, and I always know its location if it is within 60 ft of me.",
+		features : {
+			"shift" : {
+				name : "Shift",
+				minlevel : 1,
+				usages : 1,
+				recovery : "short rest",
+				tooltip : "",
+				action : ["bonus action", " (start/end)"]
+			},
+			"mark the scent" : {
+				name : "Mark the Scent",
+				minlevel : 1,
+				usages : 1,
+				recovery : "short rest",
+				tooltip : "",
+				action : ["bonus action", ""]
+			}
+		}
+	};
+
+	// The three subraces of the warforged
+	RaceList["envoy warforged"] = {
+		regExpSearch : /^(?=.*warforged)(?=.*envoy).*$/i,
+		name : "Envoy warforged",
+		sortname : "Warforged, Envoy",
+		source : [["WGtE", 69], ["UA:RoE", 9]],
+		plural : "Envoy warforged",
+		size : 3,
+		speed : {
+			walk : { spd : 30, enc : 20 }
+		},
+		languageProfs : ["Common", 1],
+		toolProfs : [["Expertise with any one tool", 1]],
+		skillstxt : "Choose any one skill",
+		savetxt : {
+			text : ["Magic can't put me to sleep"],
+			immune : ["disease", "exhaustion from lack of rest"],
+			adv_vs : ["poison"]
+		},
+		dmgres : ["Poison"],
+		age : " are created as adults and will only start to show signs of physical deterioration after 150 years, but have no further aging effects",
+		height : " stand between 6 and 7 feet tall (5'10\" + 2d6\")", // Taken from 3e Eberron Campaign Setting
+		weight : " weigh around 300 lb (270 + 2d6 \xD7 4 lb)", // Taken from 3e Eberron Campaign Setting
+		heightMetric : " stand between 1,8 and 2,1 metres tall (178 + 5d6 cm)",
+		weightMetric : " weigh around 135 kg (125 + 5d6 \xD7 8 / kg)",
+		improvements : "Envoy Warforged: +1 Constitution and +1 to two other ability scores of my choice;",
+		scores : [0, 0, 1, 0, 0, 0],
+		trait : "Envoy Warforged (+1 Constitution and +1 to two other abilit" + (typePF ? "ies" : "y scores of my choice") + ")\nWarforged Resilience: I do not need to sleep, eat, drink, or breathe.\nSentry's Rest: To benefit from a long rest, I need to enter an inactive state for 6 hours, during which I am not rendered unconscious and can see and hear as normal.\nIntegrated Protection: My AC depends on armor proficiency: none (11+Dex), light (11+Dex+Prof B), medium (13+Dex+Prof B), heavy (16+Prof B; Stealth disadv.). I can use a shield.\nIntegrated Tool: I have expertise with one tool and it is integrated into my body.",
+		eval : "AddACMisc('Prof', 'Integrated Protection', 'Integrated Protection was gained from being a Warforged', '!(/warforged (darkwood core|composite plating|heavy plating)/).test(CurrentArmour.known) || (!tDoc.getField(\"Proficiency Armor Light\").isBoxChecked(0) && !tDoc.getField(\"Proficiency Armor Medium\").isBoxChecked(0) && !tDoc.getField(\"Proficiency Armor Heavy\").isBoxChecked(0))'); var lightProf = tDoc.getField('Proficiency Armor Light').isBoxChecked(0); if (tDoc.getField('Proficiency Armor Heavy').isBoxChecked(0)) { AddArmor('Warforged Heavy Plating', true); } else if (tDoc.getField('Proficiency Armor Medium').isBoxChecked(0) && ((What('Dex') < 18 && lightProf) || !lightProf)) { AddArmor('Warforged Composite Plating', true); } else { AddArmor('Warforged Darkwood Core', true); };",
+		removeeval : "AddACMisc(0, 'Integrated Protection', 'Integrated Protection was gained from being a Warforged');"
+	};
+	RaceList["juggernaut warforged"] = {
+		regExpSearch : /^(?=.*warforged)(?=.*juggernaut).*$/i,
+		name : "Juggernaut warforged",
+		sortname : "Warforged, Juggernaut",
+		source : [["WGtE", 70], ["UA:RoE", 9]],
+		plural : "Juggernaut warforged",
+		size : 3,
+		speed : {
+			walk : { spd : 30, enc : 20 }
+		},
+		languageProfs : ["Common"],
+		weapons : ["warforged iron fists"],
+		savetxt : {
+			text : ["Magic can't put me to sleep"],
+			immune : ["disease", "exhaustion from lack of rest"],
+			adv_vs : ["poison"]
+		},
+		dmgres : ["Poison"],
+		age : " are created as adults and will only start to show signs of physical deterioration after 150 years, but have no further aging effects",
+		height : " stand between 6 and 7 feet tall (5'10\" + 2d6\")", // Taken from 3e Eberron Campaign Setting
+		weight : " weigh around 300 lb (270 + 2d6 \xD7 4 lb)", // Taken from 3e Eberron Campaign Setting
+		heightMetric : " stand between 1,8 and 2,1 metres tall (178 + 5d6 cm)",
+		weightMetric : " weigh around 135 kg (125 + 5d6 \xD7 8 / kg)",
+		improvements : "Juggernaut Warforged: +2 Strength, +1 Constitution;",
+		scores : [2, 0, 1, 0, 0, 0],
+		trait : "Juggernaut Warforged (+2 Strength, +1 Constitution)" + (typePF ? "" : " Iron Fists: unarmed strikes do 1d4.") + "\nWarforged Resilience: I do not need to sleep, eat, drink, or breathe.\nSentry's Rest: To benefit from a long rest, I need to enter an inactive state for 6 hours, during which I am not rendered unconscious and can see and hear as normal.\nIntegrated Protection: My AC depends on armor proficiency: none (11+Dex), light (11+Dex+Prof B), medium (13+Dex+Prof B), heavy (16+Prof B; Stealth disadv.). I can use a shield.\nPowerful Build: I count as one size larger for my carrying capacity, push, drag, and lift." + (typePF ? " Iron Fists: My unarmed strikes do 1d4 damage." : ""),
+		eval : "tDoc.getField('Carrying Capacity Multiplier').value *= 2; AddACMisc('Prof', 'Integrated Protection', 'Integrated Protection was gained from being a Warforged', '!(/warforged (darkwood core|composite plating|heavy plating)/).test(CurrentArmour.known) || (!tDoc.getField(\"Proficiency Armor Light\").isBoxChecked(0) && !tDoc.getField(\"Proficiency Armor Medium\").isBoxChecked(0) && !tDoc.getField(\"Proficiency Armor Heavy\").isBoxChecked(0))'); var lightProf = tDoc.getField('Proficiency Armor Light').isBoxChecked(0); if (tDoc.getField('Proficiency Armor Heavy').isBoxChecked(0)) { AddArmor('Warforged Heavy Plating', true); } else if (tDoc.getField('Proficiency Armor Medium').isBoxChecked(0) && ((What('Dex') < 18 && lightProf) || !lightProf)) { AddArmor('Warforged Composite Plating', true); } else { AddArmor('Warforged Darkwood Core', true); };",
+		removeeval : "tDoc.getField('Carrying Capacity Multiplier').value /= 2; AddACMisc(0, 'Integrated Protection', 'Integrated Protection was gained from being a Warforged');"
+	};
+	WeaponsList["warforged iron fists"] = { // Juggernaut warforged weapon
+		regExpSearch : /^(?=.*warforged)(?=.*iron)(?=.*fists?).*$/i,
+		name : "Warforged Iron Fists",
+		source : [["WGtE", 70], ["UA:RoE", 9]],
+		ability : 1,
+		type : "Natural",
+		damage : [1, 4, "bludgeoning"],
+		range : "Melee",
+		description : "",
+		abilitytodamage : true,
+		monkweapon : true
+	};
+	RaceList["skirmisher warforged"] = {
+		regExpSearch : /^(?=.*warforged)(?=.*skirmisher).*$/i,
+		name : "Skirmisher warforged",
+		sortname : "Warforged, Skirmisher",
+		source : [["WGtE", 70], ["UA:RoE", 9]],
+		plural : "Skirmisher warforged",
+		size : 3,
+		speed : {
+			walk : { spd : 35, enc : 25 }
+		},
+		languageProfs : ["Common"],
+		savetxt : {
+			text : ["Magic can't put me to sleep"],
+			immune : ["disease", "exhaustion from lack of rest"],
+			adv_vs : ["poison"]
+		},
+		dmgres : ["Poison"],
+		age : " are created as adults and will only start to show signs of physical deterioration after 150 years, but have no further aging effects",
+		height : " stand between 6 and 7 feet tall (5'10\" + 2d6\")", // Taken from 3e Eberron Campaign Setting
+		weight : " weigh around 300 lb (270 + 2d6 \xD7 4 lb)", // Taken from 3e Eberron Campaign Setting
+		heightMetric : " stand between 1,8 and 2,1 metres tall (178 + 5d6 cm)",
+		weightMetric : " weigh around 135 kg (125 + 5d6 \xD7 8 / kg)",
+		improvements : "Skirmisher Warforged: +2 Dexterity, +1 Constitution;",
+		scores : [0, 2, 1, 0, 0, 0],
+		trait : "Skirmisher Warforged (+2 Dexterity, +1 Constitution)\nWarforged Resilience: I do not need to sleep, eat, drink, or breathe.\nSentry's Rest: To benefit from a long rest, I need to enter an inactive state for 6 hours, during which I am not rendered unconscious and can see and hear as normal.\nIntegrated Protection: My AC depends on armor proficiency: none (11+Dex), light (11+Dex+Prof B), medium (13+Dex+Prof B), heavy (16+Prof B; Stealth disadv.). I can use a shield.\nLight Step: If I travel alone for an hour or more, I can move stealthily at a normal pace.",
+		eval : "AddACMisc('Prof', 'Integrated Protection', 'Integrated Protection was gained from being a Warforged', '!(/warforged (darkwood core|composite plating|heavy plating)/).test(CurrentArmour.known) || (!tDoc.getField(\"Proficiency Armor Light\").isBoxChecked(0) && !tDoc.getField(\"Proficiency Armor Medium\").isBoxChecked(0) && !tDoc.getField(\"Proficiency Armor Heavy\").isBoxChecked(0))'); var lightProf = tDoc.getField('Proficiency Armor Light').isBoxChecked(0); if (tDoc.getField('Proficiency Armor Heavy').isBoxChecked(0)) { AddArmor('Warforged Heavy Plating', true); } else if (tDoc.getField('Proficiency Armor Medium').isBoxChecked(0) && ((What('Dex') < 18 && lightProf) || !lightProf)) { AddArmor('Warforged Composite Plating', true); } else { AddArmor('Warforged Darkwood Core', true); };",
+		removeeval : "AddACMisc(0, 'Integrated Protection', 'Integrated Protection was gained from being a Warforged');"
+	};
+	// Warforged armour
+	ArmourList["warforged darkwood core"] = {
+		regExpSearch : /^(?=.*warforged)(?=.*darkwood)(?=.*core).*$/i,
+		name : "Warforged darkwood core",
+		source : [["WGtE", 69], ["UA:RoE", 9]],
+		type : "warforged",
+		ac : 11,
+		stealthdis : false,
+		weight : 0,
+		strReq : 0
+	};
+	ArmourList["warforged composite plating"] = {
+		regExpSearch : /^(?=.*warforged)(?=.*composite)(?=.*plating).*$/i,
+		name : "Warforged composite plating",
+		source : [["WGtE", 69], ["UA:RoE", 9]],
+		type : "warforged",
+		ac : 13,
+		stealthdis : false,
+		weight : 0,
+		strReq : 0,
+		dex : 2
+	};
+	ArmourList["warforged heavy plating"] = {
+		regExpSearch : /^(?=.*warforged)(?=.*heavy)(?=.*plating).*$/i,
+		name : "Warforged heavy plating",
+		source : [["WGtE", 69], ["UA:RoE", 9]],
+		type : "warforged",
+		ac : 16,
+		stealthdis : true,
+		weight : 0,
+		strReq : 0,
+		dex : -10
+	};
+}
 var iFileName = "ua_20180813_Races-of-Ravnica.js";
 RequiredSheetVersion(12.999);
 // This file adds the content from the Unearthed Arcana: Races of Ravnica article to MPMB's Character Record Sheet
@@ -32287,6 +33957,7 @@ RaceList["loxodon"] = {
 	savetxt : { adv_vs : ["frightened"] },
 	toolProfs : ["Mason's tools"],
 	addarmor : "Natural Armor",
+	vision : [["Keen Smell", 0]],
 	age : " physically mature at the same rate as humans, but are considered young until they reach the age of 60 and live about 450 years",
 	height : " stand between 7 and 8 feet tall",
 	weight : " weigh between 300 and 400 pounds",
@@ -32294,11 +33965,16 @@ RaceList["loxodon"] = {
 	weightMetric : " weigh between 150 to 200 kg",
 	improvements : "Loxodon: +2 Constitution, +1 Wisdom;",
 	scores : [0, 0, 2, 0, 1, 0],
-	trait : "Loxodon (+2 Constitution, +1 Wisdom)\n   Powerful Build: I count as one size larger for my carrying capacity, push, drag, and lift.\n   Stonecunning: I can add double my proficiency bonus to Intelligence (History) checks related to the origin of stonework, instead of my normal proficiency bonus.\n   Keen Smell: I have advantage on Wisdom (Perception) and Intelligence (Investigation) checks that rely on smell.\nNatural Armor: " + (typePF ? "I have and AC of" : "My thick, leathery skin gives me AC") + " 13 + Dexterity modifier + shield.",
+	trait : "Loxodon (+2 Constitution, +1 Wisdom)" + desc([
+		"Powerful Build: I count as one size larger for my carrying capacity, push, drag, and lift.",
+		"Stonecunning: I can add double my proficiency bonus to Intelligence (History) checks related to the origin of stonework, instead of my normal proficiency bonus.",
+		"Keen Smell: I have advantage on Wisdom (Perception) and Intelligence (Investigation) checks that rely on smell.",
+		"Natural Armor: " + (typePF ? "I have an AC of" : "My thick, leathery skin gives me AC") + " 13 + Dexterity modifier + shield."
+	]),
 	eval : "tDoc.getField('Carrying Capacity Multiplier').value *= 2;",
 	removeeval : "tDoc.getField('Carrying Capacity Multiplier').value /= 2;"
 };
-ArmourList['natural armor'].source.push(["UA:RoR", 1]);
+if (ArmourList['natural armor']) ArmourList['natural armor'].source.push(["UA:RoR", 1]);
 
 // Add Simic Hybrid
 RaceList["simic hybrid"] = {
@@ -32316,7 +33992,7 @@ RaceList["simic hybrid"] = {
 	height : " are of the same height as another of its humanoid race",
 	weight : " are of the same weight as another of its humanoid race",
 	improvements : "Simic Hybrid: +2 Constitution and +1 to one other ability score of my choice;",
-	scores : [0, 2, 0, 0, 0, 0],
+	scores : [0, 0, 2, 0, 0, 0],
 	trait : "Simic Hybrid (+2 Constitution and +1 to one other ability score of my choice)\n   Animal Enhancement (1st level): Choose one to three types of enhancement using the \"Racial Options\" button: Manta Glide, Nimble Climber, or Underwater Adaptation.\n   Animal Enhancement (5th level): At 5th level, I gain another animal enhancement. I can either choose one I didn't take at 1st level or choose Grappling Appendages, Carapace, or Acid Spit.",
 	features : {
 		"animal enhancement" : {
@@ -32416,7 +34092,7 @@ AddRacialVariant("simic hybrid", "underwater adaptation", {
 WeaponsList["grappling appendages"] = {
 	regExpSearch : /^(?=.*grappling)(?=.*(appendage|tentacle|claw)).*$/i,
 	name : "Grappling Appendages",
-	source : ["UA:RoR", 3],
+	source : [["G", 20], ["UA:RoR", 3]],
 	ability : 1,
 	type : "Natural",
 	damage : [1, 6, "bludgeoning"],
@@ -32428,7 +34104,7 @@ WeaponsList["grappling appendages"] = {
 WeaponsList["acid spit"] = {
 	regExpSearch : /^(?=.*acid)(?=.*spit).*$/i,
 	name : "Acid Spit",
-	source : ["UA:RoR", 3],
+	source : [["G", 21], ["UA:RoR", 3]],
 	ability : 3,
 	type : "Natural",
 	damage : ["C", 10, "acid"],
@@ -32459,7 +34135,17 @@ RaceList["vedalken"] = {
 	weightMetric : " weigh around 100 kg",
 	improvements : "Vedalken: +2 Intelligence, +1 Wisdom;",
 	scores : [0, 0, 0, 2, 1, 0],
-	trait : "Vedalken (+2 Intelligence, +1 Wisdom)\n   Vedalken Dispassion: I have advantage on all Intelligence, Wisdom, and Charisma saving throws.\n   Tireless Precision: I am proficient with any one tool and one skill of my choice: Arcana, History, Investigation, Medicine, Performance, or Sleight of Hand. Whenever I make an ability check with the chose tool or skill, I can add 1d4 to the check's total."
+	trait : "Vedalken (+2 Intelligence, +1 Wisdom)\n   Vedalken Dispassion: I have advantage on all Intelligence, Wisdom, and Charisma saving throws.\n   Tireless Precision: I am proficient with any one tool and one skill of my choice: Arcana, History, Investigation, Medicine, Performance, or Sleight of Hand. Whenever I make an ability check with the chosen tool or skill, I can add 1d4 to the check's total.",
+	eval : function () {
+		Checkbox('Int ST Adv', true, 'Advantage on Intelligence saving throws was gained from Vedalken');
+		Checkbox('Wis ST Adv', true, 'Advantage on Wisdom saving throws was gained from Vedalken');
+		Checkbox('Cha ST Adv', true, 'Advantage on Charisma saving throws was gained from Vedalken');
+	},
+	removeeval : function () {
+		Checkbox('Int ST Adv', false, '');
+		Checkbox('Wis ST Adv', false, '');
+		Checkbox('Cha ST Adv', false, '');
+	}
 };
 
 // Add Viashino
@@ -32513,3 +34199,788 @@ WeaponsList["lashing tail"] = {
 	abilitytodamage : true,
 	monkweapon : true
 };
+var iFileName = "ua_20180910_Dragonmarks.js";
+RequiredSheetVersion(12.999);
+// This file adds the content from the Unearthed Arcana: Dragonmarks article to MPMB's Character Record Sheet
+// Note that this content also appears in the script for Wayfinder's Guide to Eberron and thus both sources are included for all things here
+
+// Define the sources
+SourceList["UA:D"] = {
+	name : "Unearthed Arcana: Dragonmarks",
+	abbreviation : "UA:D",
+	group : "Unearthed Arcana",
+	url : "https://media.wizards.com/2018/dnd/downloads/UA_Dragonmarks.pdf",
+	date : "2018/09/10"
+};
+
+if (!SourceList.WGtE) {
+	// Dragonmarks subraces
+	RaceList["dragonmark detection half-elf"] = {
+		regExpSearch : /^((?=.*mark)(?=.*detection)|(?=.*house)(?=.*medani)).*$/i,
+		name : "Half-elf (dragonmark)",
+		sortname : "Dragonmark, Detection (Half-Elf)",
+		source : [["WGtE", 96], ["UA:D", 2]],
+		plural : "Half-elves (dragonmark)",
+		size : 3,
+		speed : {
+			walk : { spd : 30, enc : 20 }
+		},
+		languageProfs : ["Common", "Elvish"],
+		vision : [["Darkvision", 60]],
+		savetxt : {
+			text : ["Magic can't put me to sleep"],
+			adv_vs : ["charmed"]
+		},
+		age : " reach adulthood around age 20 and often live over 180 years",
+		height : " range from 5 to 6 feet tall (4'9\" + 2d8\")",
+		weight : " weigh around 155 lb (110 + 2d8 \xD7 2d4 lb)",
+		heightMetric : " range from 1,5 to 1,8 metres tall (145 + 5d8 cm)",
+		weightMetric : " weigh around 70 kg (50 + 5d8 \xD7 4d4 / 10 kg)",
+		improvements : "Half-Elf, Dragonmark of Detection: +1 Intelligence, +1 Charisma, and +1 to any one ability score of my choice;",
+		scores : [0, 0, 0, 1, 0, 1],
+		trait : "Half-Elf, Dragonmark of Detection (+1 Intelligence, +1 Charisma, and +1 to any one ability score of my choice)\n" + (typePF ? "\n" : "   ") + "Deductive Intuition: I can add my Intuition Die (1d4) to my Intelligence (Investigation) and Wisdom (Insight) checks.\n" + (typePF ? "\n" : "   ") + "Sense Threats: I can cast Detect Magic and Detect Poison and Disease as rituals using Intelligence as my spellcasting ability.",
+		spellcastingAbility : 4,
+		spellcastingBonus : {
+			name : "Sense Threats",
+			spells : ["detect magic", "detect poison and disease"],
+			selection : ["detect magic", "detect poison and disease"],
+			firstCol : "(R)",
+			times : 2
+		}
+	};
+	RaceList["dragonmark finding half-orc"] = {
+		regExpSearch : /^(?=.*half)(?=.*\bor(c|k))((?=.*mark)(?=.*finding)|(?=.*house)(?=.*tharashk)).*$/i,
+		name : "Half-orc (dragonmark)",
+		sortname : "Dragonmark, Finding (Half-Orc)",
+		source : [["WGtE", 97], ["UA:D", 2]],
+		plural : "Half-orcs (dragonmark)",
+		size : 3,
+		speed : {
+			walk : { spd : 30, enc : 20 }
+		},
+		languageProfs : ["Common", "Orc"],
+		vision : [["Darkvision", 60]],
+		age : " reach adulthood around age 14 and rarely live longer than 75 years",
+		height : " range from 5 to well over 6 feet tall (4'10\" + 2d10\")",
+		weight : " weigh around 215 lb (140 + 2d10 \xD7 2d6 lb)",
+		heightMetric : " range from 1,5 to well over 1,8 metres tall (150 + 5d10 cm)",
+		weightMetric : " weigh around 100 kg (65 + 5d10 \xD7 4d6 / 10 kg)",
+		improvements : "Half-Orc, Dragonmark of Finding: +1 Strength, +1 Wisdom, and +1 to any one ability score of my choice;",
+		scores : [1, 0, 0, 0, 1, 0],
+		trait : "Half-Orc, Dragonmark of Finding (+1 Str" + (typePF ? ", +1 Wis, +1 to one ability" : "ength, +1 Wisdom, +1 to any one ability score") + ")\n   Hunter's Intuition: I add my Intuition Die (1d4) to my Perception and Survival checks.\n   Imprint Prey: As a bonus action once per short rest, I imprint a target I can see in 30 ft or with a Survival check when tracking it, lasting until it dies or I use this again. I double my Intuition Die for tracking it, sense its general location in 60 ft, my attacks vs. it ignore half cover and don't have disadv. if I can't see it, and it has no adv. vs. me if I can't see it.\n" + (typePF ? "Nature's Voice: cast Locate Animals/Plants as a ritual from 3rd level." : "   Nature's Voice: Once I reach 3rd level, I can cast Locate Animals or Plants as a ritual."),
+		features : {
+			"imprint prey" : {
+				name : "Imprint Prey",
+				minlevel : 1,
+				usages : 1,
+				recovery : "short rest",
+				action : ["bonus action", ""]
+			},
+			"locate animals or plants" : {
+				name : "Locate Animals or Plants",
+				minlevel : 3,
+				spellcastingBonus : {
+					name : "Nature's Voice",
+					spells : ["locate animals or plants"],
+					selection : ["locate animals or plants"],
+					firstCol : "(R)"
+				}
+			}
+		}
+	};
+	RaceList["dragonmark handling human"] = {
+		regExpSearch : /^((?=.*mark)(?=.*handling)|(?=.*house)(?=.*vadalis)).*$/i,
+		name : "Human (dragonmark)",
+		sortname : "Dragonmark, Handling (Human)",
+		source : [["WGtE", 98], ["UA:D", 3]],
+		plural : "Humans (dragonmark)",
+		size : 3,
+		speed : {
+			walk : { spd : 30, enc : 20 }
+		},
+		languageProfs : ["Common", 1],
+		age : " reach adulthood in their late teens and live less than 100 years",
+		height : " range from barely 5 to well over 6 feet tall (4'8\" + 2d10\")",
+		weight : " weigh around 165 lb (110 + 2d10 \xD7 2d4 lb)",
+		heightMetric : " range from barely 1,5 to well over 1,8 metres tall (145 + 5d10 cm)",
+		weightMetric : " weigh around 75 kg (50 + 5d10 \xD7 4d4 / 10 kg)",
+		improvements : "Human, Dragonmark of Handling: +1 Dexterity, +1 Wisdom, and +1 to any one ability score of my choice;",
+		scores : [0, 1, 0, 0, 1, 0],
+		trait : "Human, Dragonmark of Handling (+1 Dex" + (typePF ? ", +1 Wis, +1 to one ability" : "terity, +1 Wisdom, +1 to any one ability score") + ")\n   Wild Intuition: I can add my Intuition Die (1d4) to my Wisdom (Animal Handling) and Intelligence (Nature) checks.\n   Expert Handling: I can use the Help action to aid an ally animal companion or mount even when they are within 30 ft of me, rather than just within 5 ft.\n   Primal Connection: Once per short rest, I can cast Animal Friendship using Wisdom " + (typePF ? "as my spellcasting ability" : "") + ".\n   " + (typePF ? "The Bigger They Are: My spells that normally affect only beasts now also affect monstrosities with an Intelligence of 3 or lower." : "Bigger They Are: My spells that affect only beasts, also affect monstrosities with Int < 4."),
+		spellcastingAbility : 5,
+		features : {
+			"animal friendship" : {
+				name : "Animal Friendship",
+				minlevel : 1,
+				usages : 1,
+				recovery : "short rest",
+				tooltip : " (Primal Connection)",
+				spellcastingBonus : {
+					name : "Primal Connection",
+					spells : ["animal friendship"],
+					selection : ["animal friendship"],
+					oncesr : true
+				}
+			}
+		}
+	};
+	RaceList["dragonmark healing halfling"] = {
+		regExpSearch : /^((?=.*mark)(?=.*healing)|(?=.*house)(?=.*jorasco)).*$/i,
+		name : "Halfling (dragonmark)",
+		sortname : "Dragonmark, Healing (Halfling)",
+		source : [["WGtE", 99], ["UA:D", 3]],
+		plural : "Halflings (dragonmark)",
+		size : 4,
+		speed : {
+			walk : { spd : 25, enc : 15 }
+		},
+		languageProfs : ["Common", "Halfling"],
+		savetxt : { adv_vs : ["frightened"] },
+		age : " reach adulthood at age 20 and live around 150 years",
+		height : " average about 3 feet tall (2'7\" + 2d4\")",
+		weight : " weigh around 40 lb (35 + 2d4 lb)",
+		heightMetric : " average about 90 cm tall (80 + 5d4)",
+		weightMetric : " weigh around 18 kg (16 + 5d4 / 10 kg)",
+		improvements : "Halfling, Dragonmark of Healing: +2 Dexterity, +1 Wisdom;",
+		scores : [0, 2, 0, 0, 1, 0],
+		trait : "Halfling, Dragonmark of Healing (+2 Dexterity, +1 Wisdom)" + (typePF ? "\n  " : "") + 
+			" Lucky: When I roll a 1 on an attack roll, ability check, or saving throw, I can reroll the die and must use the new roll." + desc([
+			"Halfling Nimbleness: I can move through the space of Medium and larger creatures.",
+			"Medical Intuition: I " + (typePF ? "" : "can") + " add my Intuition Die (1d4) to " + (typePF ? "Medicine" : "my Wisdom (Medicine)") + " checks.",
+			"Healing Touch: As an action once per short rest, I can spend one of my Hit Dice to heal myself or a creature I touch. I heal the roll of the die plus my Wisdom modifier.",
+			"Jorasco's Blessing: I know the Spare the Dying cantrip."
+		]),
+		features : {
+			"healing touch" : {
+				name : "Healing Touch",
+				minlevel : 1,
+				usages : 1,
+				recovery : "short rest",
+				action : ["action", ""]
+			}
+		},
+		spellcastingAbility : 6,
+		spellcastingBonus : {
+			name : "Jorasco's Blessing",
+			spells : ["spare the dying"],
+			selection : ["spare the dying"],
+			atwill : true
+		}
+	};
+	RaceList["dragonmark hospitality halfling"] = {
+		regExpSearch : /^((?=.*mark)(?=.*hospitality)|(?=.*house)(?=.*ghallanda)).*$/i,
+		name : "Halfling (dragonmark)",
+		sortname : "Dragonmark, Hospitality (Halfling)",
+		source : [["WGtE", 100], ["UA:D", 4]],
+		plural : "Halflings (dragonmark)",
+		size : 4,
+		speed : {
+			walk : { spd : 25, enc : 15 }
+		},
+		languageProfs : ["Common", "Halfling"],
+		savetxt : { adv_vs : ["frightened"] },
+		age : " reach adulthood at age 20 and live around 150 years",
+		height : " average about 3 feet tall (2'7\" + 2d4\")",
+		weight : " weigh around 40 lb (35 + 2d4 lb)",
+		heightMetric : " average about 90 cm tall (80 + 5d4)",
+		weightMetric : " weigh around 18 kg (16 + 5d4 / 10 kg)",
+		improvements : "Halfling, Dragonmark of Hospitality: +2 Dexterity, +1 Charisma;",
+		scores : [0, 2, 0, 0, 0, 1],
+		trait : "Halfling, Dragonmark of Hospitality (+2 Dexterity, +1 Charisma)\nLucky: When I roll a 1 on an attack roll, ability check, or saving throw, I can reroll the die and must use the new roll.\nHalfling Nimbleness: I can move through the space of Medium and larger creatures.\nEver Hospitable: I can add my Intuition Die (1d4) to my Charisma (Persuasion) checks and ability checks involving brewer's supplies or cook's utensils.\nInnkeeper's Charms: I know Friends and Prestidigitation with Cha as my spellcasting ability.",
+		spellcastingAbility : 6,
+		spellcastingBonus : {
+			name : "Innkeeper's Charms",
+			spells : ["friends", "prestidigitation"],
+			selection : ["friends", "prestidigitation"],
+			atwill : true,
+			times : 2
+		}
+	};
+	RaceList["dragonmark making human"] = {
+		regExpSearch : /^((?=.*mark)(?=.*making)|(?=.*house)(?=.*cannith)).*$/i,
+		name : "Human (dragonmark)",
+		sortname : "Dragonmark, Making (Human)",
+		source : [["WGtE", 101], ["UA:D", 4]],
+		plural : "Humans (dragonmark)",
+		size : 3,
+		speed : {
+			walk : { spd : 30, enc : 20 }
+		},
+		languageProfs : ["Common", 1],
+		toolProfs : [["Artisan's tools", 1]],
+		age : " reach adulthood in their late teens and live less than 100 years",
+		height : " range from barely 5 to well over 6 feet tall (4'8\" + 2d10\")",
+		weight : " weigh around 165 lb (110 + 2d10 \xD7 2d4 lb)",
+		heightMetric : " range from barely 1,5 to well over 1,8 metres tall (145 + 5d10 cm)",
+		weightMetric : " weigh around 75 kg (50 + 5d10 \xD7 4d4 / 10 kg)",
+		improvements : "Human, Dragonmark of Making: +1 Dexterity, +1 Intelligence, and +1 to any one ability score of my choice;",
+		scores : [0, 1, 0, 1, 0, 0],
+		trait : "Human, Dragonmark of Making (+1 Dex" + (typePF ? ", +2 Int or +2 Dex, +1 Int" : "terity, +1 Intelligence, +1 to Dex or Int, my choice") + ")\nArtisan's Intuition: I can add my Intuition Die (1d4) to ability checks with artisan's tools.\nMagecraft: I can create a magic item that gives me the ability to cast one wizard cantrip of my choice, using Intelligence as my spellcasting ability. This works while the item is in my possession. At the end of a long rest, I can replace it with a new item and cantrip.\nSpellsmith: Once per long rest, I can spend 1 minute to make a nonmagical armor or weapon gain a +1 bonus for the next hour. Maker's Gift: I know the mending cantrip.",
+		features : {
+			"spellsmith" : {
+				name : "Spellsmith",
+				minlevel : 1,
+				usages : 1,
+				recovery : "long rest"
+			}
+		},
+		eval : "CurrentSpells['dragonmark making human'] = {name : 'Human (dragonmark)', ability : 4, list : { 'class' : sheetVersion < 13 ? 'wizard' : 'dragonmark making human', level : [0, 0] }, known : {cantrips : 1, spells : sheetVersion < 13 ? false : 'list'}, bonus : {bonus1 : {name : \"Maker's Gift\", spells : ['mending'], selection : ['mending'], atwill : true}}, typeList : 2 }; SetStringifieds('spells');",
+		removeeval : "delete CurrentSpells['dragonmark making human']; SetStringifieds('spells');"
+	};
+	RunFunctionAtEnd(function() { // make the spell list for the 'making dragonmark human' in v13 and later
+		if (sheetVersion < 13) return;
+		for (var sp in SpellsList) {
+			var aSp = SpellsList[sp];
+			if (aSp.level !== undefined && aSp.level === 0 && aSp.classes && aSp.classes.indexOf('wizard') !== -1) aSp.classes.push('dragonmark making human');
+		}
+	});
+	RaceList["dragonmark passage human-ua-d"] = { // different in Unearthed Arcana
+		regExpSearch : /^((?=.*mark)(?=.*passage)|(?=.*house)(?=.*orien)).*$/i,
+		name : "Human (dragonmark)",
+		sortname : "Dragonmark, Passage (Human)",
+		source : ["UA:D", 4],
+		plural : "Humans (dragonmark)",
+		size : 3,
+		speed : {
+			walk : { spd : 40, enc : 30 }
+		},
+		languageProfs : ["Common", 1],
+		age : " reach adulthood in their late teens and live less than 100 years",
+		height : " range from barely 5 to well over 6 feet tall (4'8\" + 2d10\")",
+		weight : " weigh around 165 lb (110 + 2d10 \xD7 2d4 lb)",
+		heightMetric : " range from barely 1,5 to well over 1,8 metres tall (145 + 5d10 cm)",
+		weightMetric : " weigh around 75 kg (50 + 5d10 \xD7 4d4 / 10 kg)",
+		improvements : "Human, Dragonmark of Passage: +2 Dexterity and +1 to another ability score of my choice;",
+		scores : [0, 2, 0, 0, 0, 0],
+		trait : "Human, Dragonmark of Passage (+2 Dexterity and +1 to another ability score)\n   Intuitive Motion: I can add my Intuition Die (1d4) to my Strength (Athletics) checks and any ability checks involving operating or maintaining a land vehicle.\n   Orien's Grace: I can forgo half my movement speed for my turn to no longer provoke opportunity attacks for the rest of that turn.\n   Shared Passage: As a bonus action once per long rest, I can teleport myself and a willing ally within 5 ft a distance up to my walking speed to an unoccupied space I can see.",
+		features : {
+			"shared passage" : {
+				name : "Shared Passage",
+				minlevel : 1,
+				usages : 1,
+				recovery : "long rest",
+				action : ["bonus action", ""]
+			}
+		}
+	};
+	RaceList["dragonmark scribing gnome"] = {
+		regExpSearch : /^((?=.*mark)(?=.*scribing)|(?=.*house)(?=.*sivis)).*$/i,
+		name : "Gnome (dragonmark)",
+		sortname : "Dragonmark, Scribing (Gnome)",
+		source : [["WGtE", 103], ["UA:D", 5]],
+		plural : "Gnomes (dragonmark)",
+		size : 4,
+		speed : {
+			walk : { spd : 25, enc : 15 }
+		},
+		languageProfs : ["Common", "Gnomish", 1],
+		toolProfs : ["Calligrapher's supplies", "Forgery kits"],
+		vision : [["Darkvision", 60]],
+		savetxt : { text : ["Adv. on Int/Wis/Cha saves vs. magic"] },
+		age : " start adult life around age 40 and can live 350 to almost 500 years",
+		height : " are 3 to 4 feet tall (2'11\" + 2d4\")",
+		weight : " weigh around 40 lb (35 + 2d4 lb)",
+		heightMetric : " are 90 to 120 cm tall (2'11\" + 5d4)",
+		weightMetric : " weigh around 18 kg (16 + 5d4 / 10 kg)",
+		improvements : "Gnome, Dragonmark of Scribing: +2 Intelligence, +1 Charisma;",
+		scores : [0, 0, 0, 2, 0, 1],
+		trait : "Gnome, Dragonmark of Scribing (+2 Intelligence, +1 Charisma)\n   Gifted Scribe: I can add my Intuition Die (1d4) to ability checks involving calligrapher's supplies or forgery kits. I am proficient with both of these tools.\n   Whispering Wind: I know the Message cantrip.\n   Scribe's Insight: I can cast Comprehend Languages once per long rest.\nIntelligence is my spellcasting ability for the spells gained from being a gnome, dragonmark of scribing.",
+		spellcastingAbility : 4,
+		spellcastingBonus : {
+			name : "Whispering Wind",
+			spells : ["message"],
+			selection : ["message"],
+			atwill : true
+		},
+		features : {
+			"comprehend languages" : {
+				name : "Comprehend Languages",
+				minlevel : 1,
+				usages : 1,
+				recovery : "long rest",
+				tooltip : " (Scribe's Insight)",
+				spellcastingBonus : {
+					name : "Scribe's Insight",
+					spells : ["comprehend languages"],
+					selection : ["comprehend languages"],
+					oncelr : true
+				}
+			}
+		}
+	};
+	RaceList["dragonmark sentinel human"] = {
+		regExpSearch : /^((?=.*mark)(?=.*sentinel)|(?=.*house)(?=.*deneith)).*$/i,
+		name : "Human (dragonmark)",
+		sortname : "Dragonmark, Sentinel (Human)",
+		source : [["WGtE", 104], ["UA:D", 5]],
+		plural : "Humans (dragonmark)",
+		size : 3,
+		speed : {
+			walk : { spd : 30, enc : 20 }
+		},
+		languageProfs : ["Common", 1],
+		age : " reach adulthood in their late teens and live less than 100 years",
+		height : " range from barely 5 to well over 6 feet tall (4'8\" + 2d10\")",
+		weight : " weigh around 165 lb (110 + 2d10 \xD7 2d4 lb)",
+		heightMetric : " range from barely 1,5 to well over 1,8 metres tall (145 + 5d10 cm)",
+		weightMetric : " weigh around 75 kg (50 + 5d10 \xD7 4d4 / 10 kg)",
+		improvements : "Human, Dragonmark of Sentinel: +1 Strength, +1 Wisdom, and +1 to any one ability score of my choice;",
+		scores : [1, 0, 0, 0, 1, 0],
+		trait : "Human, Dragonmark of Sentinel (+1 Str" + (typePF ? ", +1 Wis, +1 to one ability" : "ength, +1 Wisdom, +1 to any one ability score") + ")\n   Sentinel's Intuition: I can add my Intuition Die (1d4) to Initiative rolls and my Wisdom (Perception) checks.\n   Sentinel's Shield: I know the Blade Ward cantrip. I can cast Shield once per short rest.\n   Vigilant Guardian: As an action, I can designate an ally as my ward, gaining adv. on Insight and Perception checks to spot threats to it. As a reaction when I see my ward being attacked while within 5 ft, I can swap places with it, becoming the target of the attack.",
+		features : {
+			"shield" : {
+				name : "Shield (spell)",
+				minlevel : 1,
+				usages : 1,
+				recovery : "short rest",
+				action : ["reaction", ""],
+				tooltip : " (Sentinel's Shield)",
+				spellcastingBonus : [{
+					name : "Sentinel's Shield",
+					spells : ["blade ward"],
+					selection : ["blade ward"],
+					atwill : true
+				}, {
+					name : "Sentinel's Shield",
+					spells : ["shield"],
+					selection : ["shield"],
+					oncesr : true
+				}]
+			}
+		},
+		eval : "AddAction('action', 'Vigilant Guardian (designate ward)', 'being a Human, Dragonmark of Sentinel'); AddAction('reaction', 'Vigilant Guardian (swap with ward)', 'being a Human, Dragonmark of Sentinel');",
+		removeeval : "RemoveAction('action', 'Vigilant Guardian (designate ward)'); RemoveAction('reaction', 'Vigilant Guardian (swap with ward)');",
+	};
+	RaceList["dragonmark shadow elf"] = {
+		regExpSearch : /^((?=.*mark)(?=.*shadow)|(?=.*house)(?=.*(phiarlan|thuranni))).*$/i,
+		name : "Elf (dragonmark)",
+		sortname : "Dragonmark, Shadow (Elf)",
+		source : [["WGtE", 105], ["UA:D", 6]],
+		plural : "Elves (dragonmark)",
+		size : 3,
+		speed : {
+			walk : { spd : 30, enc : 20 }
+		},
+		languageProfs : ["Common", "Elvish"],
+		vision : [["Darkvision", 60]],
+		savetxt : {
+			text : ["Magic can't put me to sleep"],
+			adv_vs : ["charmed"]
+		},
+		skills : ["Perception"],
+		skillstxt : "Perception and proficiency with either Performance or one musical instrument",
+		age : " typically claim adulthood around age 100 and can live to be 750 years old",
+		height : " range from under 5 to over 6 feet tall (4'6\" + 2d10\")",
+		weight : " weigh around 115 lb (90 + 2d10 \xD7 1d4 lb)",
+		heightMetric : " range from under 1,5 to over 1,8 metres tall (140 + 5d10 cm)",
+		weightMetric : " weigh around 55 kg (40 + 5d10 \xD7 2d4 / 10 kg)",
+		improvements : "Elf, Dragonmark of Shadow: +2 Dexterity, +1 Charisma;",
+		scores : [0, 2, 0, 0, 0, 1],
+		trait : "Elf, Dragonmark of Shadow (+2 Dexterity, +1 Charisma)\nTrance: Elves don't need to sleep, but meditate semiconsciously, for 4 hours a day. This gives the same benefit as a human gets from 8 hours of sleep (long rest takes only 4 hours).\nGift of the Shadows: I can add my Intuition Die (1d4) to Performance and Stealth checks.\nShape Shadows: I know the Minor Illusion cantrip using Charisma as my spellcasting ability.\nSlip Into Shadow: As a bonus action once per short rest, I can use the Hide action even while I have no cover or if I'm being observed.",
+		spellcastingAbility : 6,
+		spellcastingBonus : {
+			name : "Shape Shadows",
+			spells : ["minor illusion"],
+			selection : ["minor illusion"],
+			atwill : true
+		},
+		features : {
+			"slip into shadow" : {
+				name : "Slip Into Shadow",
+				minlevel : 1,
+				usages : 1,
+				recovery : "short rest",
+				action : ["bonus action", ""]
+			}
+		}
+	};
+	AddRacialVariant("dragonmark shadow elf", "performance, ", {
+		regExpSearch : /performance/i,
+		source : [["WGtE", 105], ["UA:D", 6]],
+		skills : ["Perception", "Performance"],
+		skillstxt : ""
+	});
+	AddRacialVariant("dragonmark shadow elf", "musical instrument, ", {
+		regExpSearch : /musical instrument/i,
+		source : [["WGtE", 105], ["UA:D", 6]],
+		skillstxt : "",
+		toolProfs : [["Musical instrument", 1]]
+	});
+	RaceList["dragonmark storm half-elf"] = {
+		regExpSearch : /^((?=.*mark)(?=.*storm)|(?=.*house)(?=.*lyrandar)).*$/i,
+		name : "Half-elf (dragonmark)",
+		sortname : "Dragonmark, Storm (Half-Elf)",
+		source : [["WGtE", 106], ["UA:D", 6]],
+		plural : "Half-elves (dragonmark)",
+		size : 3,
+		speed : {
+			walk : { spd : 30, enc : 20 },
+			swim : { spd : 30, enc : 20 }
+		},
+		languageProfs : ["Common", "Elvish"],
+		vision : [["Darkvision", 60]],
+		dmgres : ["Lightning"],
+		savetxt : {
+			text : ["Magic can't put me to sleep"],
+			adv_vs : ["charmed"]
+		},
+		age : " reach adulthood around age 20 and often live over 180 years",
+		height : " range from 5 to 6 feet tall (4'9\" + 2d8\")",
+		weight : " weigh around 155 lb (110 + 2d8 \xD7 2d4 lb)",
+		heightMetric : " range from 1,5 to 1,8 metres tall (145 + 5d8 cm)",
+		weightMetric : " weigh around 70 kg (50 + 5d8 \xD7 4d4 / 10 kg)",
+		improvements : "Half-Elf, Dragonmark of Storm: +1 Dexterity, +1 Charisma, and +1 to any one ability score of my choice;",
+		scores : [0, 1, 0, 0, 0, 1],
+		trait : "Half-Elf, Dragonmark of Storm (+1 Dexterity, +1 Charisma, and +1 to any one ability score of my choice)\n" + (typePF ? "\n" : "   ") + "Windwright's Intuition: I can add my Intuition Die (1d4) to my Dexterity (Acrobatics) checks and any ability checks involving operating or maintaining a water or air vehicle.\n" + (typePF ? "\n" : "   ") + "Headwinds: I know the Gust cantrip. Once I reach 3rd level, I can cast Gust of Wind once per long rest. Charisma is my spellcasting ability for these spells.",
+		spellcastingAbility : 6, // Not mentioned in WGtE, but essential!
+		spellcastingBonus : {
+			name : "Headwinds",
+			spells : ["gust"],
+			selection : ["gust"],
+			atwill : true
+		},
+		features : {
+			"gust of wind" : {
+				name : "Gust of Wind",
+				minlevel : 3,
+				usages : 1,
+				recovery : "long rest",
+				tooltip : " (Headwinds)",
+				spellcastingBonus : {
+					name : "Headwinds (level 3)",
+					spells : ["gust of wind"],
+					selection : ["gust of wind"],
+					oncelr : true
+				}
+			}
+		}
+	};
+	RaceList["dragonmark warding dwarf"] = {
+		regExpSearch : /^((?=.*mark)(?=.*warding)|(?=.*house)(?=.*kundarak)).*$/i,
+		name : "Dwarf (dragonmark)",
+		sortname : "Dragonmark, Warding (Dwarf)",
+		source : [["WGtE", 108], ["UA:D", 7]],
+		plural : "Dwarves (dragonmark)",
+		size : 3,
+		speed : {
+			walk : { spd : 25, enc : 25 }
+		},
+		languageProfs : ["Common", "Dwarvish"],
+		vision : [["Darkvision", 60]],
+		savetxt : { adv_vs : ["poison"] },
+		dmgres : ["Poison"],
+		weaponprofs : [false, false, ["battleaxe", "handaxe", "warhammer", "light hammer"]],
+		toolProfs : [["Smith, brewer, or mason tools", 1]],
+		age : " are considered young until they are 50 and live about 350 years",
+		height : " stand between 4 and 5 feet tall (4' + 2d4\")",
+		weight : " weigh around 150 lb (130 + 2d4 \xD7 2d6 lb)",
+		heightMetric : " stand between 1,2 and 1,5 metres tall (120 + 5d4 cm)",
+		weightMetric : " weigh around 75 kg (60 + 5d4 \xD7 4d6 / 10 kg)",
+		improvements : "Dwarf, Dragonmark of Warding: +1 Dexterity, +2 Constitution, +1 Intelligence;",
+		scores : [0, 1, 2, 1, 0, 0],
+		trait : "Dwarf, Dragonmark of Warding (+1 Dex" + (typePF ? ", +2 Con, +1 Int" : "terity, +2 Constitution, +1 Intelligence") + ")\n   Stonecunning: When I make an Intelligence (History) check related to the origin of stonework, I am considered having expertise in the History skill.\n   Master of Locks: I can add my Intuition Die (1d4) to Intelligence (History), Intelligence (Investigation), and ability checks with thieves' tools, if it involves lock or trap mechanisms.\n   Wards and Seals: I can cast Alarm as a ritual. Once I reach 3rd level, I can cast Arcane Lock once per long rest. Intelligence is my spellcasting ability for these.",
+		spellcastingAbility : 4,
+		spellcastingBonus : {
+			name : "Wards and Seals",
+			spells : ["alarm"],
+			selection : ["alarm"],
+			firstCol : "(R)"
+		},
+		features : {
+			"arcane lock" : {
+				name : "Arcane Lock",
+				minlevel : 3,
+				usages : 1,
+				recovery : "long rest",
+				tooltip : " (Wards and Seals)",
+				spellcastingBonus : {
+					name : "Wards and Seals (level 3)",
+					spells : ["arcane lock"],
+					selection : ["arcane lock"],
+					oncelr : true
+				}
+			}
+		}
+	};
+
+	// Gust cantrip reprint
+	if (!SpellsList["gust"]) {
+		SpellsList["gust"] = {
+			name : "Gust",
+			classes : ["druid", "sorcerer", "wizard"],
+			source : [["WGtE", 107], ["X", 157], ["E", 19], ["UA:D", 6]],
+			level : 0,
+			school : "Trans",
+			time : "1 a",
+			range : "30 ft",
+			components : "V,S",
+			duration : "Instantaneous",
+			save : "Str",
+			description : "Med. or smaller crea save or push 5 ft; or push unattended 5 lb obj 10 ft; or harmless sensory effect",
+			descriptionFull : "You seize the air and compel it to create one of the following effects at a point you can see within range." + "\n " + "\u2022 One Medium or smaller creature that you choose must succeed on a Strength saving throw or be pushed up to 5 feet away from you." + "\n " + "\u2022 You create a small blast of air capable of moving one object that is neither held nor carried and that weighs no more than 5 pounds. The object is pushed up to 10 feet away from you. It isn't pushed with enough force to cause damage." + "\n " + "\u2022 You create a harmless sensory affect using air, such as causing leaves to rustle, wind to slam shutters shut, or your clothing to ripple in a breeze."
+		};
+	}
+
+	// Greater Dragonmark feats
+	FeatsList["greater dragonmark [detection]"] = {
+		name : "Greater Dragonmark [Detection]",
+		source : [["WGtE", 110], ["UA:D", 7]],
+		prerequisite : "Being level 8 or higher and possessing the Dragonmark of Detection",
+		prereqeval : "Number(What('Character Level')) > 7 && (/^(?=.*dragonmark)(?=.*detection).*$/i).test(CurrentRace.known)",
+		description : "My Intuition Die increases with one step (for example d4 to d6). I can cast See Invisibility and True Seeing each once per long rest without using spell slots or requiring material components. Intelligence is my spellcasting ability for these. [+1 Charisma or Intelligence]",
+		improvements : "Greater Dragonmark [Detection]: +1 Charisma or Intelligence;",
+		spellcastingBonus : {
+			name : "1\u00D7 per long",
+			spells : ["see invisibility", "true seeing"],
+			selection : ["see invisibility", "true seeing"],
+			spellcastingAbility : 4,
+			oncelr : true,
+			times : 2
+		},
+		eval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d4\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d4\\)/i, 'my Intuition Die (1d6)')); }; ",
+		removeeval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d6\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d6\\)/i, 'my Intuition Die (1d4)')); }; "
+	};
+	FeatsList["greater dragonmark [finding]"] = {
+		name : "Greater Dragonmark [Finding]",
+		source : [["WGtE", 110], ["UA:D", 7]],
+		prerequisite : "Being level 8 or higher and possessing the Dragonmark of Finding",
+		prereqeval : "Number(What('Character Level')) > 7 && (/^(?=.*dragonmark)(?=.*finding).*$/i).test(CurrentRace.known)",
+		description : "My Intuition Die increases with one step (for example d4 to d6). I can cast Locate Creature and Find the Path each once per long rest without using spell slots or requiring material components. Wisdom is my spellcasting ability for these. [+1 " + (typePF ? "Strength, Dexterity, or Wisdom]" : "Str, Dex, or Wis]"),
+		improvements : "Greater Dragonmark [Finding]: +1 Strength, Dexterity, or Wisdom;",
+		spellcastingBonus : {
+			name : "1\u00D7 per long",
+			spells : ["locate creature", "find the path"],
+			selection : ["locate creature", "find the path"],
+			spellcastingAbility : 5,
+			oncelr : true,
+			times : 2
+		},
+		eval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d4\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d4\\)/i, 'my Intuition Die (1d6)')); }; ",
+		removeeval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d6\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d6\\)/i, 'my Intuition Die (1d4)')); }; "
+	};
+	FeatsList["greater dragonmark [handling]"] = {
+		name : "Greater Dragonmark [Handling]",
+		source : [["WGtE", 110], ["UA:D", 7]],
+		prerequisite : "Being level 8 or higher and possessing the Dragonmark of Handling",
+		prereqeval : "Number(What('Character Level')) > 7 && (/^(?=.*dragonmark)(?=.*handling).*$/i).test(CurrentRace.known)",
+		description : "My Intuition Die increases with one step (for example d4 to d6). I can cast Beast Sense and Dominate Beast each once per long rest without using spell slots or requiring material components. Wisdom is my spellcasting ability for these. [+1 Dexterity or Wisdom]",
+		improvements : "Greater Dragonmark [Handling]: +1 Dexterity or Wisdom;",
+		spellcastingBonus : {
+			name : "1\u00D7 per long",
+			spells : ["beast sense", "dominate beast"],
+			selection : ["beast sense", "dominate beast"],
+			spellcastingAbility : 5,
+			oncelr : true,
+			times : 2
+		},
+		eval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d4\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d4\\)/i, 'my Intuition Die (1d6)')); }; ",
+		removeeval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d6\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d6\\)/i, 'my Intuition Die (1d4)')); }; "
+	};
+	FeatsList["greater dragonmark [healing]"] = {
+		name : "Greater Dragonmark [Healing]",
+		source : [["WGtE", 110], ["UA:D", 7]],
+		prerequisite : "Being level 8 or higher and possessing the Dragonmark of Healing",
+		prereqeval : "Number(What('Character Level')) > 7 && (/^(?=.*dragonmark)(?=.*healing).*$/i).test(CurrentRace.known)",
+		description : "My Intuition Die increases with one step (for example d4 to d6). I can cast Mass Healing Word and Greater Restoration each once per long rest without using spell slots or requiring material components. Wisdom is my spellcasting ability for these. [+1 Dexterity or Wisdom]",
+		improvements : "Greater Dragonmark [Healing]: +1 Dexterity or Wisdom;",
+		spellcastingBonus : {
+			name : "1\u00D7 per long",
+			spells : ["mass healing word", "greater restoration"],
+			selection : ["mass healing word", "greater restoration"],
+			spellcastingAbility : 5,
+			oncelr : true,
+			times : 2
+		},
+		eval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d4\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d4\\)/i, 'my Intuition Die (1d6)')); }; ",
+		removeeval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d6\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d6\\)/i, 'my Intuition Die (1d4)')); }; "
+	};
+	FeatsList["greater dragonmark [hospitality]"] = {
+		name : "Greater Dragonmark [Hospitality]",
+		source : [["WGtE", 110], ["UA:D", 7]],
+		prerequisite : "Being level 8 or higher and possessing the Dragonmark of Hospitality",
+		prereqeval : "Number(What('Character Level')) > 7 && (/^(?=.*dragonmark)(?=.*hospitality).*$/i).test(CurrentRace.known)",
+		description : "My Intuition Die increases with one step (for example d4 to d6). I can cast Sanctuary and " + (typePF ? "Mordenkainen's " : "") + "Magnificent Mansion each once per long rest without using spell slots or requiring material components. Charisma is my spellcasting ability for these. [+1 Dexterity or Charisma]",
+		improvements : "Greater Dragonmark [Hospitality]: +1 Dexterity or Charisma;",
+		spellcastingBonus : {
+			name : "1\u00D7 per long",
+			spells : ["sanctuary", "mordenkainen's magnificent mansion"],
+			selection : ["sanctuary", "mordenkainen's magnificent mansion"],
+			spellcastingAbility : 6,
+			oncelr : true,
+			times : 2
+		},
+		eval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d4\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d4\\)/i, 'my Intuition Die (1d6)')); }; ",
+		removeeval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d6\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d6\\)/i, 'my Intuition Die (1d4)')); }; "
+	};
+	FeatsList["greater dragonmark [making]"] = {
+		name : "Greater Dragonmark [Making]",
+		source : [["WGtE", 110], ["UA:D", 7]],
+		prerequisite : "Being level 8 or higher and possessing the Dragonmark of Making",
+		prereqeval : "Number(What('Character Level')) > 7 && (/^(?=.*dragonmark)(?=.*making).*$/i).test(CurrentRace.known)",
+		description : "My Intuition Die increases with one step (for example d4 to d6). I can cast Fabricate and Creation each once per long rest without using spell slots or requiring material components. Intelligence is my spellcasting ability for these. [+1 Dexterity or Intelligence]",
+		improvements : "Greater Dragonmark [Making]: +1 Dexterity or Intelligence;",
+		spellcastingBonus : {
+			name : "1\u00D7 per long",
+			spells : ["fabricate", "creation"],
+			selection : ["fabricate", "creation"],
+			spellcastingAbility : 4,
+			oncelr : true,
+			times : 2
+		},
+		eval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d4\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d4\\)/i, 'my Intuition Die (1d6)')); }; ",
+		removeeval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d6\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d6\\)/i, 'my Intuition Die (1d4)')); }; "
+	};
+	FeatsList["greater dragonmark [passage]"] = {
+		name : "Greater Dragonmark [Passage]",
+		source : [["WGtE", 110], ["UA:D", 7]],
+		prerequisite : "Being level 8 or higher and possessing the Dragonmark of Passage",
+		prereqeval : "Number(What('Character Level')) > 7 && (/^(?=.*dragonmark)(?=.*passage).*$/i).test(CurrentRace.known)",
+		description : "My Intuition Die increases with one step (for example d4 to d6). I can cast Blink and Teleportation Circle each once per long rest without using spell slots or requiring material components. Constitution is my spellcasting ability for these. [+1 Dexterity or Constitution]",
+		improvements : "Greater Dragonmark [Passage]: +1 Dexterity or Constitution;",
+		spellcastingBonus : {
+			name : "1\u00D7 per long",
+			spells : ["blink", "teleportation circle"],
+			selection : ["blink", "teleportation circle"],
+			spellcastingAbility : 3,
+			oncelr : true,
+			times : 2
+		},
+		eval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d4\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d4\\)/i, 'my Intuition Die (1d6)')); }; ",
+		removeeval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d6\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d6\\)/i, 'my Intuition Die (1d4)')); }; "
+	};
+	FeatsList["greater dragonmark [scribing]"] = {
+		name : "Greater Dragonmark [Scribing]",
+		source : [["WGtE", 110], ["UA:D", 7]],
+		prerequisite : "Being level 8 or higher and possessing the Dragonmark of Scribing",
+		prereqeval : "Number(What('Character Level')) > 7 && (/^(?=.*dragonmark)(?=.*scribing).*$/i).test(CurrentRace.known)",
+		description : "My Intuition Die increases with one step (for example d4 to d6). I can cast Sending and Tongues each once per short rest without using spell slots or requiring material components. Intelligence is my spellcasting ability for these. [+1 Intelligence or Charisma]",
+		improvements : "Greater Dragonmark [Scribing]: +1 Intelligence or Charisma;",
+		spellcastingBonus : {
+			name : "1\u00D7 per short",
+			spells : ["sending", "tongues"],
+			selection : ["sending", "tongues"],
+			spellcastingAbility : 4,
+			oncesr : true,
+			times : 2
+		},
+		eval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d4\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d4\\)/i, 'my Intuition Die (1d6)')); }; ",
+		removeeval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d6\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d6\\)/i, 'my Intuition Die (1d4)')); }; "
+	};
+	FeatsList["greater dragonmark [sentinel]"] = {
+		name : "Greater Dragonmark [Sentinel]",
+		source : [["WGtE", 110], ["UA:D", 7]],
+		prerequisite : "Being level 8 or higher and possessing the Dragonmark of Sentinel",
+		prereqeval : "Number(What('Character Level')) > 7 && (/^(?=.*dragonmark)(?=.*sentinel).*$/i).test(CurrentRace.known)",
+		description : "My Intuition Die increases with one step (for example d4 to d6). I can cast Compelled Duel and Warding Bond each once per short rest without using spell slots or requiring material components. Wisdom is my spellcasting ability for these. [+1 Strength or Wisdom]",
+		improvements : "Greater Dragonmark [Sentinel]: +1 Strength or Wisdom;",
+		spellcastingBonus : {
+			name : "1\u00D7 per short",
+			spells : ["compelled duel", "warding bond"],
+			selection : ["compelled duel", "warding bond"],
+			spellcastingAbility : 5,
+			oncesr : true,
+			times : 2
+		},
+		eval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d4\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d4\\)/i, 'my Intuition Die (1d6)')); }; ",
+		removeeval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d6\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d6\\)/i, 'my Intuition Die (1d4)')); }; "
+	};
+	FeatsList["greater dragonmark [shadow]"] = {
+		name : "Greater Dragonmark [Shadow]",
+		source : [["WGtE", 110], ["UA:D", 7]],
+		prerequisite : "Being level 8 or higher and possessing the Dragonmark of Shadow",
+		prereqeval : "Number(What('Character Level')) > 7 && (/^(?=.*dragonmark)(?=.*shadow).*$/i).test(CurrentRace.known)",
+		description : "My Intuition Die increases with one step (for example d4 to d6). I can cast Nondetection and Mislead each once per long rest without using spell slots or requiring material components. Charisma is my spellcasting ability for these. [+1 Dexterity or Charisma]",
+		improvements : "Greater Dragonmark [Shadow]: +1 Dexterity or Charisma;",
+		spellcastingBonus : {
+			name : "1\u00D7 per long",
+			spells : ["nondetection", "mislead"],
+			selection : ["nondetection", "mislead"],
+			spellcastingAbility : 6,
+			oncelr : true,
+			times : 2
+		},
+		eval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d4\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d4\\)/i, 'my Intuition Die (1d6)')); }; ",
+		removeeval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d6\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d6\\)/i, 'my Intuition Die (1d4)')); }; "
+	};
+	FeatsList["greater dragonmark [storm]"] = {
+		name : "Greater Dragonmark [Storm]",
+		source : [["WGtE", 110], ["UA:D", 7]],
+		prerequisite : "Being level 8 or higher and possessing the Dragonmark of Storm",
+		prereqeval : "Number(What('Character Level')) > 7 && (/^(?=.*dragonmark)(?=.*storm).*$/i).test(CurrentRace.known)",
+		description : "My Intuition Die increases with one step (for example d4 to d6). I can cast Control Water and Control Winds each once per long rest without using spell slots or requiring material components. Charisma is my spellcasting ability for these. [+1 Dexterity or Charisma]",
+		improvements : "Greater Dragonmark [Storm]: +1 Dexterity or Charisma;",
+		spellcastingBonus : {
+			name : "1\u00D7 per long",
+			spells : ["control water", "control winds"],
+			selection : ["control water", "control winds"],
+			spellcastingAbility : 6,
+			oncelr : true,
+			times : 2
+		},
+		eval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d4\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d4\\)/i, 'my Intuition Die (1d6)')); }; ",
+		removeeval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d6\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d6\\)/i, 'my Intuition Die (1d4)')); }; "
+	};
+	FeatsList["greater dragonmark [warding]"] = {
+		name : "Greater Dragonmark [Warding]",
+		source : [["WGtE", 110], ["UA:D", 7]],
+		prerequisite : "Being level 8 or higher and possessing the Dragonmark of Warding",
+		prereqeval : "Number(What('Character Level')) > 7 && (/^(?=.*dragonmark)(?=.*warding).*$/i).test(CurrentRace.known)",
+		description : "My Intuition Die increases one step. I can cast Knock, Secret Chest, and Glyph of Warding each once per long rest without spell slot or material component. Secret Chest requires a 100 gp Siberys dragonshard as a focus. These use Int as spellcasting ability. [+1 Dex or Int]",
+		improvements : "Greater Dragonmark [Warding]: +1 Dexterity or Intelligence;",
+		spellcastingBonus : [{
+			name : "1\u00D7 per long",
+			spells : ["knock", "glyph of warding"],
+			selection : ["knock", "glyph of warding"],
+			spellcastingAbility : 4,
+			oncelr : true,
+			times : 2
+		}, {
+			name : "with Siberys dragonshard",
+			spells : ["leomund's secret chest"],
+			selection : ["leomund's secret chest"],
+			oncelr : true
+		}],
+		eval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d4\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d4\\)/i, 'my Intuition Die (1d6)')); }; ",
+		removeeval : "var raceTrait = What('Racial Traits'); if ((/my Intuition Die \\(1d6\\)/i).test(raceTrait)) { Value('Racial Traits', raceTrait.replace(/my Intuition Die \\(1d6\\)/i, 'my Intuition Die (1d4)')); }; "
+	};
+
+	// Aberrant Dragonmark feat
+	FeatsList["aberrant dragonmark"] = {
+		name : "Aberrant Dragonmark",
+		source : [["WGtE", 112], ["UA:D", 9]],
+		prerequisite : "Not having a dragonmark",
+		prereqeval : "!(/dragonmark/i).test(CurrentRace.known)",
+		description : "I learn a sorcerer cantrip and a 1st-level sorcerer spell, using Con as my spellcasting ability. I can cast the spell once per long rest without a spell slot. I can use a Hit Die when casting the spell, casting it as if with a level 2 spell slot and taking the HD as damage. [+1 Con]",
+		improvements : "Aberrant Dragonmark (feat): +1 Constitution;",
+		scores : [0, 0, 1, 0, 0, 0],
+		spellcastingBonus : [{
+			name : "Sorcerer cantrip",
+			spellcastingAbility : 3,
+			'class' : 'sorcerer',
+			level : [0, 0],
+			atwill : true
+		}, {
+			name : "Sorcerer 1st-level spell",
+			'class' : 'sorcerer',
+			level : [1, 1],
+			oncelr : true
+		}]
+	};
+}
+
+// Control Winds reprint (only in Unearthed Arcana article)
+if (!SpellsList["control winds"]) {
+	SpellsList["control winds"] = {
+		name : "Control Winds",
+		classes : ["druid", "sorcerer", "wizard"],
+		source : [["X", 152], ["E", 16], ["UA:D", 8]],
+		level : 5,
+		school : "Trans",
+		time : "1 a",
+		range : "300 ft",
+		components : "V,S",
+		duration : "Conc, 1 h",
+		description : "100-ft cube of air either gusts, downdraft, or updraft; affects flying/jump/ranged; 1 a change; see B",
+		descriptionFull : "You take control of the air in a 100-foot cube that you can see within range. Choose one of the following effects when you cast the spell. The effect lasts for the spell's duration, unless you use your action on a later turn to switch to a different effect. You can also use your action to temporarily halt the effect or to restart one you've halted." + "\n   " + toUni("Gusts") + ": A wind picks up within the cube, continually blowing in a horizontal direction you designate. You choose the intensity of the wind: calm, moderate, or strong. If the wind is moderate or strong, ranged weapon attacks that enter or leave the cube or pass through it have disadvantage on their attack rolls. If the wind is strong, any creature moving against the wind must spend 1 extra foot of movement for each foot moved." + "\n   " + toUni("Downdraft") + ": You cause a sustained blast of strong wind to blow downward from the top of the cube. Ranged weapon attacks that pass through the cube or that are made against targets within it have disadvantage on their attack rolls. A creature must make a Strength saving throw if it flies into the cube for the first time on a turn or starts its turn there flying. On a failed save, the creature is knocked prone." + "\n   " + toUni("Updraft") + ": You cause a sustained updraft within the cube, rising upward from the cube's bottom side. Creatures that end a fall within the cube take only half damage from the fall. When a creature in the cube makes a vertical jump, the creature can jump up to 10 feet higher than normal."
+	};
+}
